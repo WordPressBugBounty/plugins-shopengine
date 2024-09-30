@@ -1,10 +1,10 @@
-=== ShopEngine Elementor WooCommerce Builder Addon – All in One WooCommerce Solution ===
+﻿=== ShopEngine Elementor WooCommerce Builder Addon – All in One WooCommerce Solution ===
 
 Contributors: xpeedstudio, Ataurr, emranio
 Tags: WooCommerce, WooCommerce Builder, Elementor, Elementor WooCommerce, Product Template, WooCommerce blocks, WooCommerce Product, Product Slider, Shopping Cart, Wishlist, Woo Builder, Variation Swatches
 
 Tested up to: 6.6
-Stable tag: 4.7.1
+Stable tag: 4.7.2
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -308,6 +308,10 @@ If you like using the ShopEngine WooCommerce template builder, then consider che
 Visit  [wpmet](https://wpmet.com/)  to learn more about how to get the best of WordPress with  [Tutorial, Tips & Tricks](https://wpmet.com/blog)!
 
 == Changelog ==
+v4.7.2// 30-09-2024
+Improved: Security
+Fixed: The body tag is missing from WooCommerce pages when using the ShopEngine template
+
 v4.7.1// 12-09-2024
 Improved: Required plugin installation UI
 Fixed: Deal product widget issue
@@ -1037,6 +1041,7 @@ You will get support and updates of ShopEngine Elementor WooCommerce Builder for
 
 = What Payment Methods do you offer? =
 We accept both credit cards and PayPal for payment purposes.
+
 = How can I report security bugs? =
 
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/shopengine)

@@ -3,14 +3,15 @@
         <header class="wp-block-template-part">
             <?php block_header_area(); ?>
         </header>
-        <main class="gutenova-template-default has-global-padding is-layout-constrained wp-block-group">
-            <?php do_action('shopengine/builder/gutenberg/before-content'); ?>
-
-            <?php do_action('shopengine/builder/gutenberg/simple'); ?>
-
-            <?php do_action('shopengine/builder/gutenberg/after-content'); ?>
-        </main>
-
+        <body <?php body_class(); ?>>
+            <main class="gutenova-template-default has-global-padding is-layout-constrained wp-block-group">
+                <?php do_action('shopengine/builder/gutenberg/before-content'); ?>
+    
+                <?php do_action('shopengine/builder/gutenberg/simple'); ?>
+    
+                <?php do_action('shopengine/builder/gutenberg/after-content'); ?>
+            </main>
+        </body>
         <footer class="wp-block-template-part">
             <?php block_footer_area(); ?>
             <?php wp_footer(); ?>

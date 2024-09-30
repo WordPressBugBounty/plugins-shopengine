@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: ShopEngine 4.7.1\n"
+"Project-Id-Version: ShopEngine 4.7.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shopengine\n"
-"POT-Creation-Date: 2024-09-12 07:03:49+00:00\n"
+"POT-Creation-Date: 2024-09-30 05:39:48+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1016,26 +1016,34 @@ msgstr ""
 msgid "Notice Details"
 msgstr ""
 
-#: libs/updater/plugin-updater.php:231
-msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
+#: libs/updater/plugin-updater.php:292
+#. translators: the plugin name.
+msgid "There is a new version of %1$s available."
 msgstr ""
 
-#: libs/updater/plugin-updater.php:233 libs/updater/plugin-updater.php:241
-#: libs/updater/plugin-updater.php:244
-msgid "Latest Version Changelog"
+#: libs/updater/plugin-updater.php:298
+msgid "Contact your network administrator to install the update."
 msgstr ""
 
-#: libs/updater/plugin-updater.php:239
-msgid ""
-"There is a new version of %1$s available. %2$sView version %3$s details%4$s "
-"or %5$supdate now%6$s."
+#: libs/updater/plugin-updater.php:303
+#. translators: 1. opening anchor tag, do not translate 2. the new plugin
+#. version 3. closing anchor tag, do not translate.
+msgid "%1$sView version %2$s details%3$s."
 msgstr ""
 
-#: libs/updater/plugin-updater.php:478
+#: libs/updater/plugin-updater.php:311
+msgid "%1$sView version %2$s details%3$s or %4$supdate now%5$s."
+msgstr ""
+
+#: libs/updater/plugin-updater.php:322
+msgid "Update now."
+msgstr ""
+
+#: libs/updater/plugin-updater.php:557
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: libs/updater/plugin-updater.php:478
+#: libs/updater/plugin-updater.php:557
 msgid "Error"
 msgstr ""
 
