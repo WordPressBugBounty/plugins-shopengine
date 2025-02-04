@@ -37,7 +37,7 @@ defined('ABSPATH') || exit;
 						$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 						?>
 						<!-- shopengine cart table  body item start -->
-						<div class="shopengine-table__body-item" <?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
+						<div class="shopengine-table__body-item <?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
 							
 							<!-- 
 								@class : table-first-body-column

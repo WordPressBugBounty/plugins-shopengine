@@ -421,9 +421,9 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 		);
 
 		$this->add_control(
-			'shopengine_lightbox_icon_wrapper_size',
+			'shopengine_lightbox_icon_wrapper_height',
 			[
-				'label'      => esc_html__('Wrapper Size (px)', 'shopengine'),
+				'label'      => esc_html__('Wrapper height (px)', 'shopengine'),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range'      => [
@@ -435,10 +435,33 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 				],
 				'default'    => [
 					'unit' => 'px',
-					'size' => 50,
+					'size' => 40,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .shopengine-product-image .shopengine-product-image-toggle' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .shopengine-product-image .shopengine-product-image-toggle' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_lightbox_icon_wrapper_width',
+			[
+				'label'      => esc_html__('Wrapper width (px)', 'shopengine'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => ['px'],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 80,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .shopengine-product-image .shopengine-product-image-toggle' => 'width: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);

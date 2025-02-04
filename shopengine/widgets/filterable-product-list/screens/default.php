@@ -25,7 +25,9 @@
                 <button title="<?php esc_html_e('Navigation Item','shopengine')?>" 
                     class="filter-nav-link <?php echo esc_attr($key == 0 ? 'active' : ''); ?>" 
                     data-filter-uid="<?php echo esc_attr( $uid[$count] ); ?>" 
-                    data-product-list='<?php echo !empty($content['product_list']) ? json_encode($content['product_list']) : ''; ?>'>
+                    data-product-list='<?php echo !empty($content['product_list']) ? json_encode($content['product_list']) : ''; ?>'
+                    data-product-order='<?php echo esc_attr(!empty($settings['product_order']) ? $settings['product_order'] : 'DESC'); ?>'
+                    data-product-order-by='<?php echo esc_attr(!empty($settings['product_orderby']) ? $settings['product_orderby'] : 'date'); ?>'>
                     <?php echo esc_html($content['filter_label']); ?>
                 </button>
             </li>

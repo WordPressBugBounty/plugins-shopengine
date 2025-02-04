@@ -44,6 +44,12 @@ class Single extends Base {
 
 	public function single_page_css_conflict_remove() {
 
+		// Remove style and script for astra addon single product layout
+		if(is_plugin_active('astra-addon/astra-addon.php')) {
+
+			wp_dequeue_style('astra-addon-css');
+		}
+
 		if (function_exists('wp_get_theme')) {
 			$theme = wp_get_theme();
 			$active_theme = $theme->get('Name');

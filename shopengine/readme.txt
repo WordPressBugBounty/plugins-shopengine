@@ -2,7 +2,7 @@
 Contributors: xpeedstudio, Ataurr, emranio
 Tags: WooCommerce, WooCommerce Builder, Elementor, Elementor WooCommerce builder, WooCommerce Product
 Tested up to: 6.7
-Stable tag: 4.7.3
+Stable tag: 4.7.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -293,6 +293,12 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog)! 
 
 == Changelog ==
+v4.7.4// 04-02-2025
+Fixed: Gallery images not showing of the product image widget.
+Fixed: Cart table issue of cart page.
+Fixed: Filterable products ordering issue.
+Fixed: Shortcode not working issue with block.
+
 v4.7.3// 24-12-2024
 Fixed: Archive product widget design issue.
 Fixed: Translation warning issue with WordPress 6.7.

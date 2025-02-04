@@ -47,6 +47,32 @@ class Manifest {
 				add_action( 'woocommerce_after_order_notes', array( $yith_date_manager, 'print_delivery_from' ), 20 );
 			}
 		}
+
+		// Removed the single product layout from Astra Theme
+		if(is_plugin_active('astra-addon/astra-addon.php')) {
+
+			add_action('wp', function() {
+				if (class_exists('ASTRA_Ext_WooCommerce_Markup')) {
+
+					global $wp_filter;
+			
+					// Get the instance of the ASTRA_Ext_WooCommerce_Markup class
+					$astra_instance = null;
+					foreach ($wp_filter['wp']->callbacks as $priority => $filters) {
+						foreach ($filters as $filter) {
+							if (is_array($filter['function']) && is_object($filter['function'][0]) && get_class($filter['function'][0]) === 'ASTRA_Ext_WooCommerce_Markup') {
+								$astra_instance = $filter['function'][0];
+								break 2;
+							}
+						}
+					}
+			
+					if ($astra_instance) {
+						remove_action('wp', array($astra_instance, 'woo_single_product_layouts'), 99);
+					}
+				}
+			}, 10);
+		}
 		
 	}	
 

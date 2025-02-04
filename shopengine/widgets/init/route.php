@@ -18,6 +18,8 @@ class Route extends Api
 		$data = $this->request->get_params();
 
 		$products = $data['products'];
+		$order = isset($data['order']) ? $data['order'] : 'DESC';
+		$order_by = isset($data['order_by']) ? $data['order_by'] : 'date';
 		$settings = isset($data['settings']) ? $data['settings'] : null;
 
 		if(empty($products)) {
@@ -29,6 +31,8 @@ class Route extends Api
 
 		$args = array(
 			'post_type'      => 'product',
+			'order'          => $order,
+			'orderby'        => $order_by,
 			'post__in'       => $products,
 			'posts_per_page' => 50
 		);
