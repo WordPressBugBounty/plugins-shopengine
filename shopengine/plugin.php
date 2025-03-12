@@ -181,6 +181,7 @@ final class Plugin {
 
 		Rating::instance('shopengine')
 		->set_plugin( 'ShopEngine', 'https://wpmet.com/wordpress.org/rating/shopengine' )
+		->set_rating_url( 'https://wordpress.org/support/plugin/shopengine/reviews/#new-post' )
 		->set_plugin_logo( 'https://ps.w.org/shopengine/assets/icon-256x256.gif?rev=2505061', 'width:150px !important' )
 		->set_priority( 11 )
 		->set_first_appear_day( 7 )

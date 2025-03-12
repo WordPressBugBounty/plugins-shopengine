@@ -85,6 +85,8 @@ class ShopEngine_Advanced_Search extends \ShopEngine\Base\Widget
 					'{{WRAPPER}} .shopengine-advanced-search .shopengine-category-select-wraper' => 'display: {{VALUE}};',
 				],
 				'separator'      => 'before',
+				'render_type' => 'template',
+				'frontend_available' => true,
 			]
 		);
 
@@ -98,7 +100,9 @@ class ShopEngine_Advanced_Search extends \ShopEngine\Base\Widget
 				'condition'   => [
 					'shopengine_advanced_search_disable_category_btn' => 'block',
 				],
+				'frontend_available' => true,
 				'separator'   => 'after',
+
 			]
 		);
 		$this->add_control(

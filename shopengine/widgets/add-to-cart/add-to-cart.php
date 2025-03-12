@@ -254,10 +254,7 @@ class ShopEngine_Add_To_Cart extends \ShopEngine\Base\Widget
                 'label_off'    => esc_html__('No', 'shopengine'),
                 'default'      => "yes",
                 'return_value' => "yes",
-                'selectors'    => [
-		            '{{WRAPPER}} .shopengine-swatches' => 'display: block;',
-		            '{{WRAPPER}} .shopengine-swatches .grouped_form .group_table' => 'order: -99;',
-		        ],
+				'prefix_class' => 'shopengine-add-to-cart-ordering-',
             ]
         );
 

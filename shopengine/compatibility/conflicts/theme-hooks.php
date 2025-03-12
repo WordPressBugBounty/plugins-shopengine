@@ -261,9 +261,9 @@ class Theme_Hooks {
 		 ******************************************************/
 
 		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'add_shop_loop_div');
-		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'close_shop_loop_div');
+		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'close_shop_loop_div',	40);
 		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'grid_list_buttons');
-		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'result_count');
+		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'result_count',	31);
 
 		$this->add_action_if_not_exists('woocommerce_before_shop_loop', 'woocommerce_result_count');
 
@@ -1240,10 +1240,10 @@ class Theme_Hooks {
 		 * oceanwp theme
 		 */
 		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'add_shop_loop_div');
-		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'close_shop_loop_div');
+		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'close_shop_loop_div',40);
 		$this->remove_action_if_found_14('woocommerce_before_template_part', '\OceanWP_WooCommerce_Config', 'before_template_part');
 		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'grid_list_buttons');
-		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'result_count');
+		$this->remove_action_if_found_14('woocommerce_before_shop_loop', '\OceanWP_WooCommerce_Config', 'result_count',31);
 		$this->remove_action_if_found_14('woocommerce_before_shop_loop_item', '\OceanWP_WooCommerce_Config', 'add_shop_loop_item_inner_div');
 		$this->remove_action_if_found_14('woocommerce_after_shop_loop_item', '\OceanWP_WooCommerce_Config', 'close_shop_loop_item_inner_div');
 		$this->remove_action_if_found_14('woocommerce_before_shop_loop_item_title', '\OceanWP_WooCommerce_Config', 'loop_product_thumbnail');

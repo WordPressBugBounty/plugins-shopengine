@@ -287,8 +287,8 @@ class Rating
 
 			$not_good_enough_btn_id = ($this->never_show_triggered) ? '_btn_never_show' : '_btn_not_good';
 
-			$message = "Hey there! 👋 Thanks for using <strong>{$this->plugin_name}</strong> to build your ecommerce site! 🙌 <br>
-			Could you do us a solid and drop a <strong>review on WordPress.org...</strong> maybe with a <strong>5-star rating?</strong> 🤗";
+			$message = "Designing high-converting WooCommerce pages with <strong>ShopEngine?</strong> 🛒<br>
+			Your support means everything! Help us grow by dropping a <strong>5-star</strong> review today. ✨";
 
 			Notice::instance()->set_config($this->text_domain, '_plugin_rating_msg_used_in_day')
 				->set_message($message)
@@ -305,7 +305,7 @@ class Rating
 				->set_button(
 					array(
 						'url'   => '#',
-						'text'  => 'I already did',
+						'text'  => 'Already did',
 						'class' => 'button-default',
 						'id'    => $this->text_domain . '_btn_already_did',
 						'icon'  => 'dashicons-before dashicons-smiley',
@@ -314,7 +314,7 @@ class Rating
 				->set_button(
 					array(
 						'url'   => 'https://wpmet.com/support-ticket',
-						'text'  => 'I need support',
+						'text'  => 'Need support',
 						'class' => 'button-default',
 						'id'    => '#',
 						'icon'  => 'dashicons-before dashicons-sos',
@@ -324,7 +324,7 @@ class Rating
 				->set_button(
 					array(
 						'url'   => '#',
-						'text'  => 'No, not good enough',
+						'text'  => 'Not good',
 						'class' => 'button-default',
 						'id'    => $this->text_domain . $not_good_enough_btn_id,
 						'icon'  => 'dashicons-before dashicons-thumbs-down',

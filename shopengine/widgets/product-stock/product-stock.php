@@ -222,6 +222,7 @@ class ShopEngine_Product_Stock extends \ShopEngine\Base\Widget
 				'default'   => '#ee9800',
 				'selectors' => [
 					'{{WRAPPER}} .shopengine-product-stock .available-on-backorder' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .shopengine-product-stock .available-on-backorder svg' => 'fill: {{VALUE}};',
 				],
 			]
 		);

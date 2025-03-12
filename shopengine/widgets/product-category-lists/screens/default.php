@@ -16,7 +16,7 @@ $category_ids   = (isset($shopengine_product_cat_lists_cats) && !empty($shopengi
                     $thumbnail_id   = get_term_meta($category_id, 'thumbnail_id', true);
                     if ($thumbnail_id && isset($shopengine_product_cat_lists_show_cat_image) && $shopengine_product_cat_lists_show_cat_image === 'yes') {
                         $image_url = wp_get_attachment_url($thumbnail_id);
-                        $this->add_render_attribute('wrap-' . $key, 'style', 'background-image: url(' . esc_url($image_url) . ')');
+                        $this->add_render_attribute('wrap-' . $key, 'style', 'background-image: url(' . htmlspecialchars( esc_url( $image_url ) ) . ')');
                     }
 
                     if (!empty($term)) : ?>
