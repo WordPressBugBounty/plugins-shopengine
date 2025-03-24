@@ -126,8 +126,8 @@ class ShopEngine_Archive_Title extends \ShopEngine\Base\Widget
 			]
 		);
 		$title_tag = isset($settings['shopengine_archive_title_header_size']) 
-        ? \ShopEngine\Utils\Helper::esc_options($settings['shopengine_archive_title_header_size'], $options_heading_title_tag, 'h2') 
-        : 'h2';
+        ? \ShopEngine\Utils\Helper::esc_options($settings['shopengine_archive_title_header_size'], $options_heading_title_tag, 'h1') 
+        : 'h1';
 		echo sprintf(
 			'<div class="shopengine-archive-title"><%1$s class="archive-title">%2$s</%1$s></div>',
 			esc_html( $title_tag ),

@@ -19,7 +19,14 @@ if(is_archive() && !is_shop() && !is_product_tag()) {
 
             <!-- search button -->
             <button type="submit" class="search-btn">
-				<?php \Elementor\Icons_Manager::render_icon($settings['shopengine_advanced_search_icon'], ['aria-hidden' => 'true']); ?>
+				<?php 
+                    $icon = $settings['shopengine_advanced_search_icon'];
+                    if (!empty($icon['library']) && $icon['library'] === 'svg') {
+                        \Elementor\Icons_Manager::render_icon($icon, ['aria-hidden' => 'true']);
+                    } else {
+                        echo '<i aria-hidden="true" class="' . esc_attr($icon['value']) . '"></i>';
+                    } 
+                ?>
 
 				<?php if(!empty($settings['shopengine_advanced_search_text'])) : ?>
                     <span class="shopengine-search-text"><?php echo esc_html($settings['shopengine_advanced_search_text']); ?></span>
