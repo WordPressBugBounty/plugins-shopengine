@@ -2,7 +2,7 @@
 Contributors: xpeedstudio, Ataurr, emranio
 Tags: WooCommerce, WooCommerce Builder, Elementor, Elementor WooCommerce builder, WooCommerce Product
 Tested up to: 6.7.2
-Stable tag: 4.7.6
+Stable tag: 4.7.7
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -294,6 +294,9 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog)! 
 
 == Changelog ==
+v4.7.7// 15-04-2025
+Improved: Admin UI.
+
 v4.7.6// 23-03-2025
 Fixed: Archive view mode widget issue on mobile device.
 Fixed: Archive title widget title tag issue.

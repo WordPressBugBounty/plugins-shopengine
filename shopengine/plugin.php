@@ -102,13 +102,25 @@ final class Plugin {
             return $links;
         });
 
-		/**
-		 * EmailKit Global Class initialization
-		 *
-		 */
-		if( !class_exists('EmailKit') && !did_action('edit_with_emailkit_loaded') && class_exists('\Wpmet\Libs\Emailkit') && \ShopEngine\Utils\Util::get_settings( 'shopengine_user_consent_for_banner', 'true' ) == 'true' ) {
-
-			new \Wpmet\Libs\Emailkit();
+		if(\ShopEngine\Utils\Util::get_settings( 'shopengine_user_consent_for_banner', 'true' ) == 'true'){
+			
+			/**
+			 * EmailKit Global Class initialization
+			 *
+			 */
+			if( !class_exists('EmailKit') && !did_action('edit_with_emailkit_loaded') && class_exists('\Wpmet\Libs\Emailkit') ) {
+	
+				new \Wpmet\Libs\Emailkit();
+			}
+	
+			/**
+			 * MetForm get free templates promotional class initialization
+			 *
+			 */
+			if( !did_action('metform/after_load') && did_action('elementor/loaded') && class_exists('\Wpmet\Libs\Metform_Promo_Banner') ) {
+	
+				new \Wpmet\Libs\Metform_Promo_Banner();
+			}
 		}
 
 
