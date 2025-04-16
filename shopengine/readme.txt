@@ -1,8 +1,8 @@
 === ShopEngine Elementor WooCommerce Builder Addon – All in One WooCommerce Solution ===
 Contributors: xpeedstudio, Ataurr, emranio
 Tags: WooCommerce, WooCommerce Builder, Elementor, Elementor WooCommerce builder, WooCommerce Product
-Tested up to: 6.7.2
-Stable tag: 4.7.7
+Tested up to: 6.8
+Stable tag: 4.7.8
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -294,6 +294,9 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog)! 
 
 == Changelog ==
+v4.7.8// 16-04-2025
+Fixed: Compatibility issue with WordPress 6.8.
+
 v4.7.7// 15-04-2025
 Improved: Admin UI.
 
