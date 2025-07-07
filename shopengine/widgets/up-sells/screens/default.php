@@ -55,6 +55,11 @@ $columns	= $is_slider_enable ? $shopengine_up_sells_product_slider_perview : $sh
 ?>
 
 <div class="shopengine-up-sells <?php echo ($is_slider_enable ? 'slider-enabled' : 'slider-disabled'); ?>" data-controls="<?php echo esc_attr(json_encode($slider_options)); ?>">
+	
+	<?php if( isset($shopengine_up_sells_product_show_products_heading) && $shopengine_up_sells_product_show_products_heading == 'yes' ) : ?>
+		<h2 class="shopengine-up-sells-products-heading"><?php echo esc_html($shopengine_up_sells_product_show_products_heading_title ?? ''); ?></h2>
+	<?php endif; ?>
+
 	<?php
 	if($post_type == \ShopEngine\Core\Template_Cpt::TYPE) {
 		wc_get_template(

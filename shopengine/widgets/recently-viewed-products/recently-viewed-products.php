@@ -60,6 +60,45 @@ class Shopengine_Recently_Viewed_Products extends \ShopEngine\Base\Widget {
 			]
 		);
 
+		
+		$this->add_control(
+			'shopengine_recently_viewed_product_show_products_heading',
+			[
+				'label'        => esc_html__('Products Heading', 'shopengine'),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__('Show', 'shopengine'),
+				'label_off'    => esc_html__('Hide', 'shopengine'),
+				'return_value' => 'yes',
+				'default'      => 'no'
+			]
+		);
+
+		$this->add_control(
+			'shopengine_recently_viewed_product_show_products_heading_title',
+			[
+				'label'       => esc_html__('Heading Text', 'shopengine'),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => 'Recently Viewed Products',
+				'placeholder' => esc_html__('Enter heading text', 'shopengine'),
+				'condition'   => [
+					'shopengine_recently_viewed_product_show_products_heading' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_recently_viewed_product_hide_if_products_not_found',
+			[
+				'label'        => esc_html__('Hide if no products found', 'shopengine'),
+				'description'  => esc_html__('If no products found, hide the widget.', 'shopengine'),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__('Yes', 'shopengine'),
+				'label_off'    => esc_html__('No', 'shopengine'),
+				'return_value' => 'yes',
+				'default'      => 'no'
+			]
+		);
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -1580,6 +1619,92 @@ class Shopengine_Recently_Viewed_Products extends \ShopEngine\Base\Widget {
 				'selectors'  => [
 					'{{WRAPPER}} .recent-viewed-product-list .shopengine-single-product-item :is(.button, .added_to_cart)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 					'.rtl {{WRAPPER}} .recent-viewed-product-list .shopengine-single-product-item :is(.button, .added_to_cart)' => 'margin: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}} !important;',
+				],
+                'separator'	=> 'before',
+			]
+		);
+
+		$this->end_controls_section();
+		/*
+		 * Style Tab - Heading text
+		 */
+		$this->start_controls_section(
+			'shopengine_recently_viewed_product_heading_text_style',
+			[
+				'label' => esc_html__('Heading Text', 'shopengine'),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'shopengine_recently_viewed_product_heading_text_color',
+			[
+				'label'     => esc_html__('Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#101010',
+				'alpha'     => false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-recently-viewed-products .shopengine-recently-viewed-products-heading-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'           => 'shopengine_recently_viewed_product_heading_text_typography',
+				'label'          => esc_html__('Typography', 'shopengine'),
+				'selector'       => '{{WRAPPER}} .shopengine-recently-viewed-products .shopengine-recently-viewed-products-heading-title',
+				'exclude'        => ['font_family', 'letter_spacing', 'text_decoration', 'font_style'],
+				'fields_options' => [
+					'font_weight'    => [
+						'default' => '600',
+					],
+					'font_size'      => [
+						'label'      => esc_html__('Font Size (px)', 'shopengine'),
+						'default'    => [
+							'size' => '28',
+							'unit' => 'px',
+						],
+						'size_units' => ['px'],
+					],
+					'text_transform' => [
+						'default' => 'none',
+					],
+					'line_height'    => [
+						'label'      => esc_html__('Line Height (px)', 'shopengine'),
+						'default'    => [
+							'size' => '20',
+							'unit' => 'px',
+						],
+						'size_units' => ['px'],
+						'tablet_default' => [
+							'unit' => 'px',
+						],
+						'mobile_default' => [
+							'unit' => 'px',
+						],
+					],
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'shopengine_recently_viewed_product_heading_text_padding',
+			[
+				'label'      => esc_html__('Padding (px)', 'shopengine'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px'],
+				'default'    => [
+					'top'      => '0',
+					'right'    => '0',
+					'bottom'   => '8',
+					'left'     => '0',
+					'isLinked' => false,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .shopengine-recently-viewed-products .shopengine-recently-viewed-products-heading-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.rtl {{WRAPPER}} .shopengine-recently-viewed-products .shopengine-recently-viewed-products-heading-title' => 'padding: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}};',
 				],
                 'separator'	=> 'before',
 			]

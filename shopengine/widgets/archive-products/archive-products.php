@@ -724,6 +724,37 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 			]
 		);
 
+
+		$this->add_control(
+			'shopengine_title_excerpt_enable',
+			[
+				'label'        => esc_html__('Enable Title Excerpt', 'shopengine'),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__('Yes', 'shopengine'),
+				'label_off'    => esc_html__('No', 'shopengine'),
+				'return_value' => 'yes',
+				'default'      => 'no',
+				'description'  => esc_html__('Enable to show a truncated title with a maximum word count.', 'shopengine'),
+			]
+		);
+
+		// Number control for maximum words
+		$this->add_control(
+			'shopengine_title_excerpt_length',
+			[
+				'label'       => esc_html__('Max Words', 'shopengine'),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 1,
+				'max'         => 50,
+				'step'        => 1,
+				'default'     => 5,
+				'description' => esc_html__('Set the maximum number of words for the title excerpt.', 'shopengine'),
+				'condition'   => [
+					'shopengine_title_excerpt_enable' => 'yes',
+				],
+			]
+		);
+
 		$this->add_control(
 			'shopengine_title_color',
 			[
@@ -2523,7 +2554,7 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 		$tpl = Products::instance()->get_widget_template($this->get_name());
 
 		  // Pass settings to the template
-    	  $settings_to_pass = compact('shopengine_group_btns', 'shopengine_is_hover_details', 'shopengine_is_cats', 'shopengine_pagination_style', 'shopengine_is_details', 'shopengine_archive_product_title_header_size');
+    	  $settings_to_pass = compact('shopengine_group_btns', 'shopengine_is_hover_details', 'shopengine_is_cats', 'shopengine_pagination_style', 'shopengine_is_details', 'shopengine_archive_product_title_header_size','shopengine_title_excerpt_enable','shopengine_title_excerpt_length');
 
 		include $tpl;
 

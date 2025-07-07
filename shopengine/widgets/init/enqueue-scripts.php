@@ -32,6 +32,15 @@ class Enqueue_Scripts
 
 
 		wp_enqueue_script('shopengine-elementor-script', \ShopEngine::widget_url() . 'init/assets/js/widgets.js', ['jquery', 'elementor-frontend'], \ShopEngine::version(), true);
+
+		// For Archive product widget Tooltip text translation support.
+		wp_localize_script('shopengine-elementor-script', 'shopengineLoopProductConfig', [
+			'add_to_cart'      => __('Add to Cart', 'shopengine'),
+			'quick_view'       => __('Quick View', 'shopengine'),
+			'add_to_wishlist'  => __('Add to Wishlist', 'shopengine'),
+			'compare'          => __('Compare', 'shopengine'),
+			'direct_checkout'  => __('Direct Checkout', 'shopengine'),
+		]);
 	}
 
 	public function elementor_css() {

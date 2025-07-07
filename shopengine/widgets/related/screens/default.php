@@ -35,15 +35,22 @@ if($editor_mode) {
 ?>
 
 <div class="shopengine-related <?php echo ($is_slider_enable ? 'slider-enabled' : 'slider-disabled'); ?>" data-controls="<?php echo esc_attr($encode_slider_options); ?>">
+	
 	<?php
-
 	$relatedProduct = $args['related_products'];
 	
 	if(empty($relatedProduct)) {
-		?>
+
+		if( $shopengine_related_product_hide_if_products_not_found == 'yes' ) {
+			return;
+		} ?>
+
 		<p style="font-size: 18px; font-weight:600"><?php echo esc_html__('No related products found.', 'shopengine'); ?></p>
 		<?php
 	} else{
+		if( $shopengine_related_product_show_products_heading && $shopengine_related_product_show_products_heading == 'yes' ){ ?>
+			<h2 class="shopengine-related-products-heading-title"><?php echo esc_html( $shopengine_related_product_show_products_heading_title ?? ''); ?></h2>
+		<?php }
 		woocommerce_related_products($args);
 		if($is_slider_enable && $shopengine_related_product_slider_show_dots) {
 			echo '<div class="swiper-pagination" style="width: 100%;"></div>';

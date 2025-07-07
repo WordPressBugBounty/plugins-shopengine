@@ -2,16 +2,16 @@
 Contributors: xpeedstudio, Ataurr, emranio
 Tags: WooCommerce, WooCommerce Builder, Elementor, Elementor WooCommerce builder, WooCommerce Product
 Tested up to: 6.8
-Stable tag: 4.7.8
+Stable tag: 4.7.9
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
-WooCommerce builder for Elementor. It offers product templates, product sliders, shopping cart, quick view, Woo wishlist, product filter and more woo features.
+WooCommerce builder for Elementor. It offers product templates, product sliders, shopping cart, quick view, Woo wishlist, product filter, and more Woo features.
 
 == Description ==
 
-Are you using multiple plugins to make an Elementor-compatible WooCommerce store with custom shop page, ready-made product templates, quick view, add to cart, wishlist, product comparison, promotional product slider, cross-sell, variation swatches, and more?
+Are you using multiple plugins to make an Elementor-compatible WooCommerce store with a custom shop page, ready-made product templates, quick view, add to cart, wishlist, product comparison, promotional product slider, cross-sell, variation swatches, and more?
 
 Well, not anymore! You don’t have to slow down your WooCommerce store. 
 
@@ -19,13 +19,13 @@ Presenting [ShopEngine](https://wpmet.com/plugin/shopengine) – all-in-one WooC
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vjfrA-xI8F4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-With ShopEngine WooCommerce builder plugin, you can enjoy all the woo features and functionalities of a full-fledged online shop with custom WooCommerce product template builder.
+With the ShopEngine WooCommerce builder plugin, you can enjoy all the Woo features and functionalities of a full-fledged online shop with a custom WooCommerce product template builder.
 
 [ShopEngine Modules](https://wpmet.com/plugin/shopengine/modules/) | [ShopEngine Templates](https://wpmet.com/plugin/shopengine/templates/)  | [Support](http://account.wpmet.com/support-help/) | [Docs](https://wpmet.com/doc/getting-started-with-shopengine-installation/) | [Check Roadmap & Request a Feature](https://wpmet.com/plugin/shopengine/roadmaps#ideas) | [Purchase ShopEngine Pro](https://wpmet.com/plugin/shopengine/pricing/)
 
-## ShopEngine empowering 40,000+ WooCommerce users 
+## ShopEngine empowering 50,000+ WooCommerce users 
 
-The WooCommerce blocks of ShopEngine work with free Elementor page builder, WordPress block editor, and WooCommerce open-source eCommerce solution.
+The WooCommerce blocks of ShopEngine work with the free Elementor page builder, WordPress block editor, and WooCommerce open-source eCommerce solution.
 
 So, you can easily drag and drop Elementor's WooCommerce widgets, modules, and Elementor WooCommerce templates to make your desired site with our WooCommerce store builder
 
@@ -33,20 +33,20 @@ Overall, ShopEngine is the most complete and dynamic WooCommerce builder for Ele
 
 ## 👉 ShopEngine Elementor WooCommerce Builder Features
 
-**⭐ 70+ drag-and-drop** WooCommerce website builder widgets
-**⭐ 20+ Essential** WooCommerce store Modules
-**⭐ 16+ pre-designed** WooCommerce store builder templates
-**⭐ Enable and disable** any widget/module for the best page speed
-⭐Custom WooCommerce **Product Template Builder**
-**⭐ Override WooCommerce pages** for online store
-**⭐ Filter and Pagination** based on AJAX
-**⭐ Multi-language** Supported builder
-**⭐ Compatible** with all popular WordPress themes
-**⭐ Drag-and-drop** feature with **unlimited customization**
-**⭐** Works with Free **Elementor and WooCommerce**
+⭐ **70+ drag-and-drop** WooCommerce website builder widgets
+⭐ **20+ Essential** WooCommerce store Modules
+⭐ **16+ pre-designed** WooCommerce store builder templates
+⭐ **Enable and disable** any widget/module for the best page speed
+⭐ Custom WooCommerce **Product Template Builder**
+⭐ **Override WooCommerce pages** for online store
+⭐ **Filter and Pagination** based on AJAX
+⭐ **Multi-language** Supported builder
+⭐ **Compatible** with all popular WordPress themes
+⭐ Drag-and-drop feature with **unlimited customization**
+⭐ Works with Free **Elementor and WooCommerce**
 ⭐ Compatible with **WordPress Gutenberg Blocks**
 ⭐ **No Coding Skills** Required
-**⭐** Top-notch and **Dedicated Support Team**
+⭐ Top-notch and **Dedicated Support Team**
 
 ### ❤️ ShopEngine WooCommerce Builder Widgets (FREE)
 👉 WooCommerce Product Review Widget
@@ -58,7 +58,7 @@ Overall, ShopEngine is the most complete and dynamic WooCommerce builder for Ele
 👉 WooCommerce Store Notice Widget	
 👉 WooCommerce Product Cart Table Widget
 👉 WooCommerce Cart Total Widget
-👉 WooCommerce Shop Cross-Sell Widget
+👉 WooCommerce Cross-Sell Widget
 👉 Return to WooCommerce Shop Widget
 👉 WooCommerce Empty Cart Message Widget
 👉 Archive Description WooCommerce  Widget 
@@ -110,7 +110,7 @@ Overall, ShopEngine is the most complete and dynamic WooCommerce builder for Ele
 
 ## ✨ ShopEngine Pre-built Builder Templates, An Instant No-code Solution for Advanced WooCommerce Functions
 
-**📃** [Shop Page](https://wpmet.com/plugin/shopengine/templates/shop-page/): Display products with tons of customizable components of this WooCommerce page builder for Elementor.
+**📃** [Shop Page](https://wpmet.com/plugin/shopengine/templates/shop-page/): Our shop page builder presents you with this ready-made template that lets you showcase products with complete design flexibility.
 
 **📃** [Single Product Page](https://wpmet.com/plugin/shopengine/templates/single-page/): Showcase specification of a single WooCommerce product.
 
@@ -136,10 +136,10 @@ Overall, ShopEngine is the most complete and dynamic WooCommerce builder for Ele
 
 **📃** [Quick View Builder Template](https://wpmet.com/plugin/shopengine/templates/quick-view/): Shoppers get a quick overview of WooCommerce products.
 
-**📃** **Reset Password Template**: Let customers regain access to their account.
+**📃** **Reset Password Template**: It lets customers regain access to their account.
 
 ## ✨ ShopEngine WooCommerce Builder Modules
-ShopEngine comes with 20+ modules to help user to build dynamic WooCommerce websites without any hassle.
+ShopEngine comes with 20+ modules to help users build dynamic WooCommerce websites without any hassle.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QnsmuVmTJww?si=c9ND3ow6provtJHu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -151,7 +151,7 @@ ShopEngine comes with 20+ modules to help user to build dynamic WooCommerce webs
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DcaA2rC0Rg0?si=6bj0gEmfRQN0A2qs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** [WooCommerce Product Wishlist](https://wpmet.com/plugin/shopengine/modules/product-wishlist/) helps you by adding a stylish wishlist where your shoppers love to save their products to buy and share with loved ones later.  
+**🔷** [WooCommerce Product Wishlist](https://wpmet.com/plugin/shopengine/modules/product-wishlist/) helps you by adding a stylish Woo Wishlist where your shoppers love to save their products to buy and share with loved ones later.  
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RlTB20_pgA0?si=I6V6an1tKey9wfpO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -163,11 +163,11 @@ ShopEngine comes with 20+ modules to help user to build dynamic WooCommerce webs
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/yxpYmWo8G4I?si=wwWDHwF1eX2tyaDe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** Optimize WooCommerce checkout process more smoothly with the [Quick Checkout module](https://wpmet.com/plugin/shopengine/modules/quick-checkout/) to save your customers time.
+**🔷** Optimize WooCommerce checkout process more smoothly with the [Quick Checkout module](https://wpmet.com/plugin/shopengine/modules/quick-checkout/) to save your customers' time.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qvH8Jlc_Oi0?si=7H3z_tciDe3Qp3jd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** [PARTIAL PAYMENT MODULE](https://wpmet.com/plugin/shopengine/modules/partial-payment/)  helps customers with budget issues can pay on deposit with the partial payment option. So, it ensures your product sales.
+**🔷** [PARTIAL PAYMENT MODULE](https://wpmet.com/plugin/shopengine/modules/partial-payment/)  helps customers with budget issues pay on deposit with the partial payment option. So, it ensures your product sales.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fgQxq6XtA4Q?si=en1N61byKaqXqFzo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -205,13 +205,13 @@ ShopEngine comes with 20+ modules to help user to build dynamic WooCommerce webs
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XOZSqWLjgyk?si=TtVmR9G0em19dk-1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** Give a Shopify-style checkout appearance with the [Multistep Checkout module](https://wpmet.com/plugin/shopengine/modules/multistep-checkout/) to boost the conversion rate. This Elementor WooCommerce builder add-on will split the checkout process into different parts to make it convenient for users.
+**🔷** Give a Shopify-style checkout appearance with the [Multistep Checkout module](https://wpmet.com/plugin/shopengine/modules/multistep-checkout/) to boost the conversion rate. Our WooCommerce Elementor addon will split the checkout process into different parts to make it convenient for users.
 
 **🔷** Set up coupons for a country-specific state/region using ShopEngine, Elementor WooCommerce builder addon's [Advanced coupons module](https://wpmet.com/plugin/shopengine/modules/advanced-coupon/). Only customers in those areas can use the coupon code.
 
 **🔷** [Cross-Sell Popup](https://wpmet.com/plugin/shopengine/modules/cross-sell-popup/) module of the ShopEngine WooCommerce template builder will show product recommendations based on your customers' requirements for other products after adding products to the cart.
 
-**🔷** [Avatar module](https://wpmet.com/plugin/shopengine/modules/avatar/) makes website’s user profiles more appealing and personalized by allowing them to add an image and other user information with different customization options.
+**🔷** [Avatar module](https://wpmet.com/plugin/shopengine/modules/avatar/) makes websites' user profiles more appealing and personalized by allowing them to add an image and other user information with different customization options.
 
 ## Build Single Product Page with ShopEngine WooCommerce Builder Widgets (FREE & PRO)
 
@@ -257,7 +257,7 @@ WooCommerce shop page design impacts your eCommerce revenue. ShopEngine has been
 
 [ShopEngine Gutenberg Addon](https://wordpress.org/plugins/blocks-for-shopengine/) is an advanced addition to the ShopEngine WooCommerce builder. The ShopEngine Gutenberg addon is compatible with WooCommerce template builders that support Gutenberg.  
 
-Using this add-on, you can customize the single page, cart page, checkout, archive, etc. pages more effectively.
+Using this add-on, you can customize the single page, cart page, checkout, archive, etc., pages more effectively.
 
 You will get fully ready **5+ templates with 36+ blocks, 4 advanced modules** including quick view, wishlist, variation swatches, product comparison to design your shop as per your needs.
 
@@ -294,6 +294,18 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog)! 
 
 == Changelog ==
+v4.7.9// 07-07-2025
+Added: Elementor optimized markup support.
+Improved: Admin dashboard experience.
+Improved: Related product widget.
+Improved: Recently viewed product widget.
+Improved: Upsell product widget.
+Improved: Archive product widget.
+Improved: Account Navigation widget.
+Fixed: Product category limit issue on template creation.
+Fixed: Tooltip text translation issue with loop products.
+Fixed: Widgets category issue on Elementor editor panel with MP3 Audio Player plugin.
+
 v4.7.8// 16-04-2025
 Fixed: Compatibility issue with WordPress 6.8.
 
@@ -464,14 +476,14 @@ Added: Block theme support.
 Fixed: Name in demo design.
 Fixed: Undefined error notice in Elementor WooCommerce builder's Product Comparison button.
 Fixed: WooCommerce Shop Thank you page preview.
-Fixed: Styleing in rating inside archive product is fixed.
+Fixed: Styling in rating inside archive product is fixed.
 Fixed: Styling archive product group button ordering.
 Fixed: Downloadable product showing twice in my account page.
-Fixed: CSRF vulnerability in settings data saing.
-Fixed: WordPress widget area when block theme was activated.
-Improved: Security by appling more strong sanitation, validation and escaping.
-Improved: Archive product control UI, label and help text.
-Improved: The product selection popup in edit template.
+Fixed: CSRF vulnerability in settings data saving.
+Fixed: WordPress widget area when the block theme was activated.
+Improved: Security by applying stronger sanitation, validation, and escaping.
+Improved: Archive product control UI, label, and help text.
+Improved: The product selection popup in the edit template.
 
 v3.1.1 // 10-01-2023
 Improved: Compatibility issue fixing with Elementor.
@@ -877,9 +889,9 @@ Fixed: Checkout order review markup Issues.
 Fixed: My Account Navigation Conflicts.
 Fixed: Product rating star width issues.
 Fixed: Add to cart icon selector instead of SVG and fix css.
-Fixed: Archive products icon selector instead of SVG and fix css.
+Fixed: Archive products icon selector instead of SVG and fix CSS.
 Fixed: Add to cart sold individually product input plus minus.
-Fixed: Cart table sold individually product input plus minus.
+Fixed: Cart table sold individually, product input plus minus.
 Fixed: PHP Error on Logout Page.
 Fixed: Markup Override issues.
 Fixed: Archive products widget conflict with Storefront theme.

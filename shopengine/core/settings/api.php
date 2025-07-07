@@ -104,7 +104,7 @@ class Api extends \ShopEngine\Base\Api {
             'orderby'       => 'name', 
             'order'         => 'DESC',
             'hide_empty'    => false,
-            'number'        => 10
+            'number'        => 0  // no limits on number of terms
         ];
 
 		if(isset($data['only_parent'])){

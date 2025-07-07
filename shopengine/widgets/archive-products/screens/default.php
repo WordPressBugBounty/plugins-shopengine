@@ -41,18 +41,27 @@ $editor_mode = ( \Elementor\Plugin::$instance->editor->is_edit_mode() || is_prev
 ?>
 	<?php
 
-	if( !function_exists( 'custom_shopengine_product_title' ) ){		
-		function custom_shopengine_product_title($header_size) {
+	if(!function_exists('custom_shopengine_product_title')) {        
+		function custom_shopengine_product_title($header_size, $settings) {
 			global $product;
-			if ($product) {
+
+				$title = get_the_title($product->get_id());
+				
+				// Handle word limit if excerpt is enabled
+				if (isset($settings['shopengine_title_excerpt_enable']) && 
+					$settings['shopengine_title_excerpt_enable'] === 'yes' && 
+					isset($settings['shopengine_title_excerpt_length'])) {
+					$word_limit = (int) $settings['shopengine_title_excerpt_length'];
+					$title = wp_trim_words($title, $word_limit, '...');
+				}
+				
 				shopengine_content_render(
 					sprintf(
-					'<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>',
-					esc_attr($header_size),
-					esc_html(get_the_title($product->get_id()))
-				) );
-	
-			}
+						'<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>',
+						esc_attr($header_size),
+						esc_html($title)
+					)
+				);
 		}
 	}
 
@@ -63,7 +72,7 @@ $editor_mode = ( \Elementor\Plugin::$instance->editor->is_edit_mode() || is_prev
 		
 		if( function_exists( 'custom_shopengine_product_title' ) ) {			
 
-			custom_shopengine_product_title($header_size);
+			custom_shopengine_product_title($header_size, $settings_to_pass);
 		}
 
 	}, 10);
@@ -142,8 +151,7 @@ $editor_mode = ( \Elementor\Plugin::$instance->editor->is_edit_mode() || is_prev
 		);
 	}
 
-	$run_loop = $editor_mode ? true : woocommerce_product_loop();
-
+	$run_loop = $editor_mode ? true : (is_shop() || is_archive() ? woocommerce_product_loop() : false);
 	if( $editor_mode ) {
 
 		if(empty(WC()->session)) {

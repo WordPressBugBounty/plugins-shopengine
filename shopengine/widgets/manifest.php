@@ -29,8 +29,22 @@ class Manifest{
 			}
 			return $fields;
 		});
+		
+
+		// Check if the MP3 Music Player by Sonaar plugin is active
+		
+		if(is_plugin_active('mp3-music-player-by-sonaar/sonaar-music.php')){
+
+			add_action('elementor/editor/init', [$this, 'category_initialize'], 0);
+
+		}
+		
 	}
 
+	public function category_initialize(){
+		$elements_manager = \Elementor\Plugin::instance()->elements_manager;
+		$this->widget_categories($elements_manager);
+	}
 	public function manifest_widgets() {
 
 		foreach(Widget_List::instance()->get_list(true, 'active') as $widget) {

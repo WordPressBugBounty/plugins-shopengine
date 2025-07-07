@@ -1,5 +1,10 @@
 <?php defined('ABSPATH') || exit; ?>
 <div class="shopengine-recently-viewed-products">
+	
+	<?php if(!empty($_COOKIE['shopengine_recent_viewed_product']) && isset($settings['shopengine_recently_viewed_product_show_products_heading']) && $settings['shopengine_recently_viewed_product_show_products_heading'] == 'yes' ){ ?>
+			  <h2 class="shopengine-recently-viewed-products-heading-title"><?php echo esc_html( $settings['shopengine_recently_viewed_product_show_products_heading_title'] ?? ''); ?></h2>
+	<?php }?>
+	
     <div class="recent-viewed-product-list">
 		<?php
 		$args = [
@@ -123,6 +128,10 @@
 			wp_reset_query();
 			wp_reset_postdata();
 		} else {
+
+			if( isset($settings['shopengine_recently_viewed_product_hide_if_products_not_found']) && $settings['shopengine_recently_viewed_product_hide_if_products_not_found'] == 'yes' ) {
+				return;
+			}
 			echo esc_html_e("No recently viewed products to display", "shopengine");
 		}
 
