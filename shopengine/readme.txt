@@ -1,8 +1,8 @@
 === ShopEngine Elementor WooCommerce Builder Addon – All in One WooCommerce Solution ===
 Contributors: xpeedstudio, Ataurr, emranio
-Tags: WooCommerce, WooCommerce Builder, Elementor, Elementor WooCommerce builder, WooCommerce Product
+Tags: WooCommerce, WooCommerce Builder, Elementor WooCommerce builder, WooCommerce Product,  Shop Page Builder
 Tested up to: 6.8
-Stable tag: 4.7.9
+Stable tag: 4.8.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -15,7 +15,7 @@ Are you using multiple plugins to make an Elementor-compatible WooCommerce store
 
 Well, not anymore! You don’t have to slow down your WooCommerce store. 
 
-Presenting [ShopEngine](https://wpmet.com/plugin/shopengine) – all-in-one WooCommerce builder for Elementor and Gutenberg!
+Presenting [ShopEngine](https://wpmet.com/plugin/shopengine) – all-in-one Elementor WooCommerce builder!
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vjfrA-xI8F4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -34,13 +34,13 @@ Overall, ShopEngine is the most complete and dynamic WooCommerce builder for Ele
 ## 👉 ShopEngine Elementor WooCommerce Builder Features
 
 ⭐ **70+ drag-and-drop** WooCommerce website builder widgets
-⭐ **20+ Essential** WooCommerce store Modules
-⭐ **16+ pre-designed** WooCommerce store builder templates
+⭐ **20+ Essential** WooCommerce store modules
+⭐ **40+ pre-designed** WooCommerce store builder templates
 ⭐ **Enable and disable** any widget/module for the best page speed
 ⭐ Custom WooCommerce **Product Template Builder**
 ⭐ **Override WooCommerce pages** for online store
 ⭐ **Filter and Pagination** based on AJAX
-⭐ **Multi-language** Supported builder
+⭐ **Multi-language** supported builder	
 ⭐ **Compatible** with all popular WordPress themes
 ⭐ Drag-and-drop feature with **unlimited customization**
 ⭐ Works with Free **Elementor and WooCommerce**
@@ -143,11 +143,13 @@ ShopEngine comes with 20+ modules to help users build dynamic WooCommerce websit
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QnsmuVmTJww?si=c9ND3ow6provtJHu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** [WooCommerce Quick view module](https://wpmet.com/plugin/shopengine/modules/quick-view/) of the ShopEngine ecommerce builder allows users to have a Shopify-style at-a-glance view of a product through a popup.
+**🔷** [WooCommerce Quick view module](https://wpmet.com/plugin/shopengine/modules/quick-view/) of the ShopEngine Woo builder allows users to have a Shopify-style at-a-glance view of a product through a popup.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pI3uAOlpk1U?si=a2UKhYHXrz0IFZoo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 **🔷** [VARIATION SWATCHES MODULE](https://wpmet.com/plugin/shopengine/modules/variation-swatches/) lets you interactively display variants of a product by turning the product variation option fields into radio images, labels, and colors.
+
+**🔷** ShopEngine’s **WooCommerce product carousel** widget lets you showcase your products in a clean, eye-catching Promotional Product Slider. It makes browsing super easy—your customers can simply scroll through multiple products without needing to jump into each product page.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DcaA2rC0Rg0?si=6bj0gEmfRQN0A2qs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -171,23 +173,23 @@ ShopEngine comes with 20+ modules to help users build dynamic WooCommerce websit
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fgQxq6XtA4Q?si=en1N61byKaqXqFzo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** By  activating [Pre-order module](https://wpmet.com/plugin/shopengine/modules/pre-order/)  you can add and customize a WooCommerce pre-order option that allows your customer to pre-order the product.
+**🔷** By  activating [Pre-order module](https://wpmet.com/plugin/shopengine/modules/pre-order/) , you can add and customize a WooCommerce pre-order option that allows your customer to pre-order the product.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/aWiIw_D7azY?si=fTUalt-5x5-LDWHJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** [Back Order Module](https://wpmet.com/plugin/shopengine/modules/backorder/) This module will let you add a back-order option to know whether you should restock older products or not.
+**🔷** [Back Order Module](https://wpmet.com/plugin/shopengine/modules/backorder/) lets you add a back-order option to know whether you should restock older products or not.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/wIRPDz5c-Kw?si=gHhN6aL7vBcJSkYP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** Display sales updates as social proof of your WooCommerce store with [ShopEngine Sales Notification](https://wpmet.com/plugin/shopengine/modules/sales-notification/) module to create a sense of urgency among visitors. You can notify customer name, address, purchased products, images, and purchase time.
+**🔷** Display sales updates as social proof of your WooCommerce store with [ShopEngine Sales Notification](https://wpmet.com/plugin/shopengine/modules/sales-notification/) module to create a sense of urgency among visitors. You can notify customer's name, address, purchased products, images, and purchase time.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hHoe1WmxyYU?si=ps-19orkxOa1c-hL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** ShopEngine Elementor WooCommerce builder provides a [currency switcher module](https://wpmet.com/plugin/shopengine/modules/currency-switcher/) to switch currency according to your customers need. It helps to show multiple currencies for customers who belong to different countries.
+**🔷** ShopEngine Elementor WooCommerce builder provides a [currency switcher module](https://wpmet.com/plugin/shopengine/modules/currency-switcher/) to switch currency according to your customers' needs. It helps to show multiple currencies for customers who belong to different countries.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/TCgKrvvMO9k?si=0UMryOhTJ_dLTCOI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** The [Flash sale countdown module](https://wpmet.com/plugin/shopengine/modules/flash-sale-countdown/) enables you to show offers and discounts with a discount schedule counter for a specific time at a flash bar with the offer ending time.
+**🔷** The [Flash sale countdown module](https://wpmet.com/plugin/shopengine/modules/flash-sale-countdown/) enables you to show offers and discounts with a discount schedule counter for a specific time at a flash bar, with the offer ending time.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8xg0EM2mOK8?si=J12J94he5gVKxDHz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -199,7 +201,7 @@ ShopEngine comes with 20+ modules to help users build dynamic WooCommerce websit
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/SVRxspCkoiM?si=V311SuRmHMvjD7Vv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**🔷** The [Sticky Fly Cart module](https://wpmet.com/plugin/shopengine/modules/sticky-fly-cart/) also known as Sticky Add to Cart for WooCommerce website. Customers can view all products, add/remove items, see the subtotal amount, and navigate to the checkout process by clicking a mini cart icon.
+**🔷** The [Sticky Fly Cart module](https://wpmet.com/plugin/shopengine/modules/sticky-fly-cart/), also known as Sticky Add to Cart for WooCommerce website. Customers can view all products, add/remove items, see the subtotal amount, and navigate to the checkout process by clicking a mini cart icon.
 
 **🔷** Use the [Vacation Module](https://wpmet.com/plugin/shopengine/modules/vacation/)  to let your visitors know that you are on vacation or holiday leave for a few days with an interactive notice or alert message on your eCommerce website.
 
@@ -218,18 +220,18 @@ ShopEngine comes with 20+ modules to help users build dynamic WooCommerce websit
 ShopEngine offers 70+ WooCommerce Elementor Widgets to build attractive single-product pages to draw customers’ attention.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/S0Jx2VbU_gk?si=CR_AkMG8Mlo59n1Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-### Modernize Cart Page Builder With ShopEngine WooCommerce Widgets
+### Modernize Shopping Cart Page Builder With ShopEngine WooCommerce Widgets
 Get some specially designed helpful widgets of ShopEngine WooCommerce cart page builder to enhance the default WooCommerce cart page and reduce the cart abandonment rate.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/wT2U3UKcv38?si=pf0EXJlGb_3z4vhi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-### ShopEngine WooCommerce Widgets to Make an Intuitive Product Archive Page
+### Make an Intuitive Product Archive Page in WooCommerce
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/J9SR9EdsEIE?si=Ra0Z3g6QJ-YPQ4kt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Customize the archive page with pagination, archive title, archive products, and archive description of your eCommerce website with ShopEngine WooCommerce builder.
 
-### Customize Your Checkout Page With ShopEngine
+### Customize Your WooCommerce  Checkout Page With ShopEngine
 
 Give your customers the Shopify-style checkout page experience of their life by leveraging the checkout WooCommerce widgets of the ShopEngine Elementor WooCommerce builder.
 
@@ -239,13 +241,13 @@ Give your customers the Shopify-style checkout page experience of their life by 
 
 Now, tweaking the order page is just dragging widgets like Order Details and Order Confirm. And, take the opportunity to say thank your WooCommerce users for placing the order.
 
-### Create an Account Page For Shoppers With ShopEngine
+### Create an Account Page for Shoppers with ShopEngine Elementor WooCommerce Builder
 
-Have a customized WooCommerce account dashboard that synchs with your brand style and important information with ShopEngine WooCommerce Account page widgets.
+Have a customized WooCommerce account dashboard that syncs with your brand style and important information with ShopEngine WooCommerce Account page widgets.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/wT2U3UKcv38?si=pf0EXJlGb_3z4vhi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-Also, give them a scope to register and log out from their accounts. 
+Also, give them a scope to register and log out of their accounts. 
 
 ### General ShopEngine Woocommerce Widgets for Shop Page and Posts
 
@@ -294,6 +296,9 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog)! 
 
 == Changelog ==
+v4.8.0// 14-07-2025
+Fixed: Dashboard security issue.
+
 v4.7.9// 07-07-2025
 Added: Elementor optimized markup support.
 Improved: Admin dashboard experience.

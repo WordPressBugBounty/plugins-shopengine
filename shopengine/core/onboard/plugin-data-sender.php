@@ -110,6 +110,26 @@ class Plugin_Data_Sender
         );
     }
 
+    /**
+     * @param $route
+     * @param $data
+     */
+    public function sendEmailSubscribeData( $route, $data )
+    {
+        return wp_remote_post(
+            'https://api.wpmet.com/public/' . $route,
+            [
+                'method'      => 'POST',
+                'data_format' => 'body',
+                'headers'     => [
+                    'Accept'       => '*/*',
+                    'Content-Type' => 'application/json'
+                ],
+                'body'        => json_encode($data)
+            ]
+        );
+    }
+
     public function get_data()
     {
         return [

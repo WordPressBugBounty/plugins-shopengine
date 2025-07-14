@@ -32,11 +32,11 @@ class Onboard
 
             if (!empty($data['user_onboard_data']['email']) && !empty(is_email($data['user_onboard_data']['email']))) {
                 $args = [
-                    'email'           => $data['user_onboard_data']['email'],
-                    'environment_id'  => Onboard::ENVIRONMENT_ID,
-                    'contact_list_id' => Onboard::CONTACT_LIST_ID
+                    'email'           => sanitize_email( wp_unslash( $data['user_onboard_data']['email'] ) ),
+                    'slug'            => 'shopengine',
                 ];
-                Plugin_Data_Sender::instance()->sendAutomizyData('email-subscribe', $args);
+
+                $response = Plugin_Data_Sender::instance()->sendEmailSubscribeData( 'plugin-subscribe', $args );
             }
             update_option(Onboard::STATUS, true);
         }
