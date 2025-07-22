@@ -178,6 +178,16 @@ class Widget_List extends \ShopEngine\Base\List_Model {
 				'title'   => esc_html__('Product Title', 'shopengine'),
 				'package' => 'free',
 			],
+			'call-for-price' => [
+				'slug'    => 'call-for-price',
+				'title'   => esc_html__('Call for Price', 'shopengine'),
+				'package' => 'free',
+			],
+			'qr-code' => [
+				'slug'    => 'qr-code',
+				'title'   => esc_html__('QR Code', 'shopengine'),
+				'package' => 'free',
+			],
 			'product-rating'            => [
 				'slug'    => 'product-rating',
 				'title'   => esc_html__('Rating', 'shopengine'),

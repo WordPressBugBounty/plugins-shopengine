@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: ShopEngine 4.8.0\n"
+"Project-Id-Version: ShopEngine 4.8.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shopengine\n"
-"POT-Creation-Date: 2025-07-14 08:56:49+00:00\n"
+"POT-Creation-Date: 2025-07-22 11:38:28+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -102,7 +102,7 @@ msgid "Checkout"
 msgstr ""
 
 #: core/page-templates/screens/content-cart.php:27
-#: core/register/widget-list.php:193 widgets/cart-table/screens/cart.php:174
+#: core/register/widget-list.php:203 widgets/cart-table/screens/cart.php:174
 #: widgets/cart-table/screens/view.php:93
 #: widgets/return-to-shop/screens/default.php:11
 msgid "Return To Shop"
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Sales Notification"
 msgstr ""
 
-#: core/register/module-list.php:221 core/register/widget-list.php:363
+#: core/register/module-list.php:221 core/register/widget-list.php:373
 msgid "Currency Switcher"
 msgstr ""
 
@@ -288,7 +288,7 @@ msgstr ""
 msgid "Sticky Fly Cart"
 msgstr ""
 
-#: core/register/module-list.php:251 core/register/widget-list.php:393
+#: core/register/module-list.php:251 core/register/widget-list.php:403
 msgid "Vacation"
 msgstr ""
 
@@ -296,7 +296,7 @@ msgstr ""
 msgid "Multistep Checkout"
 msgstr ""
 
-#: core/register/module-list.php:263 core/register/widget-list.php:399
+#: core/register/module-list.php:263 core/register/widget-list.php:409
 msgid "Advanced Coupon"
 msgstr ""
 
@@ -488,6 +488,16 @@ msgid "Product Title"
 msgstr ""
 
 #: core/register/widget-list.php:183
+#: widgets/call-for-price/call-for-price.php:21
+msgid "Call for Price"
+msgstr ""
+
+#: core/register/widget-list.php:188 widgets/qr-code/qr-code-config.php:14
+#: widgets/qr-code/qr-code.php:21
+msgid "QR Code"
+msgstr ""
+
+#: core/register/widget-list.php:193
 #: widgets/archive-products/archive-products.php:127
 #: widgets/archive-products/archive-products.php:1530
 #: widgets/cross-sells/cross-sells.php:324
@@ -502,146 +512,146 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
-#: core/register/widget-list.php:188
+#: core/register/widget-list.php:198
 msgid "Related Product"
 msgstr ""
 
-#: core/register/widget-list.php:198
+#: core/register/widget-list.php:208
 msgid "Upsell"
 msgstr ""
 
-#: core/register/widget-list.php:203
+#: core/register/widget-list.php:213
 #: widgets/advanced-search/advanced-search-config.php:14
 msgid "Advanced Search"
 msgstr ""
 
-#: core/register/widget-list.php:208
+#: core/register/widget-list.php:218
 #: widgets/deal-products/deal-products-config.php:14
 msgid "Deal Products"
 msgstr ""
 
-#: core/register/widget-list.php:213
+#: core/register/widget-list.php:223
 #: widgets/empty-cart-message/empty-cart-message-config.php:14
 msgid "Empty Cart Message"
 msgstr ""
 
-#: core/register/widget-list.php:218
+#: core/register/widget-list.php:228
 #: widgets/filterable-product-list/filterable-product-list-config.php:14
 msgid "Filterable Product List"
 msgstr ""
 
-#: core/register/widget-list.php:223
+#: core/register/widget-list.php:233
 #: widgets/product-category-lists/product-category-lists-config.php:14
 msgid "Product Category List"
 msgstr ""
 
-#: core/register/widget-list.php:228
+#: core/register/widget-list.php:238
 #: widgets/product-list/product-list-config.php:15
 msgid "Product List"
 msgstr ""
 
-#: core/register/widget-list.php:233
+#: core/register/widget-list.php:243
 #: widgets/recently-viewed-products/recently-viewed-products-config.php:14
 msgid "Recently Viewed Products"
 msgstr ""
 
-#: core/register/widget-list.php:238
+#: core/register/widget-list.php:248
 #: widgets/view-single-product/view-single-product-config.php:14
 msgid "View Single Product"
 msgstr ""
 
-#: core/register/widget-list.php:243 widgets/cart-table/cart-table.php:614
+#: core/register/widget-list.php:253 widgets/cart-table/cart-table.php:614
 #: widgets/notice/notice-config.php:14
 msgid "Notice"
 msgstr ""
 
-#: core/register/widget-list.php:248
+#: core/register/widget-list.php:258
 #: widgets/checkout-form-login/checkout-form-login-config.php:14
 msgid "Checkout Form Login"
 msgstr ""
 
-#: core/register/widget-list.php:267
+#: core/register/widget-list.php:277
 msgid "Account Dashboard"
 msgstr ""
 
-#: core/register/widget-list.php:273
+#: core/register/widget-list.php:283
 msgid "Account Address"
 msgstr ""
 
-#: core/register/widget-list.php:279
+#: core/register/widget-list.php:289
 msgid "Account Details"
 msgstr ""
 
-#: core/register/widget-list.php:285
+#: core/register/widget-list.php:295
 msgid "Account Downloads"
 msgstr ""
 
-#: core/register/widget-list.php:291
+#: core/register/widget-list.php:301
 msgid "Account Form - Login"
 msgstr ""
 
-#: core/register/widget-list.php:297
+#: core/register/widget-list.php:307
 msgid "Account Form - Register"
 msgstr ""
 
-#: core/register/widget-list.php:303
+#: core/register/widget-list.php:313
 msgid "Account Logout"
 msgstr ""
 
-#: core/register/widget-list.php:309
+#: core/register/widget-list.php:319
 msgid "Account Navigation"
 msgstr ""
 
-#: core/register/widget-list.php:315
+#: core/register/widget-list.php:325
 msgid "Account Order - Details"
 msgstr ""
 
-#: core/register/widget-list.php:321
+#: core/register/widget-list.php:331
 msgid "Account Orders"
 msgstr ""
 
-#: core/register/widget-list.php:327
+#: core/register/widget-list.php:337
 #: widgets/product-categories/product-categories.php:22
 msgid "Categories"
 msgstr ""
 
-#: core/register/widget-list.php:333
+#: core/register/widget-list.php:343
 msgid "Product Filters"
 msgstr ""
 
-#: core/register/widget-list.php:339
+#: core/register/widget-list.php:349
 msgid "Thank You Address Details"
 msgstr ""
 
-#: core/register/widget-list.php:345
+#: core/register/widget-list.php:355
 msgid "Order Confirm"
 msgstr ""
 
-#: core/register/widget-list.php:351
+#: core/register/widget-list.php:361
 msgid "Order Details"
 msgstr ""
 
-#: core/register/widget-list.php:357
+#: core/register/widget-list.php:367
 msgid "Order Thank You"
 msgstr ""
 
-#: core/register/widget-list.php:369
+#: core/register/widget-list.php:379
 msgid "Flash Sale Products"
 msgstr ""
 
-#: core/register/widget-list.php:375
+#: core/register/widget-list.php:385
 msgid "Best Selling Product"
 msgstr ""
 
-#: core/register/widget-list.php:381
+#: core/register/widget-list.php:391
 msgid "Comparison Button"
 msgstr ""
 
-#: core/register/widget-list.php:387
+#: core/register/widget-list.php:397
 msgid "Product Size Chart"
 msgstr ""
 
-#: core/register/widget-list.php:405
+#: core/register/widget-list.php:415
 msgid "Product Carousel"
 msgstr ""
 
@@ -1192,6 +1202,8 @@ msgstr ""
 #: widgets/archive-title/archive-title.php:64
 #: widgets/archive-view-mode/archive-view-mode.php:233
 #: widgets/archive-view-mode/archive-view-mode.php:269
+#: widgets/call-for-price/call-for-price.php:117
+#: widgets/call-for-price/call-for-price.php:152
 #: widgets/cart-table/cart-table.php:906 widgets/cart-table/cart-table.php:940
 #: widgets/cart-table/cart-table.php:1072
 #: widgets/cart-table/cart-table.php:1157
@@ -1617,7 +1629,7 @@ msgstr ""
 #: widgets/product-price/product-price.php:28
 #: widgets/product-rating/product-rating.php:221
 #: widgets/product-review/product-review.php:618
-#: widgets/product-tabs/product-tabs.php:1695
+#: widgets/product-tabs/product-tabs.php:1695 widgets/qr-code/qr-code.php:66
 msgid "Alignment"
 msgstr ""
 
@@ -1649,7 +1661,7 @@ msgstr ""
 #: widgets/product-price/product-price.php:33
 #: widgets/product-rating/product-rating.php:225
 #: widgets/product-review/product-review.php:622
-#: widgets/product-tabs/product-tabs.php:1699
+#: widgets/product-tabs/product-tabs.php:1699 widgets/qr-code/qr-code.php:70
 #: widgets/recently-viewed-products/recently-viewed-products.php:393
 #: widgets/related/related.php:406 widgets/related/related.php:673
 #: widgets/return-to-shop/return-to-shop.php:33
@@ -1682,7 +1694,7 @@ msgstr ""
 #: widgets/product-price/product-price.php:37
 #: widgets/product-rating/product-rating.php:229
 #: widgets/product-review/product-review.php:626
-#: widgets/product-tabs/product-tabs.php:1703
+#: widgets/product-tabs/product-tabs.php:1703 widgets/qr-code/qr-code.php:74
 #: widgets/recently-viewed-products/recently-viewed-products.php:397
 #: widgets/related/related.php:410 widgets/return-to-shop/return-to-shop.php:37
 #: widgets/up-sells/up-sells.php:391
@@ -1718,7 +1730,7 @@ msgstr ""
 #: widgets/product-price/product-price.php:41
 #: widgets/product-rating/product-rating.php:233
 #: widgets/product-review/product-review.php:630
-#: widgets/product-tabs/product-tabs.php:1707
+#: widgets/product-tabs/product-tabs.php:1707 widgets/qr-code/qr-code.php:78
 #: widgets/recently-viewed-products/recently-viewed-products.php:401
 #: widgets/related/related.php:414 widgets/related/related.php:677
 #: widgets/return-to-shop/return-to-shop.php:41
@@ -1822,6 +1834,7 @@ msgid "Quantity Settings"
 msgstr ""
 
 #: widgets/add-to-cart/add-to-cart.php:55
+#: widgets/call-for-price/call-for-price.php:54
 msgid "Button Style"
 msgstr ""
 
@@ -2206,6 +2219,7 @@ msgstr ""
 #: widgets/archive-result-count/archive-result-count.php:53
 #: widgets/archive-title/archive-title.php:78
 #: widgets/archive-view-mode/archive-view-mode.php:550
+#: widgets/call-for-price/call-for-price.php:63
 #: widgets/cart-table/cart-table.php:188 widgets/cart-table/cart-table.php:190
 #: widgets/cart-table/cart-table.php:371 widgets/cart-table/cart-table.php:867
 #: widgets/cart-totals/cart-totals.php:143
@@ -2301,6 +2315,7 @@ msgstr ""
 #: widgets/archive-products/archive-products.php:2151
 #: widgets/archive-title/archive-title.php:89
 #: widgets/archive-view-mode/archive-view-mode.php:561
+#: widgets/call-for-price/call-for-price.php:74
 #: widgets/cart-table/cart-table.php:201 widgets/cart-table/cart-table.php:382
 #: widgets/cart-table/cart-table.php:878 widgets/cart-table/cart-table.php:1039
 #: widgets/cart-totals/cart-totals.php:47
@@ -2421,6 +2436,7 @@ msgstr ""
 #: widgets/archive-products/archive-products.php:809
 #: widgets/archive-products/archive-products.php:885
 #: widgets/archive-view-mode/archive-view-mode.php:572
+#: widgets/call-for-price/call-for-price.php:85
 #: widgets/cart-table/cart-table.php:393 widgets/cart-totals/cart-totals.php:61
 #: widgets/cart-totals/cart-totals.php:165
 #: widgets/cart-totals/cart-totals.php:525
@@ -2519,6 +2535,7 @@ msgstr ""
 #: widgets/archive-products/archive-products.php:1432
 #: widgets/archive-products/archive-products.php:2178
 #: widgets/archive-view-mode/archive-view-mode.php:226
+#: widgets/call-for-price/call-for-price.php:110
 #: widgets/cart-table/cart-table.php:899 widgets/cart-table/cart-table.php:1065
 #: widgets/cart-totals/cart-totals.php:352
 #: widgets/cart-totals/cart-totals.php:554
@@ -2575,6 +2592,8 @@ msgstr ""
 #: widgets/archive-products/archive-products.php:2303
 #: widgets/archive-view-mode/archive-view-mode.php:247
 #: widgets/archive-view-mode/archive-view-mode.php:285
+#: widgets/call-for-price/call-for-price.php:130
+#: widgets/call-for-price/call-for-price.php:165
 #: widgets/cart-table/cart-table.php:159 widgets/cart-table/cart-table.php:741
 #: widgets/cart-table/cart-table.php:919 widgets/cart-table/cart-table.php:955
 #: widgets/cart-table/cart-table.php:1086
@@ -2630,6 +2649,7 @@ msgstr ""
 #: widgets/archive-products/archive-products.php:1175
 #: widgets/archive-products/archive-products.php:1467
 #: widgets/archive-products/archive-products.php:2238
+#: widgets/call-for-price/call-for-price.php:145
 #: widgets/cart-table/cart-table.php:933 widgets/cart-table/cart-table.php:1150
 #: widgets/cart-totals/cart-totals.php:589
 #: widgets/cart-totals/cart-totals.php:818
@@ -2674,6 +2694,7 @@ msgstr ""
 #: widgets/archive-products/archive-products.php:2268
 #: widgets/archive-products/archive-products.php:2315
 #: widgets/archive-view-mode/archive-view-mode.php:299
+#: widgets/call-for-price/call-for-price.php:178
 #: widgets/cart-table/cart-table.php:328 widgets/cart-table/cart-table.php:513
 #: widgets/cart-table/cart-table.php:674 widgets/cart-table/cart-table.php:753
 #: widgets/cart-totals/cart-totals.php:621
@@ -2712,6 +2733,7 @@ msgstr ""
 #: widgets/add-to-cart/add-to-cart.php:2022
 #: widgets/add-to-cart/add-to-cart.php:2423
 #: widgets/add-to-cart/add-to-cart.php:2652
+#: widgets/call-for-price/call-for-price.php:226
 #: widgets/cart-table/cart-table.php:526 widgets/cart-table/cart-table.php:766
 #: widgets/cart-table/cart-table.php:993
 #: widgets/cart-totals/cart-totals.php:464
@@ -2742,6 +2764,7 @@ msgstr ""
 #: widgets/add-to-cart/add-to-cart.php:2445
 #: widgets/add-to-cart/add-to-cart.php:2674
 #: widgets/archive-products/archive-products.php:2366
+#: widgets/call-for-price/call-for-price.php:247
 #: widgets/cart-table/cart-table.php:231 widgets/cart-table/cart-table.php:572
 #: widgets/cart-table/cart-table.php:686 widgets/cart-table/cart-table.php:808
 #: widgets/cart-totals/cart-totals.php:667
@@ -2801,6 +2824,7 @@ msgstr ""
 #: widgets/add-to-cart/add-to-cart.php:2467
 #: widgets/add-to-cart/add-to-cart.php:2696
 #: widgets/archive-products/archive-products.php:2345
+#: widgets/call-for-price/call-for-price.php:269
 #: widgets/cart-totals/cart-totals.php:329
 #: widgets/checkout-form-billing/checkout-form-billing.php:502
 #: widgets/checkout-payment/checkout-payment.php:219
@@ -3899,6 +3923,7 @@ msgstr ""
 #: widgets/archive-products/archive-products.php:1725
 #: widgets/deal-products/deal-products.php:380
 #: widgets/filterable-product-list/filterable-product-list.php:1610
+#: widgets/qr-code/qr-code.php:28
 msgid "Size"
 msgstr ""
 
@@ -4159,6 +4184,18 @@ msgstr ""
 msgid "Space In-between"
 msgstr ""
 
+#: widgets/call-for-price/call-for-price-config.php:15
+msgid "Call For Price"
+msgstr ""
+
+#: widgets/call-for-price/call-for-price.php:29
+msgid "Button Text"
+msgstr ""
+
+#: widgets/call-for-price/call-for-price.php:39
+msgid "Button Phone Number"
+msgstr ""
+
 #: widgets/cart-table/cart-table.php:32 widgets/cross-sells/cross-sells.php:418
 #: widgets/filterable-product-list/filterable-product-list.php:279
 #: widgets/related/related.php:459 widgets/up-sells/up-sells.php:441
@@ -4175,7 +4212,7 @@ msgstr ""
 
 #: widgets/cart-table/cart-table.php:99 widgets/cart-table/cart-table.php:101
 #: widgets/cart-table/cart-table.php:707
-#: widgets/cart-table/screens/cart.php:121
+#: widgets/cart-table/screens/cart.php:121 widgets/qr-code/qr-code.php:51
 msgid "Quantity"
 msgstr ""
 
@@ -6601,6 +6638,16 @@ msgstr[1] ""
 msgid ""
 "There is no default product to show preview. Please add a \"Simple Type\" "
 "product first"
+msgstr ""
+
+#: widgets/qr-code/qr-code.php:40
+msgid "Scan to Add to Cart URL"
+msgstr ""
+
+#: widgets/qr-code/qr-code.php:41
+msgid ""
+"If enabled, the QR code will generate a link that adds the product to the "
+"cart when scanned."
 msgstr ""
 
 #: widgets/recently-viewed-products/recently-viewed-products.php:67
