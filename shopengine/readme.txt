@@ -2,7 +2,7 @@
 Contributors: xpeedstudio, Ataurr, emranio
 Tags: WooCommerce, WooCommerce Builder, Elementor WooCommerce builder, WooCommerce Product,  Shop Page Builder
 Tested up to: 6.8
-Stable tag: 4.8.1
+Stable tag: 4.8.2
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -296,6 +296,9 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog)! 
 
 == Changelog ==
+v4.8.2// 28-07-2025
+Improved: Onboarding process.
+
 v4.8.1// 22-07-2025
 New: QR Code widget.
 New: QR Code block.

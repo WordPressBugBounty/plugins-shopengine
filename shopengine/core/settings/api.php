@@ -78,6 +78,7 @@ class Api extends \ShopEngine\Base\Api {
             'getgenie' 				  => 'getgenie.php',
 			'emailkit'				  => 'EmailKit.php',
 			'gutenkit-blocks-addon'	  => 'gutenkit-blocks-addon.php',
+			'popup-builder-block'	  =>  'popup-builder-block.php',
         ];
 
 		$plugin_status = Plugin_Status::instance();
@@ -180,6 +181,65 @@ class Api extends \ShopEngine\Base\Api {
 			'results' => $post_items,
 		];
 	}
+	public function post_onboard_plugins() {
+		
+		// Get plugin_slug directly from request parameters
+		$plugin_slug = $this->request->get_param('plugin_slug');
+		
+		if (empty($plugin_slug)) {
+			return [
+				'success' => false,
+				'message' => 'Plugin slug is required'
+			];
+		}
+
+		if (!current_user_can('install_plugins')) {
+			return [
+				'success' => false,
+				'message' => 'Insufficient permissions to install plugins'
+			];
+		}
+
+		
+		$status = \ShopEngine\Utils\Onboard\Plugin_Installer::single_install_and_activate($plugin_slug);
+		
+		if (is_wp_error($status)) {
+			return [
+				'success' => false,
+				wp_send_json_error( array( 'status' => false ) ),
+			];
+		} else {
+			return [
+				'success' => true,
+				'data' => [
+					'message' => self::plugin_activate_message($plugin_slug)
+				]
+			];
+		}
+	}
+
+	public static function plugin_activate_message($plugin_slug) {
+		$plugins_message = [
+			'setup_configurations' => esc_html__('Setup Configurations', 'shopengine'),
+			'elementskit-lite/elementskit-lite.php' => esc_html__('Page Builder Elements Activated', 'shopengine'),
+			'getgenie/getgenie.php' => esc_html__('AI Content & SEO Tool Activated', 'shopengine'),
+			'shopengine/shopengine.php' => esc_html__('WooCommerce Builder Activated', 'shopengine'),
+			'metform/metform.php' => esc_html__('Form Builder Activated', 'shopengine'),
+			'emailkit/EmailKit.php' => esc_html__('Email Customizer Activated', 'shopengine'),
+			'wp-social/wp-social.php' => esc_html__('Social Integration Activated', 'shopengine'),
+			'wp-ultimate-review/wp-ultimate-review.php' => esc_html__('Review Management Activated', 'shopengine'),
+			'wp-fundraising-donation/wp-fundraising.php' => esc_html__('Fundraising & Donations', 'shopengine'),
+			'gutenkit-blocks-addon/gutenkit-blocks-addon.php' => esc_html__('Page Builder Blocks Activated', 'shopengine'),
+			'popup-builder-block/popup-builder-block.php' => esc_html__('Popup Builder Activated', 'shopengine'),
+			'table-builder-block/table-builder-block.php' => esc_html__('Table Builder Activated', 'shopengine'),
+			];
+
+			if ( array_key_exists( $plugin_slug, $plugins_message ) ) {
+				return esc_html( $plugins_message[$plugin_slug] );
+			} else {
+				return esc_html__( 'Plugin Activated', 'shopengine' );
+			}
+		}
 }
 
 

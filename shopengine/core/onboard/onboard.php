@@ -41,9 +41,23 @@ class Onboard
             update_option(Onboard::STATUS, true);
         }
 
-        return [
-            'status'  => 'success',
-            'message' => esc_html__('settings saved successfully.', 'shopengine')
-        ];
+       $response = array(
+        'status'  => 'success',
+        'message' => \ShopEngine\Core\Settings\Api::plugin_activate_message('setup_configurations')
+    );
+
+    $plugins = !empty($data['our_plugins']) && is_array($data['our_plugins']) ? $data['our_plugins'] : [];
+    
+        if($plugins) {
+            $total_plugins = count($plugins);
+            $total_steps   = 1 + $total_plugins;
+            $percentage = ($total_steps > 0) ? (1 / $total_steps) * 100 : 100;
+            $percentage = round($percentage);
+
+            $response['progress'] = $percentage;
+            $response['plugins'] = $plugins;
+        }
+
+        return $response;
     }
 }
