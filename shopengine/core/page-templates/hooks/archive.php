@@ -74,11 +74,11 @@ class Archive extends Base {
 			if($active_theme === 'PHOX' || $active_theme === 'PHOX Child') {
 				wp_dequeue_style('wdes-woocommerce');
 				wp_dequeue_script('bootstrap');
-				
-			}
 
-		}
-			
+			} else if ( $themeName == 'woostify' ) {
+				wp_dequeue_script('woostify-woocommerce');
+			}
+		} 
 	}
 
 

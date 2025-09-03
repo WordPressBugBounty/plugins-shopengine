@@ -24,9 +24,57 @@ elseif($stock_status == 'onbackorder') :
 	$icon = isset($settings['shopengine_pstock_available_on_backorder_icon']) ? $settings['shopengine_pstock_available_on_backorder_icon'] : '';
 
 endif;
+
+$default_icon_html = '';
+if(!empty($icon)) {
+	ob_start();
+    \Elementor\Icons_Manager::render_icon($icon, ['aria-hidden' => 'true']);
+    $default_icon_html = ob_get_clean();
+}
+$default_stock_data = [
+    'stock_status' => $stock_status,
+    'availability' => $availability['availability'] ?? '',
+    'class' => $availability['class'] ?? '',
+    'icon' => $default_icon_html,
+];
+
+// Prepare variation data for variable products
+$variation_data = [];
+if ($product->is_type('variable')) {
+    $variations = $product->get_available_variations();
+    foreach ($variations as $variation) {
+        $variation_product = wc_get_product($variation['variation_id']);
+        $variation_stock_status = $variation_product->get_stock_status();
+        $variation_icon = '';
+
+        // Map variation stock status to icon
+        if ($variation_stock_status == 'instock') {
+            $variation_icon = isset($settings['shopengine_pstock_in_stock_icon']) ? $settings['shopengine_pstock_in_stock_icon'] : '';
+        } elseif ($variation_stock_status == 'outofstock') {
+            $variation_icon = isset($settings['shopengine_pstock_out_of_stock_icon']) ? $settings['shopengine_pstock_out_of_stock_icon'] : '';
+        } elseif ($variation_stock_status == 'onbackorder') {
+            $variation_icon = isset($settings['shopengine_pstock_available_on_backorder_icon']) ? $settings['shopengine_pstock_available_on_backorder_icon'] : '';
+        }
+
+        // Pre-render variation icon HTML
+        $variation_icon_html = '';
+        if (!empty($variation_icon)) {
+            ob_start();
+            \Elementor\Icons_Manager::render_icon($variation_icon, ['aria-hidden' => 'true']);
+            $variation_icon_html = ob_get_clean();
+        }
+
+        $variation_data[$variation['variation_id']] = [
+            'stock_status' => $variation_stock_status,
+            'availability' => $variation_product->get_availability()['availability'] ?? '',
+            'class' => $variation_product->get_availability()['class'] ?? '',
+            'icon' => $variation_icon_html,
+        ];
+    }
+}
 ?>
 
-<div class="shopengine-product-stock">
+<div class="shopengine-product-stock" data-variations='<?php echo wp_json_encode($variation_data); ?>' data-default-stock='<?php echo wp_json_encode($default_stock_data); ?>'>
 
 	<?php if($post_type == \ShopEngine\Core\Template_Cpt::TYPE) :
 
@@ -43,10 +91,10 @@ endif;
 		$stock_text = isset($settings[$stock_type . '_text']) ? $settings[$stock_type . '_text'] : Self::stock_types()[$stock_type];
 		$stock_icon = isset($icons[$stock_type . '_icon']) ? $icons[$stock_type . '_icon'] : '';
 
-		shopengine_content_render('<p class="' . $stock_class . '">' . $stock_icon . ' ' . $stock_text . '</p>');
+		shopengine_content_render('<p class="stock ' . $stock_class . '" data-stock-status="' . esc_attr($stock_type) . '">' . $stock_icon . ' ' . $stock_text . '</p>');
 
 	else : ?>
-		<p class="<?php echo esc_attr( isset($availability['class']) ? $availability['class'] : ''); ?>">
+		<p class="stock <?php echo esc_attr(isset($availability['class']) ? $availability['class'] : ''); ?>" data-stock-status="<?php echo esc_attr($stock_status); ?>">
 
 			<?php
 			if(!empty($icon)) :

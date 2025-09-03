@@ -16,7 +16,7 @@ class ShopEngine_Call_For_Price_Config extends \ShopEngine\Base\Widget_Config {
 	}
 
 	public function get_icon() {
-		return 'shopengine-widget-icon shopengine-icon-mobile';
+		return 'shopengine-widget-icon shopengine-icon-call_for_price';
 	}
 
 	public function get_categories() {

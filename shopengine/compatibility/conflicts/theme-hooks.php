@@ -359,6 +359,53 @@ class Theme_Hooks {
 		// Storefront Theme
 		$this->remove_action_if_exists('woocommerce_before_main_content', 'storefront_before_content', 10 );
 		$this->remove_action_if_exists('woocommerce_after_main_content', 'storefront_after_content', 10 );
+
+
+
+		/*******************************************************
+		* Woostify theme hook reverting in shop & archive page
+		*
+		******************************************************/
+
+		// Remove Woostify WooCommerce scripts and filters
+		$this->remove_action_if_exists('loop_shop_columns', 'woostify_products_per_row');
+		$this->remove_action_if_exists('loop_shop_per_page', 'woostify_products_per_page');
+		$this->remove_action_if_exists('woocommerce_loop_add_to_cart_link', 'woostify_modify_woocommerce_loop_add_to_cart_link', 99);
+
+
+		// Remove Woostify before shop loop item title hooks
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_wrapper_open', 10);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_print_out_of_stock_label', 15);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_image_wrapper_open', 20);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_change_sale_flash', 23);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_product_loop_item_action', 25);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_link_open', 30);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_hover_image', 40);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_image', 50);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_link_close', 60);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_add_to_cart_on_image', 70);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_product_loop_item_wishlist_icon_bottom', 80);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_image_wrapper_close', 90);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_content_open', 100);
+
+		// Remove Woostify shop loop item title hooks
+		$this->remove_action_if_exists('woocommerce_shop_loop_item_title', 'woostify_add_template_loop_product_category', 5);
+		$this->remove_action_if_exists('woocommerce_shop_loop_item_title', 'woostify_add_template_loop_product_title', 10);
+
+		// Remove Woostify after shop loop item title hooks
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item_title', 'woostify_loop_product_rating', 2);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item_title', 'woostify_loop_product_meta_open', 5);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item_title', 'woostify_loop_product_price', 10);
+
+		// Remove Woostify after shop loop item hooks
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_add_to_cart_button', 10);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_meta_close', 20);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_content_close', 50);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_wrapper_close', 100);
+
+		/**
+		* End of Woostify theme hook reverting
+		******************************************************/
 	}
 
 	/**
@@ -1307,6 +1354,45 @@ class Theme_Hooks {
 		 * Flatsome theme
 		 */
 		$this->remove_action_if_exists('woocommerce_shop_loop_item_title', 'flatsome_woocommerce_shop_loop_category', 0);
+
+		/**
+		 *  Woostify theme
+		 */
+		$this->remove_action_if_exists('loop_shop_columns', 'woostify_products_per_row');
+    	$this->remove_action_if_exists('loop_shop_per_page', 'woostify_products_per_page');
+   		$this->remove_action_if_exists('woocommerce_loop_add_to_cart_link', 'woostify_modify_woocommerce_loop_add_to_cart_link', 99);
+
+
+		// Remove Woostify before shop loop item title hooks
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_wrapper_open', 10);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_print_out_of_stock_label', 15);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_image_wrapper_open', 20);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_change_sale_flash', 23);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_product_loop_item_action', 25);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_link_open', 30);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_hover_image', 40);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_image', 50);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_link_close', 60);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_add_to_cart_on_image', 70);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_product_loop_item_wishlist_icon_bottom', 80);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_image_wrapper_close', 90);
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'woostify_loop_product_content_open', 100);
+
+		// Remove Woostify shop loop item title hooks
+		$this->remove_action_if_exists('woocommerce_shop_loop_item_title', 'woostify_add_template_loop_product_category', 5);
+		$this->remove_action_if_exists('woocommerce_shop_loop_item_title', 'woostify_add_template_loop_product_title', 10);
+
+		// Remove Woostify after shop loop item title hooks
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item_title', 'woostify_loop_product_rating', 2);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item_title', 'woostify_loop_product_meta_open', 5);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item_title', 'woostify_loop_product_price', 10);
+
+		// Remove Woostify after shop loop item hooks
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_add_to_cart_button', 10);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_meta_close', 20);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_content_close', 50);
+		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_wrapper_close', 100);
+
 	}
 
 

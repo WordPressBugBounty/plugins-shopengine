@@ -55,25 +55,54 @@ class Comparison_Field_Value {
 	}
 
 	public function get_attributes( WC_Product $product , $data = null) {
+		if(!$data) $data = [];
+		$product_id = $product->get_id();
+		$formatted_attributes[$product_id] = [];
 
-	    if(!$data) $data = [] ;
+		if (!$product->has_attributes()) return $formatted_attributes;
 
-		$formatted_attributes[$product->get_id()] = [];
+		foreach ($product->get_attributes() as $attribute) {
+			$attribute_name = wc_attribute_label($attribute->get_name());
+			$attribute_slug = $attribute->is_taxonomy() 
+				? wc_attribute_taxonomy_slug($attribute->get_name())
+				: strtolower(str_replace(' ', '_', $attribute_name));
+			
+			// Find matching slug (exact or partial match)
+			$matched_slug = $this->find_matching_slug($attribute_slug, $data);
+			if (!$matched_slug) continue;
 
-		if ( $product->has_attributes() ) {
+			// Use the actual attribute name for display, not the matched slug
+			$display_key = strtolower(str_replace(' ', '_', $attribute_name));
 
-			$attributes = $product->get_attributes();
-			foreach ( $attributes as $attribute ) {
-				$attribute_name = wc_attribute_label( $attribute->get_name() );
-				$attribute_slug = strtolower(str_replace(' ', '_', $attribute_name));
-				if(in_array($attribute_slug, $data)){
-					$formatted_attributes[$product->get_id()][$attribute_slug] = explode(', ', $product->get_attribute( $attribute_name ) );
-                }
+			// Get attribute values
+			if ($attribute->is_taxonomy()) {
+				$terms = wp_get_post_terms($product_id, $attribute->get_name(), ['fields' => 'names']);
+				$formatted_attributes[$product_id][$display_key] = !is_wp_error($terms) && !empty($terms) ? $terms : [];
+			} else {
+				$values = $product->get_attribute($attribute_name);
+				$formatted_attributes[$product_id][$display_key] = !empty($values) ? array_map('trim', explode(', ', $values)) : [];
 			}
-
 		}
 
 		return $formatted_attributes;
+	}
+
+	private function find_matching_slug($attribute_slug, $data) {
+		if (empty($data) || !is_array($data)) return null;
+		
+		// Exact match first
+		if (in_array($attribute_slug, $data, true)) return $attribute_slug;
+		
+		// Partial match
+		foreach ($data as $data_slug) {
+			if (is_string($data_slug) && (
+				strpos($attribute_slug, $data_slug) === 0 || 
+				strpos($attribute_slug, $data_slug . '-') !== false
+			)) {
+				return $data_slug;
+			}
+		}
+		return null;
 	}
 
 	public function get_html( $slug, $data ) {
@@ -91,32 +120,36 @@ class Comparison_Field_Value {
 				<?php
 				break;
 			case 'attributes':
-
-			 foreach ($data as $slug => $attributes ){
-				
-				?>
-                <tr>
-                    <th style="vertical-align: middle;">  <?php
-						echo esc_html($slug) ?> </th>
-					<?php
-					$this->print_attributes( $slug, $attributes ); ?>
-                </tr>
-				<?php
-             }
+				if (!empty($data) && is_array($data)) {
+					foreach ($data as $attribute_key => $attributes ){
+						// Convert slug back to readable format for display
+						$display_name = ucwords(str_replace('_', ' ', $attribute_key));
+						?>
+		                <tr>
+		                    <th style="vertical-align: middle;">  <?php
+								echo esc_html($display_name) ?> </th>
+							<?php
+							$this->print_attributes( $attribute_key, $attributes ); ?>
+		                </tr>
+						<?php
+		             }
+				}
 				break;
 			case 'custom_meta':
-
-			 foreach ($data as $meta ){
-
-				?>
-                <tr>
-                    <th style="vertical-align: middle;">  <?php
-						echo esc_html(ucwords( preg_replace( '~([^a-z0-9\-])~i', ' ', $meta ) )) ?> </th>
-					<?php
-					$this->print_custom_meta( $meta ); ?>
-                </tr>
-				<?php
-             }
+				if (!empty($data) && is_array($data)) {
+					foreach ($data as $meta ){
+						if (!empty($meta)) {
+							?>
+			                <tr>
+			                    <th style="vertical-align: middle;">  <?php
+									echo esc_html(ucwords( preg_replace( '~([^a-z0-9\-])~i', ' ', $meta ) )) ?> </th>
+								<?php
+								$this->print_custom_meta( $meta ); ?>
+			                </tr>
+							<?php
+						}
+		             }
+				}
 				break;
 			case 'color':
 				?>

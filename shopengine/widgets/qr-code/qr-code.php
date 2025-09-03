@@ -46,16 +46,39 @@ class ShopEngine_Qr_Code extends \ShopEngine\Base\Widget
 		);
 
 		$this->add_control(
+			'shopengine_direct_payment_url',
+			[
+				'label' => __('Scan to Direct Payment URL', 'shopengine'),
+				'description' => __('If enabled, the QR code will generate a link that adds the product to cart and redirects directly to checkout.', 'shopengine'),
+				'type' => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default' => 'no',
+			]
+		);
+
+		$this->add_control(
 			'shopengine_quantity',
 			[
-				'label' => __('Quantity', 'shopengine'),
-				'type' => Controls_Manager::NUMBER,
-				'min' => 0,
-				'max' => 500,
-				'step' => 1,
-				'default' => 1,
-				'condition' => [
-					'shopengine_add_cart_url' => 'yes',
+				'label'     => esc_html__('Quantity', 'shopengine'),
+				'type'      => Controls_Manager::NUMBER,
+				'min'       => 0,
+				'max'       => 500,
+				'step'      => 1,
+				'default'   => 1,
+				'conditions' => [
+					'relation' => 'or',
+					'terms'    => [
+						[
+							'name'     => 'shopengine_add_cart_url',
+							'operator' => '===',
+							'value'    => 'yes',
+						],
+						[
+							'name'     => 'shopengine_direct_payment_url',
+							'operator' => '===',
+							'value'    => 'yes',
+						],
+					],
 				],
 			]
 		);
@@ -101,6 +124,11 @@ class ShopEngine_Qr_Code extends \ShopEngine\Base\Widget
 		if ($settings['shopengine_add_cart_url'] == 'yes') {
 
 			$url = get_the_permalink( $product_id) . sprintf('?add-to-cart=%s&quantity=%s', $product_id, $quantity );
+
+		} elseif ($settings['shopengine_direct_payment_url'] == 'yes') {
+
+			$checkout_url = wc_get_checkout_url();
+			$url = $checkout_url . sprintf('?add-to-cart=%s&quantity=%s', $product_id, $quantity );
 
 		} else {
 
