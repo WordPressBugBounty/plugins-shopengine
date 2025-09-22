@@ -147,6 +147,10 @@ class Base extends \ShopEngine\Base\Api {
         return $this->terms(['product_tag']);
     }
 
+    public function get_product_brand() {
+        return $this->terms(['product_brand']);
+    }
+
     public function get_product_terms() {
         if(isset($this->request['taxonomy'])){
             return $this->terms([$this->request['taxonomy']]);

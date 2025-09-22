@@ -3,7 +3,7 @@
 Contributors: xpeedstudio, Ataurr, emranio
 Tags: WooCommerce Builder, Woo templates, WooCommerce Product,  Shop Page Builder
 Tested up to: 6.8
-Stable tag: 4.8.3
+Stable tag: 4.8.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -294,6 +294,10 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog)! 
 
 == Changelog ==
+v4.8.4// 21-09-2025
+Fixed: User role permission vulnerability.
+Fixed: Conflict with PixelYourSite plugin.
+
 v4.8.3// 02-09-2025
 Added: Scan to direct payment URL control in QR widget.
 Improved: Pre-built templates section to container.

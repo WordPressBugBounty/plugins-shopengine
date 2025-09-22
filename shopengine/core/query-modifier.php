@@ -62,6 +62,8 @@ class Query_Modifier
 
         $sale_prefix = 'shopengine_filter_onsale';
 
+        $brand_prefix = 'shopengine_filter_brand';
+
         $meta_query = ['relation' => 'AND'];
 
         //phpcs:ignore WordPress.Security.NonceVerification.Recommended -- It's a fronted user part, not possible to verify nonce here
@@ -101,6 +103,10 @@ class Query_Modifier
             } elseif (strpos($key, $shipping_prefix) !== false) {
 
                 $query = $this->query($key, $shipping_prefix, $value, $query);
+
+            } elseif ($key === $brand_prefix) {
+
+                $query = $this->query($key, $brand_prefix, $value, $query);
 
             } elseif ($key === $stock_prefix) {
 
@@ -155,8 +161,12 @@ class Query_Modifier
 
     public function query($key, $prefix, $values, $query)
     {
-
-        $taxonomy = str_replace($prefix, '', $key);
+        // Handle brand filter specifically
+        if ($prefix === 'shopengine_filter_brand') {
+            $taxonomy = 'product_brand';
+        } else {
+            $taxonomy = str_replace($prefix, '', $key);
+        }
  
         $values = explode(',', trim($values));
  

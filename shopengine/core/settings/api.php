@@ -23,7 +23,7 @@ class Api extends \ShopEngine\Base\Api {
 
 	public function post_save() {
 
-		if( !wp_verify_nonce( $this->request->get_header('x_wp_nonce'), 'wp_rest') && !current_user_can( 'manage_options' ) ) {
+		if( !wp_verify_nonce( $this->request->get_header('x_wp_nonce'), 'wp_rest') || !current_user_can( 'manage_options' ) ) {
 			return false;
 		}
 		

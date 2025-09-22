@@ -26,6 +26,14 @@ class Cart extends Base {
 		$this->delayed_hook_conflicts();
 
 		do_action( 'woocommerce_check_cart_items' );
+
+		// Dequeue Facebook Pixel script if active
+		add_action('wp_enqueue_scripts', function () {
+			if(is_plugin_active('pixelyoursite/facebook-pixel-master.php')) {
+				
+				wp_dequeue_script('pys');
+			}
+		}, 20);
 	}
 
 	public function delayed_hook_conflicts() {
