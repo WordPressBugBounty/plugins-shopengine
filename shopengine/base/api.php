@@ -10,6 +10,7 @@ abstract class Api {
 	public $param = '';
 	public $request = null;
 	public $only_admin = false;
+	public $customer_only = false;
 
 	abstract public function config();
 
@@ -27,6 +28,9 @@ abstract class Api {
 				'permission_callback' => function() {
 					if($this->only_admin) {
 						return current_user_can('edit_others_posts');
+					}
+					if($this->customer_only) {
+						return is_user_logged_in();
 					}
 					return true;
 				},

@@ -14,6 +14,8 @@ class Single extends Base {
 	public function init() : void {
 		// nothing is going on here
 		add_action('wp_enqueue_scripts', [$this,'single_page_css_conflict_remove'], 20);
+
+		$this->delayed_hook_conflicts();
 	}
 
 	protected function get_page_type_option_slug(): string {
@@ -58,6 +60,53 @@ class Single extends Base {
 
 				wp_dequeue_style('wdes-woocommerce');
 				wp_dequeue_script('bootstrap');
+			}
+		}
+
+		$themeName = get_template();
+		// Remove Auxin Shop CSS if Auxin Shop is active
+		if(is_plugin_active('auxin-shop/auxin-shop.php')) {
+
+			wp_dequeue_style('auxin-shop');
+			
+		}  if ($themeName == 'phlox-pro') {
+
+			wp_dequeue_style('auxin-elementor-base');
+		}
+	}
+
+	public function delayed_hook_conflicts() {
+
+		if (is_plugin_active('auxin-shop/auxin-shop.php')) {
+
+			remove_filter('wc_get_template', 'auxshp_get_wc_template', 11, 2);
+
+			// Remove Auxin Shop template loader filter
+			global $wp_filter;
+			if (isset($wp_filter['woocommerce_locate_template'])) {
+				foreach ($wp_filter['woocommerce_locate_template']->callbacks as $priority => $callbacks) {
+					foreach ($callbacks as $key => $callback) {
+						if (is_array($callback['function']) && 
+							is_object($callback['function'][0]) && 
+							get_class($callback['function'][0]) === 'AUXSHP_Template_Loader' && 
+							$callback['function'][1] === 'load_templates') {
+							unset($wp_filter['woocommerce_locate_template']->callbacks[$priority][$key]);
+						}
+					}
+				}
+			}
+
+			if (isset($wp_filter['woocommerce_after_single_product']) && 
+				isset($wp_filter['woocommerce_after_single_product']->callbacks[20]) && 
+				is_array($wp_filter['woocommerce_after_single_product']->callbacks[20])) {
+				foreach ($wp_filter['woocommerce_after_single_product']->callbacks[20] as $key => $callback) {
+					if (is_array($callback['function']) && 
+						is_object($callback['function'][0]) && 
+						get_class($callback['function'][0]) === 'AUXSHP_Template_Loader' && 
+						$callback['function'][1] === 'auxshp_related_products') {
+						unset($wp_filter['woocommerce_after_single_product']->callbacks[20][$key]);
+					}
+				}
 			}
 		}
 	}

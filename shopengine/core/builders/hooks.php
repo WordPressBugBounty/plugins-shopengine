@@ -152,7 +152,7 @@ class Hooks {
 				$status       = esc_html__('Inactive', 'shopengine');
 				$status_class = 'shopengine-deactive';
 
-				if(class_exists($template_class)) {
+				if( $template_class && class_exists($template_class) ) {
 					$template_data = Action::get_template_data($post_id, $this->activated_templates);
 					if('en' === $template_language) {
 						if(is_array($template_data) && $template_data['status']) {

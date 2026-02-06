@@ -26,7 +26,11 @@ class Query_Modifier
             return;
         }
 
-        if (!isset($query->query_vars['wc_query']) || $query->query_vars['wc_query'] != 'product_query') {
+        // Only proceed when it's the product query from widgets OR we're on the shop/product archive
+        $is_product_query_flag = isset($query->query_vars['wc_query']) && $query->query_vars['wc_query'] == 'product_query';
+        $is_shop_archive = ( function_exists('is_shop') && is_shop() ) || ( isset($query->query_vars['post_type']) && $query->query_vars['post_type'] === 'product' ) || ( isset($query->is_post_type_archive) && $query->is_post_type_archive === true );
+
+        if ( ! $is_product_query_flag && ! $is_shop_archive ) {
             return;
         }
 
@@ -39,10 +43,30 @@ class Query_Modifier
             $query->set('posts_per_page', absint(intval($_GET['shopengine_products_per_page'])));
         }
 
-        // checking product filter widget active or not 
-        $active_widgets = Widget_List::instance()->get_list(true, 'active');
-        if (!isset($active_widgets['product-filters'])) {
+        // checking product filter widget active or not
+        // but if `filter_pa_*` params are present on shop archive, allow processing even if widget not active
+        $has_filter_params = false;
+        if ( $is_shop_archive ) {
+            foreach ( $_GET as $k => $v ) {
+                if ( strpos( $k, 'filter_pa_' ) === 0 && ! empty( $v ) ) {
+                    $taxonomy = substr( $k, strlen('filter_') ); // e.g. pa_color
+                    $values = explode(',', trim( $v ));
 
+                    $this->custom_query['relation'] = 'AND';
+                    $this->custom_query[] = [
+                        'taxonomy' => $taxonomy,
+                        'field'    => 'slug',
+                        'terms'    => $values,
+                        'operator' => 'IN',
+                    ];
+
+                    $has_filter_params = true;
+                }
+            }
+        }
+
+        $active_widgets = Widget_List::instance()->get_list(true, 'active');
+        if (!isset($active_widgets['product-filters']) && !$has_filter_params) {
             return;
         }
 
@@ -135,6 +159,21 @@ class Query_Modifier
                             'operator' => 'OR',
                         ];
                     }
+                }
+            }
+
+            // Support custom attribute filtering (filter_custom_{slug})
+            elseif (strpos($key, 'filter_custom_') === 0) {
+                $attr_slug = substr($key, strlen('filter_custom_')); // e.g. material, brand
+                $values = array_map('sanitize_text_field', explode(',', trim($value)));
+                
+                // Search in serialized _product_attributes meta for custom attributes
+                foreach ($values as $val) {
+                    $meta_query[] = [
+                        'key' => '_product_attributes',
+                        'value' => '"' . $val . '"',
+                        'compare' => 'LIKE'
+                    ];
                 }
             }
         }

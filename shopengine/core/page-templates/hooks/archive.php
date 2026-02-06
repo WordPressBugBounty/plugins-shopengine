@@ -38,6 +38,46 @@ class Archive extends Base {
 		if ( $themeName == 'eduma' ) {
 			remove_filter('loop_shop_columns', '__return_false');
 		}
+
+		if (is_plugin_active('auxin-shop/auxin-shop.php')) {
+
+			remove_filter('wc_get_template', 'auxshp_get_wc_template', 11, 2);
+
+			// Remove Auxin Shop template loader filter
+			global $wp_filter;
+			if (isset($wp_filter['woocommerce_locate_template'])) {
+				foreach ($wp_filter['woocommerce_locate_template']->callbacks as $priority => $callbacks) {
+					foreach ($callbacks as $key => $callback) {
+						if (is_array($callback['function']) && 
+							is_object($callback['function'][0]) && 
+							get_class($callback['function'][0]) === 'AUXSHP_Template_Loader' && 
+							$callback['function'][1] === 'load_templates') {
+							unset($wp_filter['woocommerce_locate_template']->callbacks[$priority][$key]);
+						}
+					}
+				}
+			}
+
+			// Remove rating hook from AUXSHP_Template_Loader class
+			global $wp_filter;
+			if (isset($wp_filter['woocommerce_after_shop_loop_item_title'])) {
+				foreach ($wp_filter['woocommerce_after_shop_loop_item_title']->callbacks[13] as $key => $callback) {
+					if (is_array($callback['function']) && 
+						is_object($callback['function'][0]) && 
+						get_class($callback['function'][0]) === 'AUXSHP_Template_Loader' && 
+						$callback['function'][1] === 'auxshp_loop_rating') {
+						unset($wp_filter['woocommerce_after_shop_loop_item_title']->callbacks[13][$key]);
+					}
+				}
+			}
+		}
+
+		if ( is_plugin_active('auxin-elements/auxin-elements.php') ) {
+
+			remove_action( 'woocommerce_shop_loop_item_title', 'auxin_woocommerce_template_loop_product_title', 10 );
+		}
+
+		
 	}
 
 	public function enqueue_css_with_conflicts_removed() {
@@ -62,10 +102,24 @@ class Archive extends Base {
 		
 			//Eduma Theme Conflict Issue
 			$themeName = get_template();
+			
 			if ( $themeName == 'eduma' ) {
 				wp_dequeue_script('thim-main');
 				wp_dequeue_script('thim-custom-script');
 			}
+
+		// Remove Auxin Shop CSS if Auxin Shop is active
+		if(is_plugin_active('auxin-shop/auxin-shop.php')) {
+
+			wp_dequeue_style('auxin-shop');
+			
+		}  if ($themeName == 'phlox-pro') {
+
+			wp_dequeue_style('auxin-elementor-base');
+		}
+
+
+
 
 		if (function_exists('wp_get_theme')) {
 			$theme = wp_get_theme();

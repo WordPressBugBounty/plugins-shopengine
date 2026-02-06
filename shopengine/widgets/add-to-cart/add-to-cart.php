@@ -306,6 +306,29 @@ class ShopEngine_Add_To_Cart extends \ShopEngine\Base\Widget
 			]
 		);
 
+		/*
+			------------------------------
+			WooCommerce Gift Card Support
+			------------------------------
+		*/
+		
+		// Only show gift card support control if the plugin is active
+		if (function_exists('is_plugin_active') && is_plugin_active('wt-woocommerce-gift-cards/wt-woocommerce-gift-cards.php')) {
+			$this->add_control(
+				'shopengine_woocommerce_gift_card_support',
+				[
+					'label'        => esc_html__('Enable Gift Card Support', 'shopengine'),
+					'description'  => esc_html__('Enable this to use gift card template design for WebToffee WooCommerce Gift Cards Plugin.', 'shopengine'),
+					'type'         => Controls_Manager::SWITCHER,
+					'label_on'     => esc_html__('Yes', 'shopengine'),
+					'label_off'    => esc_html__('No', 'shopengine'),
+					'return_value' => 'yes',
+					'default'      => '',
+					'separator'    => 'before',
+				]
+			);
+		}
+
 		$this->end_controls_section();
 		// contents section end
 

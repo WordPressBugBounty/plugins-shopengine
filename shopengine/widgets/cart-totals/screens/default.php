@@ -38,6 +38,12 @@ if(get_post_type() == \ShopEngine\Core\Template_Cpt::TYPE) {
 
 ?>
 
+<?php
+if (is_plugin_active('auxin-shop/auxin-shop.php')) {
+
+	remove_action( 'woocommerce_proceed_to_checkout',  'auxshp_change_checkout_button_text', 20 );
+} 
+?>
 
 <div class="shopengine-cart-totals">
 

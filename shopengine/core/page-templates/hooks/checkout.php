@@ -49,7 +49,49 @@ class Checkout extends Base {
         remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
 
 		do_action( 'woocommerce_check_cart_items' );
+
+
+		$this->delayed_hook_conflicts();
+
+		add_action('wp_enqueue_scripts', function () {
+
+			if(is_plugin_active('auxin-shop/auxin-shop.php')) {
+
+				wp_dequeue_style('auxin-shop');
+			
+			}
+			
+			$themeName = get_template();
+			if ($themeName == 'phlox-pro') {
+
+				wp_dequeue_style('auxin-elementor-base');
+			}
+
+		}, 20);
 	} 
+
+	public function delayed_hook_conflicts() {
+
+		if ( is_plugin_active( 'auxin-shop/auxin-shop.php' ) ) {
+
+			remove_filter('wc_get_template', 'auxshp_get_wc_template', 11, 2);
+
+			// Remove Auxin Shop template loader filter
+			global $wp_filter;
+			if (isset($wp_filter['woocommerce_locate_template'])) {
+				foreach ($wp_filter['woocommerce_locate_template']->callbacks as $priority => $callbacks) {
+					foreach ($callbacks as $key => $callback) {
+						if (is_array($callback['function']) && 
+							is_object($callback['function'][0]) && 
+							get_class($callback['function'][0]) === 'AUXSHP_Template_Loader' && 
+							$callback['function'][1] === 'load_templates') {
+							unset($wp_filter['woocommerce_locate_template']->callbacks[$priority][$key]);
+						}
+					}
+				}
+			}
+		}
+	}
 	
 	protected function get_page_type_option_slug(): string {
 		if(!empty($_REQUEST['nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'wp_rest')) {

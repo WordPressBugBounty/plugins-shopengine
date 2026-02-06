@@ -40,6 +40,18 @@ class ShopEngine_Product_Rating extends \ShopEngine\Base\Widget
 				'description'	=> esc_html__('Will display when it is not 1 review', 'shopengine'),
 			]
 		);
+		$this->add_control(
+			'shopengine_show_zero_reviews',
+			[
+				'label' => esc_html__('Show Review Section (Even if 0 Reviews)', 'shopengine'),
+				'type'  => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__('Yes', 'shopengine'),
+				'label_off' => esc_html__('No', 'shopengine'),
+				'return_value' => 'yes',
+				'default' => 'no',
+				'description' => esc_html__('Enable this to display the rating section even when the product has no reviews', 'shopengine'),
+			]
+		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(

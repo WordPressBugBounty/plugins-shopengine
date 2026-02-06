@@ -17,12 +17,68 @@ if($editor_mode) {
 
 ?>
 
+<?php
+// woostify theme compatibility
+	$theme_name = get_template();
+	if ($theme_name == 'woostify') {
+			
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_loop_product_wrapper_open', 10 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_print_out_of_stock_label', 15 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_loop_product_image_wrapper_open', 20 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_change_sale_flash', 23 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_product_loop_item_action', 25 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_loop_product_link_open', 30 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_loop_product_hover_image', 40 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_loop_product_image', 50 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_loop_product_link_close', 60 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_loop_product_add_to_cart_on_image', 70 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_product_loop_item_wishlist_icon_bottom', 80 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_loop_product_image_wrapper_close', 90 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woostify_loop_product_content_open', 100 );
+
+		remove_action( 'woocommerce_shop_loop_item_title', 'woostify_add_template_loop_product_category', 5 );
+		remove_action( 'woocommerce_shop_loop_item_title', 'woostify_add_template_loop_product_title', 10 );
+
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woostify_loop_product_rating', 2 );
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woostify_loop_product_meta_open', 5 );
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woostify_loop_product_price', 10 );
+
+		remove_action( 'woocommerce_after_shop_loop_item', 'woostify_loop_product_add_to_cart_button', 10 );
+		remove_action( 'woocommerce_after_shop_loop_item', 'woostify_loop_product_meta_close', 20 );
+		remove_action( 'woocommerce_after_shop_loop_item', 'woostify_loop_product_content_close', 50 );
+		remove_action( 'woocommerce_after_shop_loop_item', 'woostify_loop_product_wrapper_close', 100 );
+	}
+
+?>
+
 <?php 
 	if ( is_plugin_active( 'iconic-woo-image-swap/iconic-woo-image-swap.php' ) )
 	{
 		global $iconic_woo_image_swap_class;
 		remove_action('woocommerce_before_shop_loop_item',array($iconic_woo_image_swap_class,'template_loop_product_thumbnail'),5);
 				
+	}
+
+	if (is_plugin_active('auxin-shop/auxin-shop.php')) {
+
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'auxshp_loop_product_meta', 12 );
+		remove_action( 'woocommerce_after_shop_loop_item'      , 'auxshp_loop_product_tools', 12  );
+		remove_action( 'woocommerce_archive_description'       , 'auxshp_archive_page_title_description', 1 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'auxshp_get_product_thumbnail', 11 );
+
+		global $wp_filter;
+		if (isset($wp_filter['woocommerce_after_single_product']) && 
+			isset($wp_filter['woocommerce_after_single_product']->callbacks[20]) && 
+			is_array($wp_filter['woocommerce_after_single_product']->callbacks[20])) {
+			foreach ($wp_filter['woocommerce_after_single_product']->callbacks[20] as $key => $callback) {
+				if (is_array($callback['function']) && 
+					is_object($callback['function'][0]) && 
+					get_class($callback['function'][0]) === 'AUXSHP_Template_Loader' && 
+					$callback['function'][1] === 'auxshp_related_products') {
+					unset($wp_filter['woocommerce_after_single_product']->callbacks[20][$key]);
+				}
+			}
+		}
 	}
 ?>
 

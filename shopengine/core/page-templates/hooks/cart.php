@@ -33,6 +33,13 @@ class Cart extends Base {
 				
 				wp_dequeue_script('pys');
 			}
+			
+			$themeName = get_template();
+			if ($themeName == 'phlox-pro') {
+
+				wp_dequeue_style('auxin-elementor-base');
+			}
+
 		}, 20);
 	}
 
@@ -44,10 +51,36 @@ class Cart extends Base {
 			remove_action( 'woocommerce_after_cart', 'woocommerce_cross_sell_display', 20 );
 		}
 
+
+		if( $themeName == 'woostify' ) {	
+			remove_action( 'woocommerce_after_cart', 'woocommerce_cross_sell_display' );
+			remove_filter( 'woocommerce_cross_sells_columns', 'woostify_cross_sell_display_columns' );
+		}
+
 		// revert this hook for cart page and editor mode
 		if ( $themeName == 'flatsome' || $themeName == 'hestia' ) {
 			add_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
 			remove_action( 'woocommerce_after_cart', 'woocommerce_cross_sell_display' );
+		}
+
+		if ( is_plugin_active( 'auxin-shop/auxin-shop.php' ) ) {
+
+			remove_filter('wc_get_template', 'auxshp_get_wc_template', 11, 2);
+
+			// Remove Auxin Shop template loader filter
+			global $wp_filter;
+			if (isset($wp_filter['woocommerce_locate_template'])) {
+				foreach ($wp_filter['woocommerce_locate_template']->callbacks as $priority => $callbacks) {
+					foreach ($callbacks as $key => $callback) {
+						if (is_array($callback['function']) && 
+							is_object($callback['function'][0]) && 
+							get_class($callback['function'][0]) === 'AUXSHP_Template_Loader' && 
+							$callback['function'][1] === 'load_templates') {
+							unset($wp_filter['woocommerce_locate_template']->callbacks[$priority][$key]);
+						}
+					}
+				}
+			}
 		}
 	}
 

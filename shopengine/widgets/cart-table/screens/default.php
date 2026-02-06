@@ -27,6 +27,27 @@ if(get_post_type() == \ShopEngine\Core\Template_Cpt::TYPE) {
 			}
 		}
 	}
+
+
+	if ( is_plugin_active('auxin-shop/auxin-shop.php') ) {
+
+		remove_filter('wc_get_template', 'auxshp_get_wc_template', 11, 2);
+
+			// Remove Auxin Shop template loader filter
+		global $wp_filter;
+		if (isset($wp_filter['woocommerce_locate_template'])) {
+			foreach ($wp_filter['woocommerce_locate_template']->callbacks as $priority => $callbacks) {
+				foreach ($callbacks as $key => $callback) {
+					if (is_array($callback['function']) && 
+						is_object($callback['function'][0]) && 
+						get_class($callback['function'][0]) === 'AUXSHP_Template_Loader' && 
+						$callback['function'][1] === 'load_templates') {
+						unset($wp_filter['woocommerce_locate_template']->callbacks[$priority][$key]);
+					}
+				}
+			}
+		}
+	}
 }
 
 WC()->cart->calculate_totals();

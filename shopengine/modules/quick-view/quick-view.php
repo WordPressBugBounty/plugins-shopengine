@@ -35,7 +35,7 @@ class Quick_View
 
 		add_action('wp_enqueue_scripts', function () {
 
-			wp_enqueue_script('flexslider');
+			wp_enqueue_script('wc-flexslider');
 
 			// Modal Stylesheet
 			wp_enqueue_style( 'shopengine-modal-styles' );

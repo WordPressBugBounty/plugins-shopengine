@@ -20,6 +20,14 @@ class License_Route extends \ShopEngine\Base\Api {
 	 */
 	public function post_deactive() {
 
+		// Check if user has administrator capabilities
+		if (!current_user_can('manage_options')) {
+			return [
+				'Status' => 'Fail',
+				'msg'    => esc_html__('Sorry, you are not allowed to deactivate licenses.', 'shopengine'),
+			];
+		}
+
 		$res = Helper::instance()->deactivate();
 
 		//wp_redirect('https://account.wpmet.com/?wpmet-screen=products'); exit;
@@ -36,6 +44,14 @@ class License_Route extends \ShopEngine\Base\Api {
 	 * http://localhost/shopengine/pro/wp-json/shopengine-builder/v1/license/activate
 	 */
 	public function post_activate() {
+
+		// Check if user has administrator capabilities
+		if (!current_user_can('manage_options')) {
+			return [
+				'Status' => 'Fail',
+				'msg'    => esc_html__('Sorry, you are not allowed to activate licenses.', 'shopengine'),
+			];
+		}
 
 		$data = json_decode($this->request->get_body(), true);
 

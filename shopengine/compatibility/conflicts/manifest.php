@@ -18,7 +18,7 @@ class Manifest {
 			 * 	 elementor/element/before_section_start
 			 * 	 elementor/element/after_section_end
 			 */
-			wp_enqueue_script('flexslider');
+			wp_enqueue_script('wc-flexslider');
 
 			/**
 			 * remove unwanted breadcrumb in shop and archive page

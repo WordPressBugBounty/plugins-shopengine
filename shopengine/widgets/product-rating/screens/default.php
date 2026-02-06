@@ -8,9 +8,9 @@ if(!$product){
 // return if review not available
 $is_editor = ($post_type == \ShopEngine\Core\Template_Cpt::TYPE) ? true : false;
 $rating_count = $product->get_rating_count();
+$show_zero_reviews = isset($settings['shopengine_show_zero_reviews']) && $settings['shopengine_show_zero_reviews'] === 'yes';
 
-if(!$is_editor && (!post_type_supports('product', 'comments') || !wc_review_ratings_enabled() || $rating_count <= 0 || !function_exists('woocommerce_template_single_rating'))) {
-
+if(!$is_editor && (!post_type_supports('product', 'comments') || !wc_review_ratings_enabled() || (!$show_zero_reviews && $rating_count <= 0) || !function_exists('woocommerce_template_single_rating'))) {
 	return;
 }
 
@@ -42,7 +42,7 @@ $average      = $product->get_average_rating();
 			return;
 		}
 
-		if ( $rating_count > 0 ) : ?>
+		if ( $rating_count > 0 || ($show_zero_reviews && $rating_count <= 0) ) : ?>
 
 			<div class="woocommerce-product-rating">
 				<?php shopengine_content_render( wc_get_rating_html( $average, $rating_count ) ); ?>

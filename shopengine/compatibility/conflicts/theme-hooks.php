@@ -422,7 +422,7 @@ class Theme_Hooks {
 		/**
 		 * Woodmart theme dequeueing this so we are enqueueing again.
 		 */
-		wp_enqueue_script('flexslider');
+		wp_enqueue_script('wc-flexslider');
 
 
 		/*******************************************************

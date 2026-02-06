@@ -159,6 +159,13 @@ switch ($product_by) {
 
 $productQuery = new \WP_Query($args);
 
+// Remove Woostify theme conflicts for ShopEngine widgets
+$themeName = get_template();
+if ($themeName === 'woostify') {
+	// Remove the conflicting filter hook
+	remove_filter('woocommerce_loop_add_to_cart_link', 'woostify_modify_woocommerce_loop_add_to_cart_link', 99, 3);
+}
+
 ?>
 
 <div class="shopengine-product-list">

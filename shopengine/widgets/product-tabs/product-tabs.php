@@ -752,6 +752,121 @@ class ShopEngine_Product_Tabs extends \ShopEngine\Base\Widget
 			]
 		);
 
+		// attribute links controls
+		$this->add_control(
+			'shopengine_product_tabs_attribute_links_heading',
+			[
+				'label'     => esc_html__('Attribute Links', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'shopengine_product_tabs_enable_attribute_links',
+			[
+				'label' => esc_html__('Enable Attribute Links', 'shopengine'),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__('Yes', 'shopengine'),
+				'label_off' => esc_html__('No', 'shopengine'),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'description' => esc_html__('Enable linking product attributes to shop archive page with filters', 'shopengine'),
+			]
+		);
+
+		$this->start_controls_tabs(
+			'shopengine_product_tabs_attribute_link_tabs',
+			[
+				'condition' => [
+					'shopengine_product_tabs_enable_attribute_links' => 'yes',
+				],
+			]
+		);
+
+		$this->start_controls_tab(
+			'shopengine_product_tabs_attribute_link_normal',
+			[
+				'label' => esc_html__('Normal', 'shopengine'),
+			]
+		);
+
+		$this->add_control(
+			'shopengine_product_tabs_attribute_link_color',
+			[
+				'label' => esc_html__('Link Color', 'shopengine'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#000000',
+				'alpha' => false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-product-tabs .woocommerce-product-attributes-item__value a' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-product-tabs .shop_attributes a' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'shopengine_product_tabs_attribute_link_hover',
+			[
+				'label' => esc_html__('Hover', 'shopengine'),
+			]
+		);
+
+		$this->add_control(
+			'shopengine_product_tabs_attribute_link_hover_color',
+			[
+				'label' => esc_html__('Hover Color', 'shopengine'),
+				'type' => Controls_Manager::COLOR,
+				'default' => '#0000ff',
+				'alpha' => false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-product-tabs .woocommerce-product-attributes-item__value a:hover' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-product-tabs .shop_attributes a:hover' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+
+		$this->add_control(
+			'shopengine_product_tabs_attribute_link_decoration',
+			[
+				'label' => esc_html__('Text Decoration', 'shopengine'),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'none',
+				'options' => [
+					'none' => esc_html__('None', 'shopengine'),
+					'underline' => esc_html__('Underline', 'shopengine'),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-product-tabs .woocommerce-product-attributes-item__value a' => 'text-decoration: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-product-tabs .shop_attributes a' => 'text-decoration: {{VALUE}} !important;',
+				],
+				'condition' => [
+					'shopengine_product_tabs_enable_attribute_links' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_product_tabs_attribute_link_target',
+			[
+				'label' => esc_html__('Open in New Tab', 'shopengine'),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__('Yes', 'shopengine'),
+				'label_off' => esc_html__('No', 'shopengine'),
+				'return_value' => '_blank',
+				'default' => '',
+				'description' => esc_html__('Open attribute links in a new tab/window', 'shopengine'),
+				'condition' => [
+					'shopengine_product_tabs_enable_attribute_links' => 'yes',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 
 		/*

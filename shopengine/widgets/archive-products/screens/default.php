@@ -22,6 +22,22 @@ $editor_mode = ( \Elementor\Plugin::$instance->editor->is_edit_mode() || is_prev
 	}
 ?>
 	
+
+<?php 
+
+	if ( is_plugin_active('auxin-elements/auxin-elements.php') ) {
+
+		remove_action( 'woocommerce_shop_loop_item_title', 'auxin_woocommerce_template_loop_product_title', 10 );
+	}
+
+	if(is_plugin_active('auxin-shop/auxin-shop.php')) {
+
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'auxshp_loop_product_meta', 12 );
+		remove_action( 'woocommerce_after_shop_loop_item'      , 'auxshp_loop_product_tools', 12  );
+		remove_action( 'woocommerce_archive_description'       , 'auxshp_archive_page_title_description', 1 );
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'auxshp_get_product_thumbnail', 11 );
+	}
+?>
 	 
 <?php
 	//Blocksy theme conflict issue 

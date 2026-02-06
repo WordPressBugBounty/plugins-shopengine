@@ -10,9 +10,16 @@ class Route extends Api {
 
 		$this->prefix = 'wishlist';
 		$this->param  = "";
+		$this->customer_only = true;
 	}
 
 	public function post_add_to_list() {
+
+		// Verify nonce for CSRF protection
+		$nonce = $this->request->get_header('X-WP-Nonce');
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'wp_rest')) {
+			return new \WP_Error('rest_forbidden', esc_html__('Invalid nonce.', 'shopengine'), array('status' => 403));
+		}
 
 		$data = $this->request->get_params();
 		$idd = $data['product_id'];

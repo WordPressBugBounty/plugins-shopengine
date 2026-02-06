@@ -148,8 +148,8 @@ class Base {
 	public function menu_others() {
 		add_submenu_page(
 			'shopengine-settings',
-			esc_html__('Modules', 'shopengine'),
-			esc_html__('Modules', 'shopengine'),
+			esc_html__('Add-ons', 'shopengine'),
+			esc_html__('Add-ons', 'shopengine'),
 			'manage_options',
 			$this->menu_link_part . '#shopengine-modules'
 		);
