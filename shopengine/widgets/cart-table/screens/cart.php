@@ -124,19 +124,25 @@ defined('ABSPATH') || exit;
 									if($_product->is_sold_individually()) {
 										$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
 									} else {
-										echo "<span class='minus-button'>&minus;</span>";
+										$min_qty = apply_filters('woocommerce_quantity_input_min', 0, $_product);
+										$max_qty = $_product->get_max_purchase_quantity();
+										?>
+										<span data-min="<?php echo esc_attr($min_qty); ?>" class='minus-button'>&minus;</span>
+										<?php
 										$product_quantity = woocommerce_quantity_input(
 											array(
 												'input_name'   => "cart[{$cart_item_key}][qty]",
 												'input_value'  => $cart_item['quantity'],
-												'max_value'    => $_product->get_max_purchase_quantity(),
-												'min_value'    => '0',
+												'max_value'    => $max_qty,
+												'min_value'    => $min_qty,
 												'product_name' => $_product->get_name(),
 											),
 											$_product,
 											false
 										);
-										echo "<span data-max=".intval($_product->get_max_purchase_quantity())." class='plus-button'>&plus;</span>";
+										?>
+										<span data-max="<?php echo esc_attr($max_qty); ?>" class='plus-button'>&plus;</span>
+										<?php
 									}
 
 									shopengine_content_render(apply_filters('woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item));

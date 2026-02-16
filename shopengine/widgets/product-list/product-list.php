@@ -455,6 +455,7 @@ class ShopEngine_Product_List extends \ShopEngine\Base\Widget {
 				'label_off'    => esc_html__('No', 'shopengine'),
 				'default'      => 'yes',
 				'return_value' => 'yes',
+				'frontend_available' => true,
 				'selectors'    => [
 					'{{WRAPPER}} .shopengine-product-list .overlay-add-to-cart' => 'display: flex;',
 				],
@@ -486,6 +487,7 @@ class ShopEngine_Product_List extends \ShopEngine\Base\Widget {
 				],
 				'default'   => 'bottom',
 				'toggle'    => false,
+				'frontend_available' => true,
 				'condition' => [
 					'show_product_hover_overlay' => 'yes',
 				],

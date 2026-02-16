@@ -101,7 +101,7 @@ class Template_Cpt {
 
 	public function filter_post_row_actions($actions, $post) {
 
-		if(Action::is_edit_with_gutenberg($post->ID)) {
+		if(Action::is_edit_with_gutenberg($post->ID) && did_action('shopengine-gutenberg-addon/before_loaded')) {
 			$action = esc_html__("Edit With Gutenberg", "shopengine");
 
 			$actions['shopengine_edit_with_gutenberg'] = sprintf(

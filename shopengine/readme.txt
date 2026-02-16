@@ -1,13 +1,13 @@
 === ShopEngine Elementor WooCommerce Builder Addon – All in One WooCommerce Solution ===
 Contributors: Roxnor, Ataurr, aion11
-Tags: WooCommerce Builder, woocommerce addon, WooCommerce Product,  Cart Page Builder, Shopping Cart
+Tags: WooCommerce Builder, WooCommerce add-on, Elementor WooCommerce, Cross-sell, Shopping Cart, Variation Swatches, WooCommerce Checkout, WooCommerce Product
 Tested up to: 6.9
-Stable tag: 4.8.7
+Stable tag: 4.8.8
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
-WooCommerce builder for Elementor and Gutenberg. It offers product templates, product sliders, shopping cart, quick view, Woo wishlist, product filter, and more Woo features.
+ WooCommerce builder for Elementor and Gutenberg. It offers product templates, product sliders, shopping cart, quick view, Woo wishlist, product filter, and more Woo features.
 
 == Description ==
 
@@ -15,7 +15,7 @@ Are you using multiple plugins to make a WooCommerce store with a shop page buil
 
 Well, not anymore! You don’t have to slow down your WooCommerce store.
 
-Presenting [ShopEngine](https://wpmet.com/plugin/shopengine/?utm_source=org&utm_medium=readme) – all-in-one WooCommerce builder for Elementor and Gutenberg!
+  Presenting [ShopEngine](https://wpmet.com/plugin/shopengine/?utm_source=org&utm_medium=readme), all-in-one WooCommerce builder for Elementor and Gutenberg!
 
 https://youtu.be/vjfrA-xI8F4
 
@@ -24,11 +24,11 @@ With the ShopEngine Woobuilder plugin, you can enjoy all the Woo features and fu
 [ShopEngine Addons](https://wpmet.com/plugin/shopengine/modules/?utm_source=org&utm_medium=readme) | [ShopEngine Templates](https://wpmet.com/plugin/shopengine/templates/?utm_source=org&utm_medium=readme)  | [Support](http://account.wpmet.com/support-help/?utm_source=org&utm_medium=readme) | [Docs](https://wpmet.com/doc/getting-started-with-shopengine-installation/?utm_source=org&utm_medium=readme) | [Check Roadmap & Request a Feature](https://wpmet.com/plugin/shopengine/roadmaps?utm_source=org&utm_medium=readme#ideas) | [Purchase ShopEngine Pro](https://wpmet.com/plugin/shopengine/pricing/?utm_source=org&utm_medium=readme)
 
 ## ShopEngine empowering 80,000+ WooCommerce users 
-ShopEngine’s WooCommerce features work smoothly with both Elementor and the WordPress block editor. You can drag and drop widgets, addons, and templates to build the store layout you want without any hassle.
+ShopEngine’s WooCommerce features work smoothly with both Elementor and the WordPress block editor. You can drag and drop widgets, add-ons, and templates to build the store layout you want without any hassle.
 
 It’s one of the most complete WooCommerce builders for Elementor and Gutenberg, giving store creators a flexible and powerful toolkit to design their shops.
 
-## 👉 ShopEngine WooCommerce Builder Features
+## 👉 ShopEngine Elementor WooCommerce Builder Features	
 
 ⭐ **70+ drag-and-drop** WooCommerce builder widgets
 ⭐ **20+ WooCommerce addons** for e-commerce store.
@@ -64,7 +64,7 @@ This WooCommerce Builder also includes...
 ✔️ **No Coding Skills** Required.
 ✔️ Top-notch and **Dedicated Support Team**.
 
-## ✨ ShopEngine Pre-built Builder Templates, An Instant No-code Solution for Advanced WooCommerce Functions
+## ✨ Pre-built WooCommerce Templates by ShopEngine, An Instant No-code Solution for WooCommerce Builder
 
 **📃** [Shop Page](https://wpmet.com/plugin/shopengine/templates/shop-page/?utm_source=org&utm_medium=readme): Display products with tons of customizable components of this WooCommerce shop page builder.
 
@@ -169,7 +169,7 @@ https://youtu.be/XOZSqWLjgyk?si=bSjzwk0vMz4KitvQ
 
 **🔷** [Avatar add-on](https://wpmet.com/plugin/shopengine/modules/avatar/?utm_source=org&utm_medium=readme) makes websites' user profiles more appealing and personalized by allowing them to add an image and other user information with different customization options.
 
-## Build Single Product Page with ShopEngine WooCommerce Builder Widgets (FREE & PRO)
+## Build Single Product Page with ShopEngine Elementor WooCommerce Builder Widgets (FREE & PRO)
 
 ShopEngine offers 70+ WooCommerce Elementor Widgets to build attractive single-product pages to draw customers’ attention.
 
@@ -311,6 +311,13 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog?utm_source=org&utm_medium=readme)! 
 
 == Changelog ==
+v4.8.8// 16-02-2026
+Improved: Default shipping field settings in the checkout template.
+Improved: Add to cart widget style.
+Improved: Template creation UI.
+Fixed: Compatibility issue with the Products Manager plugin.
+Fixed: Product quantity adjustment controls issue with Min Max Control plugin.
+
 v4.8.7// 01-12-2025
 Fixed: Single page template and related product widget warning issues.
 
@@ -1121,4 +1128,3 @@ We accept both credit cards and PayPal for payment purposes.
 = How can I report security bugs? =
 
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/shopengine)
-

@@ -67,105 +67,7 @@ class ShopEngine_Checkout_Form_Shipping extends \ShopEngine\Base\Widget
 		);
 		$this->end_controls_section();
 
-		/**
-		 * Checkbox label title
-		 */
-		$this->start_controls_section(
-			'shopengine_title_section',
-			[
-				'label' => esc_html__('Checkbox Title', 'shopengine'),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'shopengine_title_color',
-			[
-				'label'     => esc_html__('Color', 'shopengine'),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'default'   => '#3A3A3A',
-				'alpha'		=> false,
-				'selectors' => [
-					'{{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label > span' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'shopengine_title_font_size',
-			[
-				'label'      => esc_html__('Font Size (px)', 'shopengine'),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => ['px'],
-				'range'      => [
-					'px' => [
-						'min' => 0,
-						'max' => 64,
-					],
-				],
-				'default'    => [
-					'size' => 18,
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label > span' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'           => 'shopengine_title_typography',
-				'label'          => esc_html__('Typography', 'shopengine'),
-				'selector'       => '{{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label > span',
-				'exclude'        => ['text_decoration'],
-				'exclude'        => ['font_size'],
-				'fields_options' => [
-					'typography'     => [
-						'default' => 'custom',
-					],
-					'font_weight'    => [
-						'default' => '700',
-					],
-					'line_height'    => [
-						'default'    => [
-							'size' => '22',
-							'unit' => 'px'
-						],
-						'label'      => 'Line-height (px)',
-						'size_units' => ['px']
-					],
-					'letter_spacing' => [
-						'responsive' => false,
-					]
-				],
-			)
-		);
-
-		$this->add_responsive_control(
-			'shopengine_title_margin',
-			[
-				'label'      => esc_html__('Margin', 'shopengine'),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => ['px'],
-				'default'    => [
-					'unit'     => 'px',
-					'top'      => 0,
-					'right'    => 0,
-					'bottom'   => 25,
-					'left'     => 0,
-					'isLinked' => true,
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'.rtl {{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label' => 'margin: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
-			/*================================ 
+		/*================================ 
 		Checkout Form Visibility Start
 
 		- shopengine_hide_shipping_first_name_field
@@ -184,7 +86,7 @@ class ShopEngine_Checkout_Form_Shipping extends \ShopEngine\Base\Widget
 			'shopengine_checkout_form_visibility',
 			[
 				'label' => esc_html__('Field Visibility', 'shopengine'),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
 
@@ -320,6 +222,104 @@ class ShopEngine_Checkout_Form_Shipping extends \ShopEngine\Base\Widget
 		/*================================ 
 		Checkout Form Visibility end
 		==================================*/ 
+
+		/**
+		 * Checkbox label title
+		 */
+		$this->start_controls_section(
+			'shopengine_title_section',
+			[
+				'label' => esc_html__('Checkbox Title', 'shopengine'),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'shopengine_title_color',
+			[
+				'label'     => esc_html__('Color', 'shopengine'),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'default'   => '#3A3A3A',
+				'alpha'		=> false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label > span' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'shopengine_title_font_size',
+			[
+				'label'      => esc_html__('Font Size (px)', 'shopengine'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => ['px'],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 64,
+					],
+				],
+				'default'    => [
+					'size' => 18,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label > span' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'shopengine_title_typography',
+				'label'          => esc_html__('Typography', 'shopengine'),
+				'selector'       => '{{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label > span',
+				'exclude'        => ['text_decoration'],
+				'exclude'        => ['font_size'],
+				'fields_options' => [
+					'typography'     => [
+						'default' => 'custom',
+					],
+					'font_weight'    => [
+						'default' => '700',
+					],
+					'line_height'    => [
+						'default'    => [
+							'size' => '22',
+							'unit' => 'px'
+						],
+						'label'      => 'Line-height (px)',
+						'size_units' => ['px']
+					],
+					'letter_spacing' => [
+						'responsive' => false,
+					]
+				],
+			)
+		);
+
+		$this->add_responsive_control(
+			'shopengine_title_margin',
+			[
+				'label'      => esc_html__('Margin', 'shopengine'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px'],
+				'default'    => [
+					'unit'     => 'px',
+					'top'      => 0,
+					'right'    => 0,
+					'bottom'   => 25,
+					'left'     => 0,
+					'isLinked' => true,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'.rtl {{WRAPPER}} .shopengine-checkout-form-shipping #ship-to-different-address > label' => 'margin: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'shopengine_form_container_section',

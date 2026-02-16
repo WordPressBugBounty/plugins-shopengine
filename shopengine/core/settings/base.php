@@ -103,11 +103,10 @@ class Base {
 				'form_prefix'         => \ShopEngine::SHOPENGINE_PREFIX,
 				'template_types'      => json_encode($page_templates),
 				'elementor_installed' => did_action('elementor/loaded') ? 'yes' : 'no',
-				'supported_builders'  => [
-					\ShopEngine\Core\Builders\Action::EDIT_WITH_ELEMENTOR => 'Elementor',
-					\ShopEngine\Core\Builders\Action::EDIT_WITH_GUTENBERG => 'Gutenberg',
-				],
-				'default_builder'     => did_action('elementor/loaded') ? \ShopEngine\Core\Builders\Action::EDIT_WITH_ELEMENTOR : \ShopEngine\Core\Builders\Action::EDIT_WITH_GUTENBERG,
+				'gutenberg_installed' => did_action('shopengine-gutenberg-addon/before_loaded') ? 'yes' : 'no',
+				'supported_builders'  => $this->get_supported_builders(),
+				'default_builder'     => $this->get_default_builder(),
+				'both_builders_active' => (did_action('elementor/loaded') && did_action('shopengine-gutenberg-addon/before_loaded')) ? 'yes' : 'no',
 				'license_activated_message' => sprintf(esc_html__('Congratulations! Your product is activated for "%s"', 'shopengine'), parse_url(home_url(), PHP_URL_HOST)),			
 				'is_rtl'			=> is_rtl() ? 'true' : 'false',
 				'ajaxurl' => admin_url(  ).'admin-ajax.php',
@@ -201,6 +200,47 @@ class Base {
 		if($screen->id == 'edit-' . Template_Cpt::TYPE) {
 			include_once \ShopEngine::plugin_dir() . 'core/settings/screens/default.php';
 		}
+	}
+
+	/**
+	 * Get supported builders based on active plugins
+	 *
+	 * @return array
+	 */
+	private function get_supported_builders() {
+		$builders = [];
+
+		// Check if Elementor is active
+		if(did_action('elementor/loaded')) {
+			$builders[\ShopEngine\Core\Builders\Action::EDIT_WITH_ELEMENTOR] = 'Elementor';
+		}
+
+		// Check if Blocks for ShopEngine (Gutenberg addon) is active
+		if(did_action('shopengine-gutenberg-addon/before_loaded')) {
+			$builders[\ShopEngine\Core\Builders\Action::EDIT_WITH_GUTENBERG] = 'Gutenberg';
+		}
+
+		return $builders;
+	}
+
+	/**
+	 * Get default builder based on active plugins
+	 *
+	 * @return string
+	 */
+	private function get_default_builder() {
+		// Prefer Elementor if it's active
+		if(did_action('elementor/loaded')) {
+			return \ShopEngine\Core\Builders\Action::EDIT_WITH_ELEMENTOR;
+		}
+
+		// Use Gutenberg if the addon is active
+		if(did_action('shopengine-gutenberg-addon/before_loaded')) {
+			return \ShopEngine\Core\Builders\Action::EDIT_WITH_GUTENBERG;
+		}
+
+		// Fallback to Elementor if neither is active
+		return \ShopEngine\Core\Builders\Action::EDIT_WITH_ELEMENTOR;
 	}
 
 }

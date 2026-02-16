@@ -22,7 +22,7 @@ class Manifest{
 
 		add_action('elementor/elements/categories_registered', [$this, 'widget_categories']);
 		add_action('elementor/widgets/register', [$this, 'register_widgets']);
-        add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_widgets']);
+        add_filter('elementor/editor/localize_settings', [$this, 'promote_pro_widgets'], 1000);
 		add_filter('woocommerce_default_address_fields', function($fields) {
 			foreach ($fields as $key => $value) {
 				unset($fields[$key]['priority']);

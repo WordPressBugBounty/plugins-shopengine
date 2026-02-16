@@ -105,11 +105,16 @@ class Api extends \ShopEngine\Base\Api {
             'orderby'       => 'name', 
             'order'         => 'DESC',
             'hide_empty'    => false,
-            'number'        => 0  // no limits on number of terms
+            'number'        => isset($data['number']) ? absint($data['number']) : 0  // limit number of terms, 0 = no limit
         ];
 
 		if(isset($data['only_parent'])){
 			$query_args['parent'] = 0;
+		}
+
+		// Allow requesting children for a specific parent id
+		if (isset($data['parent'])) {
+			$query_args['parent'] = absint($data['parent']);
 		}
 		
 		if(isset($data['ids'])){
@@ -122,12 +127,42 @@ class Api extends \ShopEngine\Base\Api {
 
 		$product_cat = get_terms($query_args);
 		$product_categories = [];
+		$categories_with_children_info = [];
+		
 		foreach($product_cat as $category) {
 			$product_categories[$category->term_id] = $category->name;
+			
+			// Check if this category has children
+			$children_count = get_terms([
+				'taxonomy' => 'product_cat',
+				'parent' => $category->term_id,
+				'hide_empty' => false,
+				'fields' => 'count'
+			]);
+			
+			$categories_with_children_info[$category->term_id] = [
+				'name' => $category->name,
+				'has_children' => $children_count > 0
+			];
 		}
+
+		// If a number limit is provided, also report if there are more children available
+		$more = 0;
+		if (!empty($data['number'])) {
+			// If parent is set, count total children for that parent; otherwise count top-level if only_parent
+			$count_args = $query_args;
+			// remove number limit for counting
+			unset($count_args['number']);
+			$all_terms = get_terms($count_args);
+			$total = is_array($all_terms) ? count($all_terms) : 0;
+			$more = max(0, $total - intval($data['number']));
+		}
+
 		return [
 			'status' => 'success',
 			'result' => $product_categories,
+			'result_with_children' => $categories_with_children_info,
+			'more' => $more,
 			'message' => esc_html__('categories fetched', 'shopengine')
 		];
 	}

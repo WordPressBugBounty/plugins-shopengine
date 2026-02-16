@@ -167,6 +167,15 @@ final class Plugin {
 
             //Loading the scripts and styles
             add_action('elementor/editor/after_enqueue_styles', [$this, 'js_css_elementor']);
+    
+            // Register widgets immediately after elementor is loaded with higher priority
+			if(is_plugin_active('related-products-manager-woocommerce/related-products-manager-for-woocommerce.php')) {
+
+				add_action('elementor/widgets/register', function() {
+					(new Manifest())->init();
+				}, 5); // Priority 5 to load early
+			}
+
         }
 
 
