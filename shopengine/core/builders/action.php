@@ -128,7 +128,7 @@ class Action
             /**
              *  Get ready made template data
              */
-            $template_path = Base::instance()->get_content_path( $form_settings['sample_design'] );
+            $template_path =  $form_settings['sample_design'] ;
             $css_path = str_replace('content.html', 'style.txt', $template_path);            
 
             if ( is_file( $template_path ) ) {

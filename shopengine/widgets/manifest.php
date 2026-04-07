@@ -32,8 +32,11 @@ class Manifest{
 		
 
 		// Check if the MP3 Music Player by Sonaar plugin is active
+		if( ! function_exists('is_plugin_active') ){
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
 		
-		if(is_plugin_active('mp3-music-player-by-sonaar/sonaar-music.php')){
+		if(is_plugin_active('mp3-music-player-by-sonaar/sonaar-music.php') || is_plugin_active('smart-wishlist-for-more-convert/smart-wishlist-for-more-convert.php')){
 
 			add_action('elementor/editor/init', [$this, 'category_initialize'], 0);
 

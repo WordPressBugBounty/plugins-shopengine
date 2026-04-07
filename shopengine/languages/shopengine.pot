@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: ShopEngine 4.8.8\n"
+"Project-Id-Version: ShopEngine 4.8.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shopengine\n"
-"POT-Creation-Date: 2026-02-16 10:45:18+00:00\n"
+"POT-Creation-Date: 2026-04-07 10:02:25+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,23 +37,23 @@ msgstr ""
 msgid "Shopengine Full width"
 msgstr ""
 
-#: core/builders/hooks.php:94 widgets/product-stock/product-stock.php:39
+#: core/builders/hooks.php:105 widgets/product-stock/product-stock.php:39
 msgid "Type"
 msgstr ""
 
-#: core/builders/hooks.php:97
+#: core/builders/hooks.php:108
 msgid "Language"
 msgstr ""
 
-#: core/builders/hooks.php:100
+#: core/builders/hooks.php:111
 msgid "Status"
 msgstr ""
 
-#: core/builders/hooks.php:101
+#: core/builders/hooks.php:112
 msgid "Builder"
 msgstr ""
 
-#: core/builders/hooks.php:132
+#: core/builders/hooks.php:143
 #: widgets/filterable-product-list/filterable-product-list.php:259
 #: widgets/product-category-lists/product-category-lists.php:126
 #: widgets/product-list/product-list-config.php:69
@@ -63,38 +63,87 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: core/builders/hooks.php:152
+#: core/builders/hooks.php:163
 msgid "Inactive"
 msgstr ""
 
-#: core/builders/hooks.php:159 core/builders/hooks.php:163
+#: core/builders/hooks.php:170 core/builders/hooks.php:174
 #: widgets/archive-products/archive-products.php:2282
 msgid "Active"
 msgstr ""
 
-#: core/builders/hooks.php:190
+#: core/builders/hooks.php:201
 msgid "Template Type "
 msgstr ""
 
-#: core/page-templates/page-templates.php:81
+#: core/page-templates/page-templates.php:83
 msgid "Shop"
 msgstr ""
 
-#: core/page-templates/page-templates.php:89
+#: core/page-templates/page-templates.php:91
 msgid "Archive"
 msgstr ""
 
-#: core/page-templates/page-templates.php:97
+#: core/page-templates/page-templates.php:99
 msgid "Single"
 msgstr ""
 
-#: core/page-templates/page-templates.php:105
+#: core/page-templates/page-templates.php:107
 #: core/page-templates/screens/content-cart.php:19
 msgid "Cart"
 msgstr ""
 
-#: core/page-templates/page-templates.php:113
+#: core/page-templates/page-templates.php:115
 msgid "Checkout"
+msgstr ""
+
+#: core/page-templates/page-templates.php:123
+msgid "Order / Thank you"
+msgstr ""
+
+#: core/page-templates/page-templates.php:131
+msgid "My Account Login / Register"
+msgstr ""
+
+#: core/page-templates/page-templates.php:138 core/register/widget-list.php:277
+#: widgets/manifest.php:117
+msgid "Account Dashboard"
+msgstr ""
+
+#: core/page-templates/page-templates.php:146
+msgid "My Account Orders"
+msgstr ""
+
+#: core/page-templates/page-templates.php:154
+msgid "My Account Downloads"
+msgstr ""
+
+#: core/page-templates/page-templates.php:162
+msgid "My Account Order Details"
+msgstr ""
+
+#: core/page-templates/page-templates.php:170
+msgid "My Account Details"
+msgstr ""
+
+#: core/page-templates/page-templates.php:178
+msgid "My Account Address"
+msgstr ""
+
+#: core/page-templates/page-templates.php:186
+msgid "Reset Password Form"
+msgstr ""
+
+#: core/page-templates/page-templates.php:194
+msgid "New Password Form"
+msgstr ""
+
+#: core/page-templates/page-templates.php:202
+msgid "Empty Cart"
+msgstr ""
+
+#: core/page-templates/page-templates.php:210 widgets/manifest.php:267
+msgid "Checkout Order Pay"
 msgstr ""
 
 #: core/page-templates/screens/content-cart.php:27
@@ -265,7 +314,7 @@ msgid "Sales Notification"
 msgstr ""
 
 #: core/register/module-list.php:221 core/register/widget-list.php:373
-#: widgets/manifest.php:210
+#: widgets/manifest.php:213
 msgid "Currency Switcher"
 msgstr ""
 
@@ -277,7 +326,7 @@ msgstr ""
 msgid "Checkout Additional Field"
 msgstr ""
 
-#: core/register/module-list.php:239 widgets/manifest.php:234
+#: core/register/module-list.php:239 widgets/manifest.php:237
 msgid "Product Size Charts"
 msgstr ""
 
@@ -286,7 +335,7 @@ msgid "Sticky Fly Cart"
 msgstr ""
 
 #: core/register/module-list.php:251 core/register/widget-list.php:403
-#: widgets/manifest.php:240
+#: widgets/manifest.php:243
 msgid "Vacation"
 msgstr ""
 
@@ -295,7 +344,7 @@ msgid "Multistep Checkout"
 msgstr ""
 
 #: core/register/module-list.php:263 core/register/widget-list.php:409
-#: widgets/manifest.php:246
+#: widgets/manifest.php:249
 msgid "Advanced Coupon"
 msgstr ""
 
@@ -303,7 +352,7 @@ msgstr ""
 msgid "Cross Sell Popup"
 msgstr ""
 
-#: core/register/module-list.php:275 widgets/manifest.php:252
+#: core/register/module-list.php:275 widgets/manifest.php:255
 msgid "Avatar"
 msgstr ""
 
@@ -569,19 +618,15 @@ msgstr ""
 msgid "Checkout Form Login"
 msgstr ""
 
-#: core/register/widget-list.php:277 widgets/manifest.php:114
-msgid "Account Dashboard"
-msgstr ""
-
-#: core/register/widget-list.php:283 widgets/manifest.php:120
+#: core/register/widget-list.php:283 widgets/manifest.php:123
 msgid "Account Address"
 msgstr ""
 
-#: core/register/widget-list.php:289 widgets/manifest.php:126
+#: core/register/widget-list.php:289 widgets/manifest.php:129
 msgid "Account Details"
 msgstr ""
 
-#: core/register/widget-list.php:295 widgets/manifest.php:132
+#: core/register/widget-list.php:295 widgets/manifest.php:135
 msgid "Account Downloads"
 msgstr ""
 
@@ -593,11 +638,11 @@ msgstr ""
 msgid "Account Form - Register"
 msgstr ""
 
-#: core/register/widget-list.php:313 widgets/manifest.php:150
+#: core/register/widget-list.php:313 widgets/manifest.php:153
 msgid "Account Logout"
 msgstr ""
 
-#: core/register/widget-list.php:319 widgets/manifest.php:156
+#: core/register/widget-list.php:319 widgets/manifest.php:159
 msgid "Account Navigation"
 msgstr ""
 
@@ -605,20 +650,20 @@ msgstr ""
 msgid "Account Order - Details"
 msgstr ""
 
-#: core/register/widget-list.php:331 widgets/manifest.php:168
+#: core/register/widget-list.php:331 widgets/manifest.php:171
 msgid "Account Orders"
 msgstr ""
 
-#: core/register/widget-list.php:337 widgets/manifest.php:174
+#: core/register/widget-list.php:337 widgets/manifest.php:177
 #: widgets/product-categories/product-categories.php:22
 msgid "Categories"
 msgstr ""
 
-#: core/register/widget-list.php:343 widgets/manifest.php:180
+#: core/register/widget-list.php:343 widgets/manifest.php:183
 msgid "Product Filters"
 msgstr ""
 
-#: core/register/widget-list.php:349 widgets/manifest.php:186
+#: core/register/widget-list.php:349 widgets/manifest.php:189
 msgid "Thank You Address Details"
 msgstr ""
 
@@ -630,19 +675,19 @@ msgstr ""
 msgid "Order Details"
 msgstr ""
 
-#: core/register/widget-list.php:367 widgets/manifest.php:204
+#: core/register/widget-list.php:367 widgets/manifest.php:207
 msgid "Order Thank You"
 msgstr ""
 
-#: core/register/widget-list.php:379 widgets/manifest.php:216
+#: core/register/widget-list.php:379 widgets/manifest.php:219
 msgid "Flash Sale Products"
 msgstr ""
 
-#: core/register/widget-list.php:385 widgets/manifest.php:222
+#: core/register/widget-list.php:385 widgets/manifest.php:225
 msgid "Best Selling Product"
 msgstr ""
 
-#: core/register/widget-list.php:391 widgets/manifest.php:228
+#: core/register/widget-list.php:391 widgets/manifest.php:231
 msgid "Comparison Button"
 msgstr ""
 
@@ -650,179 +695,179 @@ msgstr ""
 msgid "Product Size Chart"
 msgstr ""
 
-#: core/register/widget-list.php:415 widgets/manifest.php:270
+#: core/register/widget-list.php:415 widgets/manifest.php:273
 msgid "Product Carousel"
 msgstr ""
 
-#: core/sample-designs/designs.php:7 core/sample-designs/designs.php:16
+#: core/sample-designs/designs.php:12 core/sample-designs/designs.php:21
 msgid "Single Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:25 core/sample-designs/designs.php:34
+#: core/sample-designs/designs.php:30 core/sample-designs/designs.php:39
 msgid "Single Design 2"
 msgstr ""
 
-#: core/sample-designs/designs.php:43 core/sample-designs/designs.php:52
+#: core/sample-designs/designs.php:48 core/sample-designs/designs.php:57
 msgid "Single Design 3"
 msgstr ""
 
-#: core/sample-designs/designs.php:61 core/sample-designs/designs.php:70
+#: core/sample-designs/designs.php:66 core/sample-designs/designs.php:75
 msgid "Single Design 4"
 msgstr ""
 
-#: core/sample-designs/designs.php:79 core/sample-designs/designs.php:88
+#: core/sample-designs/designs.php:84 core/sample-designs/designs.php:93
 msgid "Single Design 5"
 msgstr ""
 
-#: core/sample-designs/designs.php:97 core/sample-designs/designs.php:106
+#: core/sample-designs/designs.php:102 core/sample-designs/designs.php:111
 msgid "Single Design 6"
 msgstr ""
 
-#: core/sample-designs/designs.php:115 core/sample-designs/designs.php:124
+#: core/sample-designs/designs.php:120 core/sample-designs/designs.php:129
 msgid "Single Design 7"
 msgstr ""
 
-#: core/sample-designs/designs.php:133 core/sample-designs/designs.php:142
+#: core/sample-designs/designs.php:138 core/sample-designs/designs.php:147
 msgid "Single Design 8"
 msgstr ""
 
-#: core/sample-designs/designs.php:151 core/sample-designs/designs.php:160
+#: core/sample-designs/designs.php:156 core/sample-designs/designs.php:165
 msgid "Single Design 9"
 msgstr ""
 
-#: core/sample-designs/designs.php:169 core/sample-designs/designs.php:178
+#: core/sample-designs/designs.php:174 core/sample-designs/designs.php:183
 msgid "Single Design 10"
 msgstr ""
 
-#: core/sample-designs/designs.php:187
+#: core/sample-designs/designs.php:192
 msgid "Single Design 11 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:198 core/sample-designs/designs.php:207
+#: core/sample-designs/designs.php:203 core/sample-designs/designs.php:212
 msgid "Archive Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:216 core/sample-designs/designs.php:225
+#: core/sample-designs/designs.php:221 core/sample-designs/designs.php:230
 msgid "Archive Design 2"
 msgstr ""
 
-#: core/sample-designs/designs.php:234
+#: core/sample-designs/designs.php:239
 msgid "Archive Design 3 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:245 core/sample-designs/designs.php:254
+#: core/sample-designs/designs.php:250 core/sample-designs/designs.php:259
 msgid "Shop Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:263 core/sample-designs/designs.php:272
+#: core/sample-designs/designs.php:268 core/sample-designs/designs.php:277
 msgid "Shop Design 2"
 msgstr ""
 
-#: core/sample-designs/designs.php:281 core/sample-designs/designs.php:290
+#: core/sample-designs/designs.php:286 core/sample-designs/designs.php:295
 msgid "Shop Design 3"
 msgstr ""
 
-#: core/sample-designs/designs.php:299 core/sample-designs/designs.php:308
+#: core/sample-designs/designs.php:304 core/sample-designs/designs.php:313
 msgid "Shop Design 4"
 msgstr ""
 
-#: core/sample-designs/designs.php:346 core/sample-designs/designs.php:355
+#: core/sample-designs/designs.php:351 core/sample-designs/designs.php:360
 msgid "Cart Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:364
+#: core/sample-designs/designs.php:369
 msgid "Cart Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:375 core/sample-designs/designs.php:384
+#: core/sample-designs/designs.php:380 core/sample-designs/designs.php:389
 msgid "Checkout Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:393 core/sample-designs/designs.php:402
+#: core/sample-designs/designs.php:398 core/sample-designs/designs.php:407
 msgid "Checkout Design 2"
 msgstr ""
 
-#: core/sample-designs/designs.php:411 core/sample-designs/designs.php:420
+#: core/sample-designs/designs.php:416 core/sample-designs/designs.php:425
 msgid "Checkout Design 3"
 msgstr ""
 
-#: core/sample-designs/designs.php:611 core/sample-designs/designs.php:620
+#: core/sample-designs/designs.php:616 core/sample-designs/designs.php:625
 msgid "Order/Thank You Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:629
+#: core/sample-designs/designs.php:634
 msgid "Order/Thank You Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:640 core/sample-designs/designs.php:649
+#: core/sample-designs/designs.php:645 core/sample-designs/designs.php:654
 msgid "Quick Checkout Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:658
+#: core/sample-designs/designs.php:663
 msgid "Quick Checkout Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:669 core/sample-designs/designs.php:678
+#: core/sample-designs/designs.php:674 core/sample-designs/designs.php:683
 msgid "Quickview Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:687
+#: core/sample-designs/designs.php:692
 msgid "Quickview Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:698 core/sample-designs/designs.php:707
+#: core/sample-designs/designs.php:703 core/sample-designs/designs.php:712
 msgid "Account Dashboard Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:716
+#: core/sample-designs/designs.php:721
 msgid "Account Dashboard Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:727 core/sample-designs/designs.php:736
+#: core/sample-designs/designs.php:732 core/sample-designs/designs.php:741
 msgid "Account Orders Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:745
+#: core/sample-designs/designs.php:750
 msgid "Account Orders Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:756 core/sample-designs/designs.php:765
+#: core/sample-designs/designs.php:761 core/sample-designs/designs.php:770
 msgid "Account Order Details Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:774
+#: core/sample-designs/designs.php:779
 msgid "Account Order Details Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:785 core/sample-designs/designs.php:794
+#: core/sample-designs/designs.php:790 core/sample-designs/designs.php:799
 msgid "Account Downloads Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:803
+#: core/sample-designs/designs.php:808
 msgid "Account Downloads Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:814 core/sample-designs/designs.php:823
+#: core/sample-designs/designs.php:819 core/sample-designs/designs.php:828
 msgid "Account Address Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:832
+#: core/sample-designs/designs.php:837
 msgid "Account Address Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:843 core/sample-designs/designs.php:852
+#: core/sample-designs/designs.php:848 core/sample-designs/designs.php:857
 msgid "Account Details Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:861
+#: core/sample-designs/designs.php:866
 msgid "Account Details Design 2 RTL"
 msgstr ""
 
-#: core/sample-designs/designs.php:872 core/sample-designs/designs.php:881
+#: core/sample-designs/designs.php:877 core/sample-designs/designs.php:886
 msgid "Account Login/Register Design 1"
 msgstr ""
 
-#: core/sample-designs/designs.php:890
+#: core/sample-designs/designs.php:895
 msgid "Account Login/Register Design 2 RTL"
 msgstr ""
 
@@ -4808,7 +4853,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: widgets/checkout-form-login/screens/default.php:60 widgets/manifest.php:258
+#: widgets/checkout-form-login/screens/default.php:60 widgets/manifest.php:261
 msgid "Lost Password"
 msgstr ""
 
@@ -5775,55 +5820,51 @@ msgstr ""
 msgid "No products were found."
 msgstr ""
 
-#: widgets/manifest.php:138
+#: widgets/manifest.php:141
 msgid "Account Form Login"
 msgstr ""
 
-#: widgets/manifest.php:144
+#: widgets/manifest.php:147
 msgid "Account Form Register"
 msgstr ""
 
-#: widgets/manifest.php:162
+#: widgets/manifest.php:165
 msgid "Account Order Details"
 msgstr ""
 
-#: widgets/manifest.php:192
+#: widgets/manifest.php:195
 msgid "Thank You Order Confirm"
 msgstr ""
 
-#: widgets/manifest.php:198
+#: widgets/manifest.php:201
 msgid "Thank You Order Details"
 msgstr ""
 
-#: widgets/manifest.php:264
-msgid "Checkout Order Pay"
-msgstr ""
-
-#: widgets/manifest.php:283
+#: widgets/manifest.php:286
 msgid "ShopEngine General"
 msgstr ""
 
-#: widgets/manifest.php:287
+#: widgets/manifest.php:290
 msgid "ShopEngine Single Product"
 msgstr ""
 
-#: widgets/manifest.php:291
+#: widgets/manifest.php:294
 msgid "ShopEngine Cart"
 msgstr ""
 
-#: widgets/manifest.php:295
+#: widgets/manifest.php:298
 msgid "ShopEngine Product Archive"
 msgstr ""
 
-#: widgets/manifest.php:299
+#: widgets/manifest.php:302
 msgid "ShopEngine Checkout"
 msgstr ""
 
-#: widgets/manifest.php:303
+#: widgets/manifest.php:306
 msgid "ShopEngine Order"
 msgstr ""
 
-#: widgets/manifest.php:307
+#: widgets/manifest.php:310
 msgid "ShopEngine My Account"
 msgstr ""
 

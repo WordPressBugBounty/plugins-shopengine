@@ -37,6 +37,17 @@ class Hooks {
 
 		// override the default notice template.
 		add_filter('woocommerce_locate_template', [$this, 'shopengine_notice_template'], 10, 3);
+		add_filter('admin_body_class', function($classes){
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				include_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
+			if (is_plugin_active('blocks-for-shopengine/shopengine-gutenberg-addon.php') && ! is_plugin_active('elementor/elementor.php')) {
+				$classes .= ' shopengine-gutenberg-addon-active';
+			}
+
+			return $classes;
+		});
 	}
 
 	/**
@@ -96,7 +107,7 @@ class Hooks {
 		if(true === $this->languages['status']) {
 			$columns['lang']    = esc_html__('Language', 'shopengine');
 		}
-	
+
 		$columns['status']  = esc_html__('Status', 'shopengine');
 		$columns['builder'] = esc_html__('Builder', 'shopengine');
 		$columns['author']  = esc_html($author_column);
@@ -219,7 +230,7 @@ class Hooks {
 			&& $_GET['type'] != 'all' // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- This hook can access only admin And not possible to verify nonce here
 		) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- This hook can access only admin And not possible to verify nonce here
-			$type                              = sanitize_key($_GET['type']); 
+			$type                              = sanitize_key($_GET['type']);
 			$query->query_vars['meta_key']     = Action::get_meta_key_for_type();
 			$query->query_vars['meta_value']   = $type;
 			$query->query_vars['meta_compare'] = '=';
@@ -240,5 +251,5 @@ class Hooks {
 		}
 		return $template;
 	}
-	
+
 }

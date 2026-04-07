@@ -2,7 +2,7 @@
 Contributors: Roxnor, Ataurr, aion11
 Tags: WooCommerce Builder, WooCommerce add-on, Elementor WooCommerce, Cross-sell, Shopping Cart, Variation Swatches, WooCommerce Checkout, WooCommerce Product
 Tested up to: 6.9
-Stable tag: 4.8.8
+Stable tag: 4.8.9
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -311,6 +311,11 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog?utm_source=org&utm_medium=readme)! 
 
 == Changelog ==
+v4.8.9// 07-04-2026
+Improved: Admin dashboard UI.
+Fixed: Issue with pre-built template importing.
+Fixed: Widgets category issue in the Elementor editor panel when using the MoreConvert Wishlist for WooCommerce plugin.
+
 v4.8.8// 16-02-2026
 Improved: Default shipping field settings in the checkout template.
 Improved: Add to cart widget style.

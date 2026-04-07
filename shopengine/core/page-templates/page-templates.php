@@ -36,7 +36,9 @@ class Page_Templates {
 
 			if(isset($template['class']) && $template['class']) {
 
-				new $template['class']();
+				if ( class_exists( $template['class'] ) ) {
+					new $template['class']();
+				}
 
 			}
 		}
@@ -65,7 +67,7 @@ class Page_Templates {
 		$product_id = Products::instance()->get_preview_product();
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Some other templates call it without nonce added.
-		if(isset($_GET['shopengine_product_id'])) { 
+		if(isset($_GET['shopengine_product_id'])) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Some other templates call it without nonce added.
 			$product_id = sanitize_text_field(wp_unslash($_GET['shopengine_product_id']));
 			update_option('__shopengine_preview_product_id', $product_id);
@@ -117,6 +119,101 @@ class Page_Templates {
 				'css'     => 'checkout',
 				'url'     => get_permalink(wc_get_page_id('checkout')),
 			],
+			'order'            => [
+				'title'   => esc_html__('Order / Thank you', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Thank_You',
+				'opt_key' => 'order',
+				'css'     => 'order',
+				'url'	  => get_permalink( wc_get_page_id( 'checkout' ) )
+			],
+			'my_account_login' => [
+				'title'   => esc_html__('My Account Login / Register', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Account_Login',
+				'opt_key' => 'my_account_login',
+				'css'     => 'account-login-register',
+			],
+			'my_account'       => [
+				'title'   => esc_html__('Account Dashboard', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Account',
+				'opt_key' => 'my_account',
+				'css'     => 'account',
+				'url'	  => get_permalink( wc_get_page_id( 'myaccount' ) )
+			],
+			'account_orders'       => [
+				'title'   => esc_html__('My Account Orders', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Account_Orders',
+				'opt_key' => 'account_orders',
+				'css'     => 'account-orders',
+				'url'	  => get_permalink( wc_get_page_id( 'myaccount' ) )
+			],
+			'account_downloads'    => [
+				'title'   => esc_html__('My Account Downloads', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Account_Downloads',
+				'opt_key' => 'account_downloads',
+				'css'     => 'account-downloads',
+				'url'	  => get_permalink( wc_get_page_id( 'myaccount' ) )
+			],
+			'account_orders_view'  => [
+				'title'   => esc_html__('My Account Order Details', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Account_Orders_View',
+				'opt_key' => 'account_orders_view',
+				'css'     => 'account-orders-view',
+				'url'	  => get_permalink( wc_get_page_id( 'myaccount' ) )
+			],
+			'account_edit_account' => [
+				'title'   => esc_html__('My Account Details', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Account_Details',
+				'opt_key' => 'account_edit_account',
+				'css'     => 'account-details',
+				'url'	  => get_permalink( wc_get_page_id( 'myaccount' ) )
+			],
+			'account_edit_address' => [
+				'title'   => esc_html__('My Account Address', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Account_Address',
+				'opt_key' => 'account_edit_address',
+				'css'     => 'account-address',
+				'url'	  => get_permalink( wc_get_page_id( 'myaccount' ) )
+			],
+			'lost-password'     => [
+				'title'   => esc_html__('Reset Password Form', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Lost_Password',
+				'opt_key' => 'lost-password',
+				'css'     => 'lost-password',
+				'url'     => get_permalink(wc_get_page_id('myaccount')),
+			],
+			'reset-password'     => [
+				'title'   => esc_html__('New Password Form', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Reset_Password',
+				'opt_key' => 'reset-password',
+				'css'     => 'reset-password',
+				'url'     => get_permalink(wc_get_page_id('myaccount')),
+			],
+			'empty-cart'     => [
+				'title'   => esc_html__('Empty Cart', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Empty_Cart',
+				'opt_key' => 'empty-cart',
+				'css'     => 'empty-cart',
+				'url'     => get_permalink(wc_get_page_id('cart')),
+			],
+			'checkout-order-pay' => [
+				'title'   => esc_html__('Checkout Order Pay', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Checkout_Order_Pay',
+				'opt_key' => 'checkout-order-pay',
+				'css'     => 'checkout-order-pay',
+				'url'     => get_permalink(wc_get_page_id('checkout')). '/order-pay',
+			]
 		];
 
 

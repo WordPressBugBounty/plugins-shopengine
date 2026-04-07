@@ -19,19 +19,6 @@ class Base {
 		$this->designs      = apply_filters('shopengine/templates/sample-designs', $this->designs);
 		$this->content_path = \ShopEngine::core_dir() . 'sample-designs/';
 
-		if(!class_exists('\ShopEngine_Pro')) {
-
-			foreach($this->designs as $tpl => $designs) {
-
-				foreach($designs as $idx => $design) {
-
-					if($design['package'] === 'pro') {
-
-						unset($this->designs[$tpl][$idx]);
-					}
-				}
-			}
-		}
 	}
 
 	public function get_designs() {
