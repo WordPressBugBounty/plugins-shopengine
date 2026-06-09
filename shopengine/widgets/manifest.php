@@ -173,6 +173,12 @@ class Manifest{
 				'categories' => '["shopengine-my_account"]',
 			],
 			[
+				'name'       => 'account-wishlist',
+				'title'      => esc_html__( 'Account Wishlist', 'shopengine' ),
+				'icon'       => 'shopengine-widget-icon shopengine-icon-account_wishlist',
+				'categories' => '["shopengine-my_account"]',
+			],
+			[
 				'name'       => 'categories',
 				'title'      => esc_html__( 'Categories', 'shopengine' ),
 				'icon'       => 'shopengine-widget-icon shopengine-icon-product_categories',

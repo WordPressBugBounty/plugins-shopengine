@@ -121,7 +121,28 @@ $editor_mode = ( \Elementor\Plugin::$instance->editor->is_edit_mode() || is_prev
 		endif;
 	}, 40);
 
-	$wp_query_args = ['post_type' => 'product'];
+	// Editor mode product query args for pagination and product count based on customizer settings. On frontend, it will use the default query.
+
+	if ( $editor_mode ) {
+		$per_page = (int) get_option('posts_per_page');
+		$paged = max(1, (int) get_query_var('paged'), (int) get_query_var('page'));
+		$wp_query_args = [
+			'post_type'      => 'product',
+			'posts_per_page' => $per_page,
+			'paged'          => $paged,
+			'post_status'    => 'publish',
+			'tax_query'      => [
+				[
+					'taxonomy' => 'product_visibility',
+					'field'    => 'name',
+					'terms'    => ['exclude-from-catalog'],
+					'operator' => 'NOT IN',
+				],
+			],
+		];
+	} else {
+		$wp_query_args = ['post_type' => 'product'];
+	}
 
 	// pagination next previous button label filter
 

@@ -332,6 +332,12 @@ class Widget_List extends \ShopEngine\Base\List_Model {
 				'package' => 'pro-disabled',
 				'categories' => ['shopengine-my_account'],
 			],
+			'account-wishlist'           => [
+				'slug'    => 'account-wishlist',
+				'title'   => esc_html__( 'Account Wishlist', 'shopengine' ),
+				'package' => 'pro-disabled',
+				'categories' => ['shopengine-my_account'],
+			],
 			'categories'               => [
 				'slug'    => 'categories',
 				'title'   => esc_html__( 'Categories', 'shopengine' ),

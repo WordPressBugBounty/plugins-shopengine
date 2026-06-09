@@ -15,11 +15,40 @@ class ShopEngine_Checkout_Coupon_Form extends \ShopEngine\Base\Widget {
 
 	protected function register_controls() {
 
+		// Style toggle control
+
+		$this->start_controls_section(
+			'shopengine_checkout_coupon_form_info_toggle_heading',
+			[
+				'label'     => esc_html__('Toggle', 'shopengine'),
+				'tab'   => Controls_Manager::TAB_STYLE,
+				]
+		);
+
+		// Coupon Style Toggle Control
+
+		$this->add_control(
+			'shopengine_checkout_coupon_form_info_toggle',
+			[
+				'label'     => esc_html__('Toggle Style?', 'shopengine'),
+				'type'      => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'   => 'no',
+				'label_on'  => esc_html__('Yes', 'shopengine'),
+				'label_off' => esc_html__('No', 'shopengine'),
+			]
+		);
+
+		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'shopengine_section_checkout_coupon_form_info_style',
 			[
 				'label' => esc_html__('Info', 'shopengine'),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'shopengine_checkout_coupon_form_info_toggle' => 'yes',
+				],
 			]
 		);
 
@@ -180,6 +209,9 @@ class ShopEngine_Checkout_Coupon_Form extends \ShopEngine\Base\Widget {
 			[
 				'label' => esc_html__('Description', 'shopengine'),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'shopengine_checkout_coupon_form_info_toggle' => 'yes',
+				],
 			]
 		);
 
@@ -379,7 +411,7 @@ class ShopEngine_Checkout_Coupon_Form extends \ShopEngine\Base\Widget {
 				'size_units' => ['px'],
 				'range'      => [
 					'px' => [
-						'min'  => 0,
+						'min'  => -50,
 						'max'  => 50,
 						'step' => 5,
 					],

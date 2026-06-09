@@ -14,6 +14,7 @@ use ShopEngine\Libs\License\License_Route;
 use ShopEngine\Libs\Rating\Rating;
 use ShopEngine\Libs\Updater\Init as Updater;
 use ShopEngine\Modules\Manifest as Module_Manifest;
+use ShopEngine\Utils\Feedback\Plugin_Unsubscribe;
 use ShopEngine\Widgets\Manifest;
 
 
@@ -85,6 +86,8 @@ final class Plugin {
 		if($error) {
 			return;
 		}
+
+
 		
 		add_filter("plugin_action_links_shopengine/shopengine.php", function ($links) {
 		$free = esc_html__("Go To Shopengine","shopengine");
@@ -129,7 +132,9 @@ final class Plugin {
 		 *
 		 */
 		new License_Route();
-
+		
+		// Initialize deactivation feedback modal
+        new \ShopEngine\Utils\Feedback\Plugin_Unsubscribe();
 		/**
 		 * Run pro plugin updater here....
 		 *
@@ -177,6 +182,13 @@ final class Plugin {
 			}
 
         }
+
+		// Cart validation compatibility with WC Min Max Quantity plugin
+
+		if ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'woo-min-max-quantity-step-control-single/wcmmq.php' ) ) {
+			
+			add_filter( 'wcmmq_cart_validation_check', [ $this, 'shopengine_wcmmq_cart_validation_compat' ], 10, 2 );
+		}
 
 
 		//Loading public scripts and styles
@@ -365,6 +377,24 @@ final class Plugin {
 		//it will register an option in customizer for woocommerce products catelog. It's related with our Arcive Products widget.
 		Register_Settings::instance()->init();
 	}
+
+	public function shopengine_wcmmq_cart_validation_compat( $check, $request ) {
+		
+		$cart_widget_flag = isset( $_REQUEST['shopengine_cart_widget'] )
+			? sanitize_text_field( wp_unslash( $_REQUEST['shopengine_cart_widget'] ) )
+			: '';
+		$cart_widget_nonce = isset( $_REQUEST['shopengine_cart_widget_nonce'] )
+			? sanitize_text_field( wp_unslash( $_REQUEST['shopengine_cart_widget_nonce'] ) )
+			: '';
+
+		if ( $cart_widget_flag === '1' && wp_verify_nonce( $cart_widget_nonce, 'shopengine_cart_widget' ) ) {
+			return false; // Skip WC MMQ validation for verified ShopEngine cart widget requests
+		}
+		return $check; // Proceed with normal validation for other requests
+	}
+
+
+
 
 
 	// add async and defer attributes to enqueued scripts

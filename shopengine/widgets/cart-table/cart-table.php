@@ -29,7 +29,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 		$this->add_control(
 			'shopengine_cart_table_footer__buttons',
 			[
-				'label'     => esc_html__('Buttons', 'shopengine'),
+				'label'     => esc_html__('Footer Buttons', 'shopengine'),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -65,6 +65,65 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 			]
 		);
 
+		$this->add_control(
+			'shopengine_cart_table_footer__remove_button',
+			[
+				'label'     => esc_html__('Remove Button', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control('shopengine_cart_table_remove_button_style',
+			[
+				'label'     => esc_html__('Change Position?', 'shopengine'),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'default',
+				'label_on'  => esc_html__('Yes', 'shopengine'),
+				'label_off' => esc_html__('No', 'shopengine'),
+				'return_value' => 'positional',
+				'render_type'  => 'template',
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_remove_button_position',
+			[
+				'label'        => esc_html__('Remove Button Position', 'shopengine'),
+				'type'         => Controls_Manager::SELECT,
+				'default'      => 'default',
+				'options'      => [
+					'default' => esc_html__('Default', 'shopengine'),
+					'start' => esc_html__('Start', 'shopengine'),
+					'end'   => esc_html__('End', 'shopengine'),
+				],
+				'condition'    => [
+					'shopengine_cart_table_remove_button_style' => 'positional',
+				],
+				'prefix_class' => 'shopengine-cart-remove-pos-',
+				'render_type'  => 'template',
+			]);
+
+		$this->add_control(
+			'shopengine_cart_table_quantity_icon',
+			[
+				'label'     => esc_html__('Quantity Icons', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control('shopengine_cart_table_quantity_icon_remove',
+			[
+				'label'     => esc_html__('Remove Icons', 'shopengine'),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'no',
+				'label_on'  => esc_html__('Yes', 'shopengine'),
+				'label_off' => esc_html__('No', 'shopengine'),
+				'return_value' => 'yes',
+			]
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -80,7 +139,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 			[
 				'label'     => esc_html__('Title', 'shopengine'),
 				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__('Product Name', 'shopengine')
+				'default'   => esc_html__('Product', 'shopengine')
 			]
 		);
 
@@ -416,7 +475,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 					'top'      => '30',
 					'right'    => '0',
 					'bottom'   => '30',
-					'left'     => '40',
+					'left'     => '10',
 					'unit'     => 'px',
 					'isLinked' => false,
 				],
@@ -424,7 +483,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 					'top'      => '20',
 					'right'    => '30',
 					'bottom'   => '20',
-					'left'     => '10',
+					'left'     => '40',
 					'unit'     => 'px',
 					'isLinked' => false,
 				],
@@ -730,7 +789,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 				'default'   => '#ACA3A3',
 				'alpha'		=> false,
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body .shopengine-cart-quantity :is(.minus-button, .plus-button):hover' => 'color: {{VALUE}};'
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body .shopengine-cart-quantity :is(.minus-button, .plus-button, input):hover' => 'color: {{VALUE}};'
 				],
 			]
 		);
@@ -900,28 +959,115 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 			]
 		);
 
+		// Return To Shop Button Styles - Normal
+
 		$this->add_control(
-			'shopengine_cart_table_footer_btn_normal_color',
+			'shopengine_cart_table_footer_btn_styles_return_to_shop',
+			[
+				'label'     => esc_html__('Continue Shopping', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_normal_color_return_to_shop',
 			[
 				'label'     => esc_html__('Color', 'shopengine'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#979797',
 				'alpha'		=> false,
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer :is(.shopengine-footer-button, a, i)'   => 'color: {{VALUE}} !important;'
-				],
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .return-to-shop.shopengine-footer-button :is(a, i)'   => 'color: {{VALUE}} !important;'
+				]
 			]
 		);
 
 		$this->add_control(
-			'shopengine_cart_table_footer_btn_normal_bg_color',
+			'shopengine_cart_table_footer_btn_normal_bg_color_return_to_shop',
 			[
 				'label'     => esc_html__('Background Color', 'shopengine'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#f1f1f1',
 				'alpha'		=> false,
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .shopengine-footer-button' => 'background-color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .return-to-shop.shopengine-footer-button' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		// Update Cart Button Styles - Normal
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_styles_update_cart',
+			[
+				'label'     => esc_html__('Update Cart Button', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_normal_color_update_cart',
+			[
+				'label'     => esc_html__('Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#979797',
+				'alpha'		=> false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .update-cart-btn.shopengine-footer-button :is(a, i, span)'   => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .update-cart-btn.shopengine-footer-button'   => 'color: {{VALUE}} !important;'
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_normal_bg_color_update_cart',
+			[
+				'label'     => esc_html__('Background Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#f1f1f1',
+				'alpha'		=> false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .update-cart-btn.shopengine-footer-button' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		// Clear Cart Button Styles - Normal
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_styles_clear_cart',
+			[
+				'label'     => esc_html__('Clear Cart Button', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_normal_color_clear_cart',
+			[
+				'label'     => esc_html__('Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#979797',
+				'alpha'		=> false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .clear-btn.shopengine-footer-button :is(a, i, span)'   => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .clear-btn.shopengine-footer-button'   => 'color: {{VALUE}} !important;'
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_normal_bg_color_clear_cart',
+			[
+				'label'     => esc_html__('Background Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#f1f1f1',
+				'alpha'		=> false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .clear-btn.shopengine-footer-button' => 'background-color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -934,8 +1080,19 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 				]
 		);
 
+		// Return To Shop Button Styles - Hover
+
 		$this->add_control(
-			'shopengine_cart_table_footer_btn_hover_color',
+			'shopengine_cart_table_footer_btn_styles_hover_return_to_shop',
+			[
+				'label'     => esc_html__('Return To Shop Button', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_hover_color_return_to_shop',
 			[
 				'label'     => esc_html__('Color', 'shopengine'),
 				'type'      => Controls_Manager::COLOR,
@@ -943,26 +1100,101 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 				'default'   => '#FFFFFF',
 				'alpha'     => false,
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer :is(.shopengine-footer-button, a):hover' => 'color: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .shopengine-footer-button:hover :is(a, i, span)' => 'color: {{VALUE}} !important;'
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .return-to-shop.shopengine-footer-button:hover' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .return-to-shop.shopengine-footer-button:hover :is(a, i, span)' => 'color: {{VALUE}} !important;'
 				]
 			]
 		);
 
 		$this->add_control(
-			'shopengine_cart_table_footer_btn_hover_bg_color',
+			'shopengine_cart_table_footer_btn_hover_bg_color_return_to_shop',
 			[
 				'label'     => esc_html__('Background Color', 'shopengine'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#3A3A3A',
 				'alpha'     => false,
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .shopengine-footer-button:hover' => 'background-color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .return-to-shop.shopengine-footer-button:hover' => 'background-color: {{VALUE}} !important;',
 				],
 			]
 		);
 
-		
+		// Update Cart Button Styles - Hover
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_styles_hover_update_cart',
+			[
+				'label'     => esc_html__('Update Cart Button', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_hover_color_update_cart',
+			[
+				'label'     => esc_html__('Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'alpha'     => false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .update-cart-btn.shopengine-footer-button:hover' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .update-cart-btn.shopengine-footer-button:hover :is(a, i, span)' => 'color: {{VALUE}} !important;'
+				]
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_hover_bg_color_update_cart',
+			[
+				'label'     => esc_html__('Background Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#3A3A3A',
+				'alpha'     => false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .update-cart-btn.shopengine-footer-button:hover' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		// Clear Cart Button Styles - Hover
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_styles_hover_clear_cart',
+			[
+				'label'     => esc_html__('Clear Cart Button', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_hover_color_clear_cart',
+			[
+				'label'     => esc_html__('Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'alpha'     => false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .clear-btn.shopengine-footer-button:hover' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .clear-btn.shopengine-footer-button:hover :is(a, i, span)' => 'color: {{VALUE}} !important;'
+				]
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_table_footer_btn_hover_bg_color_clear_cart',
+			[
+				'label'     => esc_html__('Background Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#3A3A3A',
+				'alpha'     => false,
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .clear-btn.shopengine-footer-button:hover' => 'background-color: {{VALUE}} !important;',
+				],
+			]
+		);
+
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		
@@ -984,6 +1216,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .shopengine-footer-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'.rtl {{WRAPPER}} .shopengine-cart-table .shopengine-table__footer .shopengine-footer-button' => 'padding: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}};',
 				],
+				'separator' => 'before',
 			]
 		);
 
@@ -1051,6 +1284,8 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 				'selectors'  => [
 					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove a' => 'font-size: {{SIZE}}{{UNIT}} !important;',
 					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove a svg' => 'width: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove a' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove a svg' => 'width: {{SIZE}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -1075,7 +1310,9 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 				'alpha'     => false,
 				'selectors' => [
 					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove :is(a,span)' => 'color: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove svg' => 'fill: {{VALUE}} !important;'
+					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove svg' => 'fill: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove :is(a,span)' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove svg' => 'fill: {{VALUE}} !important;'
 				]
 			]
 		);
@@ -1089,6 +1326,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 				'alpha'     => false,
 				'selectors' => [
 					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove :is(a)' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove :is(a)' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1108,6 +1346,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove a' => 'opacity: {{SIZE}} !important;',
+					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove a' => 'opacity: {{SIZE}} !important;',
 				],
 			]
 		);
@@ -1173,6 +1412,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 				'alpha'     => false,
 				'selectors' => [
 					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove :is(a):hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove :is(a):hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1192,6 +1432,7 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove a:hover' => 'opacity: {{SIZE}} !important;',
+					'{{WRAPPER}} .shopengine-widget .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove a:hover' => 'opacity: {{SIZE}} !important;',
 				],
 			]
 		);
@@ -1216,13 +1457,18 @@ class ShopEngine_Cart_Table extends \ShopEngine\Base\Widget {
 						'selectors' => [
 							'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove a:hover' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 							'.rtl {{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove a:hover' => 'border-width: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}}',
+							'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove a:hover' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+							'.rtl {{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove a:hover' => 'border-width: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}}',
 						]
 					],
 					'color'  => [
 						'default' => '#f2f2f2'
 					]
 				],
-				'selector'       => '{{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove a:hover',
+				'selectors'       => [
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td:first-child .product-thumbnail .product-remove a:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .shopengine-cart-table .shopengine-table__body-item--td.remove-button .product-remove a:hover' => 'border-color: {{VALUE}};',
+				],
 				'separator'	=> 'before'
 			]
 		);

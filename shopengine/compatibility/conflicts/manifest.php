@@ -73,8 +73,50 @@ class Manifest {
 				}
 			}, 10);
 		}
+
+
+		// Check if the Unlimited Elements for Elementor Pro plugin is active
+		if (is_plugin_active('unlimited-elements-for-elementor-premium/unlimited-elements-pro.php')) {
+			
+			add_action('elementor/init', [$this, 'remove_unlimited_elements_background_hooks'], 999);
+			
+		}
 		
 	}	
+
+	// This function will remove the background overlay hooks added by Unlimited Elements for Elementor Pro plugin
+	public function remove_unlimited_elements_background_hooks() {
+		$hooks = array(
+			'elementor/element/section/section_background_overlay/after_section_end',
+			'elementor/element/container/section_background_overlay/after_section_end',
+		);
+
+		global $wp_filter;
+
+		foreach ($hooks as $hook) {
+			if (empty($wp_filter[$hook]) || empty($wp_filter[$hook]->callbacks)) {
+				continue;
+			}
+
+			foreach ($wp_filter[$hook]->callbacks as $priority => $callbacks) {
+				foreach ($callbacks as $callback) {
+					$function = isset($callback['function']) ? $callback['function'] : null;
+
+					if (!is_array($function) || empty($function[0]) || empty($function[1])) {
+						continue;
+					}
+
+					if (!is_object($function[0])) {
+						continue;
+					}
+
+					if (get_class($function[0]) === 'UniteCreatorElementorIntegrate' && $function[1] === 'onSectionStyleControlsAdd') {
+						remove_action($hook, $function, $priority);
+					}
+				}
+			}
+		}
+	}
 
 	public function elementor_editor_conflict($element, $section_id) {
 

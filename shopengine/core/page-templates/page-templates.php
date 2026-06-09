@@ -150,6 +150,14 @@ class Page_Templates {
 				'css'     => 'account-orders',
 				'url'	  => get_permalink( wc_get_page_id( 'myaccount' ) )
 			],
+			'account_wishlist'       => [
+				'title'   => esc_html__('My Account Wishlist', 'shopengine'),
+				'package' => 'pro',
+				'class'   => 'ShopEngine_Pro\Templates\Hooks\Account_Wishlist',
+				'opt_key' => 'account_wishlist',
+				'css'     => 'account-wishlist',
+				'url'	  => get_permalink( wc_get_page_id( 'myaccount' ) )
+			],
 			'account_downloads'    => [
 				'title'   => esc_html__('My Account Downloads', 'shopengine'),
 				'package' => 'pro',

@@ -102,7 +102,7 @@ defined('ABSPATH') || exit;
 						<?php echo esc_html($settings['shopengine_cart_table_update']); ?>
 					</button>
 
-					<button class="shopengine-footer-button clear-btn" type="submit" name="empty_cart">
+					<button class="clear-btn shopengine-footer-button" type="submit" name="empty_cart">
 						<i class="eicon-trash-o"></i>
 						<?php echo esc_html($settings['shopengine_cart_table_clear_all']); ?>
 					</button>

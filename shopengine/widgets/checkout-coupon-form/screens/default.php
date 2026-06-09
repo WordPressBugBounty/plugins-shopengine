@@ -10,14 +10,18 @@ if (!wc_coupons_enabled()) {
 	return;
 }
 
+$show_toggle = isset( $settings['shopengine_checkout_coupon_form_info_toggle'] ) && 'yes' === $settings['shopengine_checkout_coupon_form_info_toggle'];
+
 ?>
 
 <div class="shopengine-checkout-coupon-form">
 
+<?php if ( $show_toggle ) : ?>
+
     <div class="woocommerce-form-coupon-toggle">
         <div class="woocommerce-info-toggle">
 			<?php echo esc_html(apply_filters('woocommerce_checkout_coupon_message', esc_html__('Have a coupon?', 'shopengine'))); ?>
-            <button title="<?php esc_html_e('Coupon Code','shopengine')?>"  class="showcoupon"><?php echo esc_html__('Click here to enter your code', 'shopengine') ?></button>
+            <button type="button" title="<?php esc_html_e('Coupon Code','shopengine')?>"  class="showcoupon"><?php echo esc_html__('Click here to enter your code', 'shopengine') ?></button>
         </div>
     </div>
 
@@ -35,5 +39,20 @@ if (!wc_coupons_enabled()) {
 
         <div class="clear"></div>
     </div>
+<?php elseif ( ! $show_toggle ) : ?>
+
+    <div class="shopengine-checkout-coupon">
+
+        <p class="form-row form-row-first">
+            <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e('Coupon code', 'shopengine');?>" id="coupon_code" value="" />
+        </p>
+
+        <p class="form-row form-row-last">
+            <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e('Apply coupon', 'shopengine');?>"><?php esc_html_e('Apply coupon', 'shopengine');?></button>
+        </p>
+
+        <div class="clear"></div>
+    </div>
+<?php endif; ?>
 
 </div>

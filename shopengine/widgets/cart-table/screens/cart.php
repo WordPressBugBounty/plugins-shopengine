@@ -6,6 +6,19 @@ defined('ABSPATH') || exit;
 		<?php do_action('woocommerce_before_cart'); ?>
 
 		<form class="shopengine-cart-form woocommerce-cart-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+			<?php
+			$wcmmq_active = false;
+			if ( ! function_exists( 'is_plugin_active' ) && file_exists( ABSPATH . 'wp-admin/includes/plugin.php' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+			if ( function_exists( 'is_plugin_active' ) ) {
+				$wcmmq_active = is_plugin_active( 'woo-min-max-quantity-step-control-single/wcmmq.php' );
+			}
+			?>
+			<?php if ( $wcmmq_active ) : ?>
+				<input type="hidden" name="shopengine_cart_widget" value="1" />
+				<?php wp_nonce_field( 'shopengine_cart_widget', 'shopengine_cart_widget_nonce' ); ?>
+			<?php endif; ?>
 		
 			<?php do_action('woocommerce_before_cart_table'); ?>
 			
@@ -16,6 +29,7 @@ defined('ABSPATH') || exit;
 				shopengine cart table  head start 
 				------------------------------------->
 				<div class="shopengine-table__head">
+					<div class="shopengine-table__head--th product-remove"></div>
 					<div class="shopengine-table__head--th product-name"><?php echo esc_html($settings['shopengine_cart_table_title']) ?></div>
 					<div class="shopengine-table__head--th product-price"><?php echo esc_html($settings['shopengine_cart_table_price']) ?></div>
 					<div class="shopengine-table__head--th product-quantity"><?php echo esc_html($settings['shopengine_cart_table_quantity']) ?></div>
@@ -32,6 +46,7 @@ defined('ABSPATH') || exit;
 				foreach(WC()->cart->get_cart() as $cart_item_key => $cart_item) {
 					$_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 					$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
+					$is_positional = ($settings['shopengine_cart_table_remove_button_position'] === 'start') || ($settings['shopengine_cart_table_remove_button_position'] === 'end');
 
 					if($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_cart_item_visible', true, $cart_item, $cart_item_key)) {
 						$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
@@ -39,10 +54,38 @@ defined('ABSPATH') || exit;
 						<!-- shopengine cart table  body item start -->
 						<div class="shopengine-table__body-item <?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
 							
-							<!-- 
-								@class : table-first-body-column
-								@content : remove button, thumbnail, product name
-							 -->
+							<?php if($is_positional) : ?>
+							<div class="shopengine-table__body-item--td remove-button">
+
+							
+								<!-- remove button -->
+								<div class="product-remove">
+										<?php
+										$cart = esc_html__("Remove Cart Item","shopengine");
+										ob_start();
+										\Elementor\Icons_Manager::render_icon( $settings['shopengine_table_remove_button_icon_change'], [ 'aria-hidden' => 'true' ] );
+										$remove_icon = ob_get_clean();
+										shopengine_content_render(
+											apply_filters(
+												'woocommerce_cart_item_remove_link',
+												sprintf(
+													'<a title="' . $cart . '" href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">
+													  %s
+													</a>',
+													esc_url(wc_get_cart_remove_url($cart_item_key)),
+													esc_html__('Remove this item', 'shopengine'),
+													esc_attr($product_id),
+													esc_attr( $cart_item_key ),
+													esc_attr($_product->get_sku()),
+													$remove_icon,	
+												),
+												$cart_item_key
+											)
+										);
+										?>
+								</div>	
+							</div>
+							<?php endif; ?>
 
 							<div class="shopengine-table__body-item--td table-first-body-column">
 								
@@ -58,6 +101,7 @@ defined('ABSPATH') || exit;
 									} ?> 
 								
 									<!-- remove button -->
+									<?php if(!$is_positional) : ?>
 									<div class="product-remove">
 										<?php
 										$cart = esc_html__("Remove Cart Item","shopengine");
@@ -82,7 +126,8 @@ defined('ABSPATH') || exit;
 											)
 										);
 										?>
-									</div>	
+									</div>
+									<?php endif; ?>
 								</div>
 
 								
@@ -120,6 +165,7 @@ defined('ABSPATH') || exit;
 							<!-- product quantity -->
 							<div class="shopengine-table__body-item--td product-quantity" data-title="<?php esc_attr_e('Quantity', 'shopengine'); ?>">
 								<div class="shopengine-cart-quantity">
+									<?php $remove_quantity_button = ($settings['shopengine_cart_table_quantity_icon_remove'] === 'yes'); ?>
 									<?php
 									if($_product->is_sold_individually()) {
 										$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
@@ -127,7 +173,9 @@ defined('ABSPATH') || exit;
 										$min_qty = apply_filters('woocommerce_quantity_input_min', 0, $_product);
 										$max_qty = $_product->get_max_purchase_quantity();
 										?>
+										<?php if(! $remove_quantity_button) : ?>
 										<span data-min="<?php echo esc_attr($min_qty); ?>" class='minus-button'>&minus;</span>
+										<?php endif; ?>
 										<?php
 										$product_quantity = woocommerce_quantity_input(
 											array(
@@ -141,7 +189,9 @@ defined('ABSPATH') || exit;
 											false
 										);
 										?>
+										<?php if(! $remove_quantity_button) : ?>
 										<span data-max="<?php echo esc_attr($max_qty); ?>" class='plus-button'>&plus;</span>
+										<?php endif; ?>
 										<?php
 									}
 
