@@ -71,14 +71,13 @@ class Api extends \ShopEngine\Base\Api {
 	public function get_our_others_plugin_install_api() {
         $plugins = [
             'elementskit-lite'        => 'elementskit-lite.php',
+			'rox-dynamic-cpt-fields-engine' => 'rox-dynamic-cpt-fields-engine.php',
+			'rox-appointment-booking' => 'rox-appointment-booking.php',
             'metform'                 => 'metform.php',
-            'wp-social'               => 'wp-social.php',
-            'wp-ultimate-review'      => 'wp-ultimate-review.php',
-            'wp-fundraising-donation' => 'wp-fundraising-donation.php',
-            'getgenie' 				  => 'getgenie.php',
-			'emailkit'				  => 'EmailKit.php',
 			'gutenkit-blocks-addon'	  => 'gutenkit-blocks-addon.php',
 			'popup-builder-block'	  =>  'popup-builder-block.php',
+			'emailkit'				  => 'EmailKit.php',
+			'getgenie' 				  => 'getgenie.php',
         ];
 
 		$plugin_status = Plugin_Status::instance();
@@ -238,10 +237,10 @@ class Api extends \ShopEngine\Base\Api {
 		
 		$status = \ShopEngine\Utils\Onboard\Plugin_Installer::single_install_and_activate($plugin_slug);
 		
-		if (is_wp_error($status)) {
+		if ($status === false) {
 			return [
 				'success' => false,
-				wp_send_json_error( array( 'status' => false ) ),
+				'message' => 'Plugin installation failed'
 			];
 		} else {
 			return [
@@ -257,13 +256,12 @@ class Api extends \ShopEngine\Base\Api {
 		$plugins_message = [
 			'setup_configurations' => esc_html__('Setup Configurations', 'shopengine'),
 			'elementskit-lite/elementskit-lite.php' => esc_html__('Page Builder Elements Activated', 'shopengine'),
+			'rox-dynamic-cpt-fields-engine/rox-dynamic-cpt-fields-engine.php' => esc_html__('Dynamic CPT Fields Activated', 'shopengine'),
+			'rox-appointment-booking/rox-appointment-booking.php' => esc_html__('Appointment Booking Activated', 'shopengine'),
 			'getgenie/getgenie.php' => esc_html__('AI Content & SEO Tool Activated', 'shopengine'),
 			'shopengine/shopengine.php' => esc_html__('WooCommerce Builder Activated', 'shopengine'),
 			'metform/metform.php' => esc_html__('Form Builder Activated', 'shopengine'),
 			'emailkit/EmailKit.php' => esc_html__('Email Customizer Activated', 'shopengine'),
-			'wp-social/wp-social.php' => esc_html__('Social Integration Activated', 'shopengine'),
-			'wp-ultimate-review/wp-ultimate-review.php' => esc_html__('Review Management Activated', 'shopengine'),
-			'wp-fundraising-donation/wp-fundraising.php' => esc_html__('Fundraising & Donations', 'shopengine'),
 			'gutenkit-blocks-addon/gutenkit-blocks-addon.php' => esc_html__('Page Builder Blocks Activated', 'shopengine'),
 			'popup-builder-block/popup-builder-block.php' => esc_html__('Popup Builder Activated', 'shopengine'),
 			'table-builder-block/table-builder-block.php' => esc_html__('Table Builder Activated', 'shopengine'),

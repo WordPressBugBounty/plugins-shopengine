@@ -12,6 +12,7 @@ extract($settings_to_pass);
 $wrap_extra_class = sprintf('%1$s%2$s', 'shopengine-grid', ($shopengine_is_hover_details !== 'yes' && $shopengine_group_btns !== 'yes') ? ' shopengine-hover-disable' : '');
 
 $editor_mode = ( \Elementor\Plugin::$instance->editor->is_edit_mode() || is_preview() ) ;
+
 ?>
 <?php 
 	if ( is_plugin_active( 'iconic-woo-image-swap/iconic-woo-image-swap.php' ) )
@@ -85,41 +86,70 @@ $editor_mode = ( \Elementor\Plugin::$instance->editor->is_edit_mode() || is_prev
 	remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
 	add_action('woocommerce_shop_loop_item_title', function() use ($settings_to_pass) {
 		$header_size = isset($settings_to_pass['shopengine_archive_product_title_header_size']) ? $settings_to_pass['shopengine_archive_product_title_header_size'] : 'h1';
-		
-		if( function_exists( 'custom_shopengine_product_title' ) ) {			
-
+		if (function_exists('custom_shopengine_product_title')) {
 			custom_shopengine_product_title($header_size, $settings_to_pass);
 		}
-
 	}, 10);
 
 	?>
 <div data-pagination="<?php echo esc_attr($shopengine_pagination_style) ?>"
-     class="shopengine-archive-products <?php echo esc_attr($wrap_extra_class); ?>">
+	     class="shopengine-archive-products <?php echo esc_attr($wrap_extra_class); ?> <?php echo (isset($shopengine_independent_add_to_cart) && $shopengine_independent_add_to_cart === 'yes' && isset($shopengine_independent_add_to_cart_position) && $shopengine_independent_add_to_cart_position === 'top') ? 'shopengine-independent-add-to-cart-position-top' : ''; ?>">
 	<?php
 	// add product description
-	add_action('woocommerce_after_shop_loop_item_title', function () use ($shopengine_is_details, $shopengine_group_btns, $shopengine_is_hover_details) {
+	add_action('woocommerce_after_shop_loop_item_title', function () use ($shopengine_is_details, $shopengine_group_btns, $shopengine_independent_add_to_cart, $shopengine_independent_add_to_cart_position, $shopengine_is_hover_details) {
+		$has_group_buttons    = ($shopengine_group_btns === 'yes');
+		$has_independent      = (isset($shopengine_independent_add_to_cart) && $shopengine_independent_add_to_cart === 'yes');
+		$show_indep_bottom    = $has_independent && isset($shopengine_independent_add_to_cart_position) && $shopengine_independent_add_to_cart_position === 'bottom';
+		$show_default_buttons = !$has_group_buttons && !$has_independent;
+		$show_description     = ($shopengine_is_details === 'yes') && $show_default_buttons;
+		$show_footer          = $show_description || $show_indep_bottom || $show_default_buttons;
 
-		if($shopengine_is_hover_details === 'yes') : ?>
-            <div class="shopengine-product-description-footer">
-		<?php endif;
+		$footer_classes = 'shopengine-product-description-footer';
+		if ($shopengine_is_hover_details === 'yes') {
+			$footer_classes .= ' shopengine-product-description-footer-hover';
+		}
+		if ($has_independent) {
+			$footer_classes .= ' shopengine-independent-add-to-cart';
+		}
 
-		if($shopengine_is_details === 'yes') :
-			?>
-            <div class="shopengine-product-excerpt"> <?php
-				the_excerpt();
-				?> </div> <?php
-		endif;
+		if ($show_footer) : ?>
+				<div class="<?php echo esc_attr($footer_classes); ?>">
+			<?php endif;
 
-		if($shopengine_is_hover_details === 'yes') : ?>
-			<?php if($shopengine_group_btns !== 'yes') : ?>
-                <div class="shopengine-product-description-btn-group">
+			if ($show_description) : ?>
+				<div class="shopengine-product-excerpt"> <?php the_excerpt(); ?> </div>
+			<?php endif;
+
+			if ($show_indep_bottom) : ?>
+				<div class="shopengine-product-description-btn-group shopengine-independent-add-to-cart shopengine-cart-only">
 					<?php woocommerce_template_loop_add_to_cart(); ?>
-                </div>
-			<?php endif; ?>
-            </div> <?php
-		endif;
+				</div>
+			<?php elseif ($show_default_buttons) : ?>
+				<div class="shopengine-product-description-btn-group default-btns <?php echo esc_attr($this->get_button_hide_classes()); ?>">
+					<?php $this->render_footer_action_btns(); ?>
+				</div>
+			<?php endif;
+
+			if ($show_footer) : ?>
+				</div>
+			<?php endif;
+
 	}, 40);
+
+	// If independent position is 'top', render add-to-cart in the image area (before title)
+	if (isset($shopengine_independent_add_to_cart) && $shopengine_independent_add_to_cart === 'yes') {
+		add_action('woocommerce_before_shop_loop_item_title', function () use ($shopengine_independent_add_to_cart, $shopengine_independent_add_to_cart_position, $shopengine_group_btns) {
+			if (isset($shopengine_independent_add_to_cart_position) && $shopengine_independent_add_to_cart_position === 'top') :
+				woocommerce_template_loop_product_link_close();
+				?>
+				<div class="shopengine-product-thumb-add-to-cart shopengine-independent-add-to-cart shopengine-cart-only">
+				<?php woocommerce_template_loop_add_to_cart(); ?>
+				</div>
+				<?php
+				woocommerce_template_loop_product_link_open();
+			endif;
+		}, 20);
+	}
 
 	// Editor mode product query args for pagination and product count based on customizer settings. On frontend, it will use the default query.
 

@@ -1,22 +1,22 @@
 === ShopEngine Elementor WooCommerce Builder Addon – All in One WooCommerce Solution ===
 Contributors: Roxnor, Ataurr, aion11
-Tags: WooCommerce Builder, WooCommerce add-on, Elementor WooCommerce, Cross-sell, Variation Swatches, WooCommerce Checkout, WooCommerce Product
+Tags: WooCommerce Builder, WooCommerce addons, Elementor WooCommerce, Cross-sell, Variation Swatches, WooCommerce Checkout, WooCommerce Product
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 4.9.0
+Stable tag: 4.9.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
- WooCommerce builder for Elementor and Gutenberg. It offers product templates, product sliders, shopping cart, quick view, Woo wishlist, product filter, and more Woo features.
+ WooCommerce builder for Elementor and Gutenberg, offering product templates, product sliders, shopping cart, quick view, Woo Wishlist, product filter.
 
 == Description ==
 
-Are you using multiple plugins to make a WooCommerce store with a shop page builder, ready-made product templates, WooCommerce quick view, shopping cart, Woo wishlist, product comparison, promotional product slider, cross-sell, variation swatches, and more?
+[ShopEngine](https://wpmet.com/plugin/shopengine/?utm_source=org&utm_medium=readme) is the most complete WooCommerce Builder for Elementor. The all-in-one Elementor WooCommerce addon that replaces dozens of separate plugins. Build every page of your WooCommerce store: shop page builder, cart page builder, checkout builder, single product builder, and My Account builder, all with drag-and-drop.
 
-Well, not anymore! You don’t have to slow down your WooCommerce store.
+Get **70+ WooCommerce widgets, 40+ eCommerce templates, and 20+ WooCommerce addons** including Woo Wishlist, WooCommerce Quick View, Product Comparison, Cross Sell popup, Variation Swatches, Flash Sale Countdown, and Currency Switcher. Everything all in one Woo Builder.
 
-  Presenting [ShopEngine](https://wpmet.com/plugin/shopengine/?utm_source=org&utm_medium=readme), all-in-one WooCommerce builder for Elementor and Gutenberg!
+This comprehensive WooCommerce page builder also supports the Gutenberg block editor area!
 
 https://youtu.be/vjfrA-xI8F4
 
@@ -46,6 +46,7 @@ It’s one of the most complete WooCommerce builders for Elementor and Gutenberg
 ⭐ **Filterable Product List** to sort products with real-time filters.
 
 ShopEngine **overrides default WooCommerce page** designs with custom, **sales-focused** designs and features. 
+
 ✅ WooCommerce **Shop page** builder.
 ✅ **Shopping Cart** builder.
 ✅ **Single Product** page builder.
@@ -55,17 +56,20 @@ ShopEngine **overrides default WooCommerce page** designs with custom, **sales-f
 ✅ **Order Confirmation / Thank You** page builder.
 ✅ **WooCommerce Account Dashboard** builder.
 
-This WooCommerce Builder also includes...
+This Woo Builder also includes…
 
-✔️ **Multi-language** supported builder	.
-✔️ **Compatible** with all popular WordPress themes.
-✔️ Works with Free **Elementor and WooCommerce**.
-✔️ Compatible with **WordPress Gutenberg Blocks**.
-✔️ **Filter and Pagination** based on AJAX.
-✔️ **No Coding Skills** Required.
-✔️ Top-notch and **Dedicated Support Team**.
+✔️ Multi-language & RTL supported WooCommerce addon
+✔️ Compatible with all popular WordPress themes 
+✔️ Works with free Elementor - no Elementor Pro required
+✔️ Gutenberg block editor compatible WooCommerce addon
+✔️ AJAX-based product filter and pagination - no page reload
+✔️ 40+ ready-made eCommerce templates - import in one click
+✔️ No coding skills required - full drag-and-drop Woo Builder
+✔️ HPOS (High Performance Order Storage) compatible
+✔️ WPML & Polylang multilingual ready
+✔️ 24/7 dedicated support team
 
-## ✨ Pre-built WooCommerce Templates by ShopEngine, An Instant No-code Solution for WooCommerce Builder
+### 📃 SHOPENGINE WOOCOMMERCE TEMPLATES (40+ Ready Designs) - An Instant No-code Solution for WooCommerce Builder
 
 **📃** [Shop Page](https://wpmet.com/plugin/shopengine/templates/shop-page/?utm_source=org&utm_medium=readme): Display products with tons of customizable components of this WooCommerce shop page builder.
 
@@ -94,7 +98,8 @@ This WooCommerce Builder also includes...
 **📃** [Quick View Builder Template](https://wpmet.com/plugin/shopengine/templates/quick-view/?utm_source=org&utm_medium=readme): Shoppers get a quick overview of WooCommerce products.
 
 ## ✨ ShopEngine WooCommerce Addons for Advanced Woo Builder Features
-ShopEngine comes with 20+ WooCommerce addons to help users build dynamic WooCommerce websites without any hassle.
+
+ShopEngine comes with **20+ WooCommerce addons** to help users build dynamic WooCommerce websites without any hassle.
 
 https://youtu.be/QnsmuVmTJww?si=LBNZ1KewYa4777Yr
 
@@ -176,7 +181,10 @@ ShopEngine offers 70+ WooCommerce Elementor Widgets to build attractive single-p
 
 https://youtu.be/S0Jx2VbU_gk?si=O15FUjVoeycal6_Q
 
+
+
 ### Modernize Shopping Cart Page Builder With ShopEngine WooCommerce Widgets
+
 Get some specially designed helpful widgets of ShopEngine WooCommerce cart page builder to enhance the default WooCommerce cart page and reduce the cart abandonment rate.
 
 https://youtu.be/wT2U3UKcv38?si=pdvwuPRB1Z7a9KFv
@@ -328,6 +336,11 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog?utm_source=org&utm_medium=readme)! 
 
 == Changelog ==
+v4.9.1// 30-06-2026
+Added: Payment methods template support.
+Improved: Archive product widget controllers.
+Fixed: Resolved an issue where ShopEngine classes were incorrectly being added to the body tag.
+
 v4.9.0// 08-06-2026
 Added: Wishlist template support.
 Added: Individual controllers for Cart Table widget cart footer buttons. 

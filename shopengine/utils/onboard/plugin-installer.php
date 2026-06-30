@@ -112,7 +112,7 @@ class Plugin_Installer {
 	 */
 	public static function single_install_and_activate( string $plugin_file ) {
 		$installer = new self( $plugin_file );
-		$installer->install_and_activate();
+		return $installer->install_and_activate();
 	}
 
 	/**

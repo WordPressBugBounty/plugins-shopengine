@@ -41,8 +41,6 @@ abstract class Base {
             return;
         }
 
-		add_filter('body_class', [$this, 'hook_body_class']);
-
 		$this->prod_tpl_id   = $this->get_registered_template_id($this->get_page_type_option_slug());
 
 		//phpcs:ignore WordPress.Security.NonceVerification.Recommended -- It's a fronted user part, not possible to verify nonce here
@@ -56,6 +54,8 @@ abstract class Base {
 		if(empty($this->prod_tpl_id) || !$this->is_template_active()) {
 			return;
 		}
+
+		add_filter('body_class', [$this, 'hook_body_class']);
 
         if(\ShopEngine\Core\Builders\Action::edit_with($this->prod_tpl_id) == 'elementor' && !Helper::is_elementor_active()) {
             return;

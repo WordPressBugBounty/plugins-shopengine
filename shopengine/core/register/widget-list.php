@@ -338,6 +338,12 @@ class Widget_List extends \ShopEngine\Base\List_Model {
 				'package' => 'pro-disabled',
 				'categories' => ['shopengine-my_account'],
 			],
+			'account-payment-methods'           => [
+				'slug'    => 'account-payment-methods',
+				'title'   => esc_html__( 'Account Payment Methods', 'shopengine' ),
+				'package' => 'pro-disabled',
+				'categories' => ['shopengine-my_account'],
+			],
 			'categories'               => [
 				'slug'    => 'categories',
 				'title'   => esc_html__( 'Categories', 'shopengine' ),

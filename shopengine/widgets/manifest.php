@@ -179,6 +179,12 @@ class Manifest{
 				'categories' => '["shopengine-my_account"]',
 			],
 			[
+				'name'       => 'account-payment-methods',
+				'title'      => esc_html__( 'Account Payment Methods', 'shopengine' ),
+				'icon'       => 'shopengine-widget-icon shopengine-icon-account_payment_methods',
+				'categories' => '["shopengine-my_account"]',
+			],
+			[
 				'name'       => 'categories',
 				'title'      => esc_html__( 'Categories', 'shopengine' ),
 				'icon'       => 'shopengine-widget-icon shopengine-icon-product_categories',

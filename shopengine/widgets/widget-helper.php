@@ -225,6 +225,10 @@ class Widget_Helper {
 
 				$template = WC_ABSPATH.'templates/checkout/terms.php';
 
+			} elseif(strpos($template, 'woocommerce/myaccount/payment-methods.php') !== false) {
+
+				$template = WC_ABSPATH.'templates/myaccount/payment-methods.php';
+
 			}
 			return $template;
 		}, 999);
