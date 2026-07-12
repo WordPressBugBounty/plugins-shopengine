@@ -110,6 +110,23 @@
 			}
 	}
 
+	// Get the current theme name
+	$themeName = get_template();
+
+	/*
+		---------------------------------------------
+		Remove Envo Shop JS if Envo Shop is active
+		 This is to prevent conflicts with ShopEngine's single product template
+		--------------------------------------------
+	*/
+	if($themeName == 'envo-shop') {
+
+		// Stop Envo Shop from rendering its own duplicate plus/minus buttons
+		remove_action('woocommerce_before_add_to_cart_quantity', 'envo_shop_display_quantity_minus');
+		remove_action('woocommerce_after_add_to_cart_quantity', 'envo_shop_display_quantity_plus');
+	}
+
+
 	// Check if gift card plugin is active and enabled first
 	$gift_card_plugin_active = function_exists('is_plugin_active') ? is_plugin_active('wt-woocommerce-gift-cards/wt-woocommerce-gift-cards.php') : false;
 	$gift_card_class_exists = class_exists('Wt_Gc_Gift_Card_Purchase_Setup_Product_Page');

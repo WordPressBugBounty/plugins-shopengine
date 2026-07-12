@@ -3,7 +3,7 @@ Contributors: Roxnor, Ataurr, aion11
 Tags: WooCommerce Builder, WooCommerce addons, Elementor WooCommerce, Cross-sell, Variation Swatches, WooCommerce Checkout, WooCommerce Product
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 4.9.1
+Stable tag: 4.9.2
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -171,7 +171,7 @@ https://youtu.be/XOZSqWLjgyk?si=bSjzwk0vMz4KitvQ
 
 **🔷** Set up coupons for a country-specific state/region using ShopEngine, Elementor WooCommerce builder addon's [Advanced coupons add-on](https://wpmet.com/plugin/shopengine/modules/advanced-coupon/?utm_source=org&utm_medium=readme). Only customers in those areas can use the coupon code.
 
-**🔷** [Cross-Sell Popup](https://wpmet.com/plugin/shopengine/modules/cross-sell-popup/?utm_source=org&utm_medium=readme) module of the ShopEngine WooCommerce template builder will show product recommendations based on your customers' requirements for other products after adding products to the cart.
+**🔷** [Cross-Sell Popup](https://wpmet.com/plugin/shopengine/modules/cross-sell-popup/?utm_source=org&utm_medium=readme) WooCommerce addon shows targeted cross-sell product recommendations the moment a customer adds to cart. This WooCommerce template boosting average order value automatically. The most effective cross-sell WooCommerce builder for Elementor stores.
 
 **🔷** [Avatar add-on](https://wpmet.com/plugin/shopengine/modules/avatar/?utm_source=org&utm_medium=readme) makes websites' user profiles more appealing and personalized by allowing them to add an image and other user information with different customization options.
 
@@ -183,9 +183,9 @@ https://youtu.be/S0Jx2VbU_gk?si=O15FUjVoeycal6_Q
 
 
 
-### Modernize Shopping Cart Page Builder With ShopEngine WooCommerce Widgets
+###  Cart Page Builder – Redesign Shopping Cart With WooCommerce Widgets
 
-Get some specially designed helpful widgets of ShopEngine WooCommerce cart page builder to enhance the default WooCommerce cart page and reduce the cart abandonment rate.
+Get WooCommerce widgets designed for customizing WooCommerce cart page builder to enhance the default cart page of WooCommerce and reduce the cart abandonment rate.
 
 https://youtu.be/wT2U3UKcv38?si=pdvwuPRB1Z7a9KFv
 
@@ -305,7 +305,7 @@ You will get fully ready **5+ templates with 36+ blocks, 4 advanced add-on** inc
 
 ### 😇 BACKED BY A TRUSTED TEAM
 
-ShopEngine is brought to you by **Wpmet, a name trusted by 10,00,000+ satisfied users worldwide**.
+ShopEngine is a WooCommerce addon for Elementor by **Wpmet, trusted by 1,000,000+ WordPress users worldwide**.
 
 ### 🎯 IT’S TIME TO GET STARTED WITH SHOPENGINE
 Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-with-shopengine-installation/?utm_source=org&utm_medium=readme)
@@ -336,6 +336,10 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog?utm_source=org&utm_medium=readme)! 
 
 == Changelog ==
+v4.9.2// 12-07-2026
+Improved: Onboarding process.
+Fixed: Conflict issue with envo-shop theme.
+
 v4.9.1// 30-06-2026
 Added: Payment methods template support.
 Improved: Archive product widget controllers.
@@ -1160,7 +1164,7 @@ Yes, you can create your own template with ShopEngine. ShopEgnie offers 2 option
 You can create a custom template by using the black template, then drag-and-drop the necessary widgets of ShopEngine(Woo builder).
 You can choose a template from ShopEngine’s template library to save you time and effort.
 
-= Is there a support center of ShopEngine( to guide me when needed? =
+= Is there a support center of ShopEngine to guide me when needed? =
 Yes, ShopEngine (Elementor WooCommerce Builder) has a 24/7 dedicated support team to help users with any issues or answer their queries.
 
 = Can I request new features for ShopEngine? =

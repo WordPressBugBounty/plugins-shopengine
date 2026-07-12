@@ -71,8 +71,6 @@ class Api extends \ShopEngine\Base\Api {
 	public function get_our_others_plugin_install_api() {
         $plugins = [
             'elementskit-lite'        => 'elementskit-lite.php',
-			'rox-dynamic-cpt-fields-engine' => 'rox-dynamic-cpt-fields-engine.php',
-			'rox-appointment-booking' => 'rox-appointment-booking.php',
             'metform'                 => 'metform.php',
 			'gutenkit-blocks-addon'	  => 'gutenkit-blocks-addon.php',
 			'popup-builder-block'	  =>  'popup-builder-block.php',
@@ -256,8 +254,6 @@ class Api extends \ShopEngine\Base\Api {
 		$plugins_message = [
 			'setup_configurations' => esc_html__('Setup Configurations', 'shopengine'),
 			'elementskit-lite/elementskit-lite.php' => esc_html__('Page Builder Elements Activated', 'shopengine'),
-			'rox-dynamic-cpt-fields-engine/rox-dynamic-cpt-fields-engine.php' => esc_html__('Dynamic CPT Fields Activated', 'shopengine'),
-			'rox-appointment-booking/rox-appointment-booking.php' => esc_html__('Appointment Booking Activated', 'shopengine'),
 			'getgenie/getgenie.php' => esc_html__('AI Content & SEO Tool Activated', 'shopengine'),
 			'shopengine/shopengine.php' => esc_html__('WooCommerce Builder Activated', 'shopengine'),
 			'metform/metform.php' => esc_html__('Form Builder Activated', 'shopengine'),
