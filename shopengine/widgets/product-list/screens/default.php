@@ -188,9 +188,11 @@ if ($themeName === 'woostify') {
 							</a>
 
 							<!-- add to cart -->
+							<?php if (!isset($show_product_hover_overlay) || $show_product_hover_overlay === 'yes') : ?>
 							<div class="overlay-add-to-cart position-<?php echo isset($product_hover_overlay_position) ? esc_attr($product_hover_overlay_position) : 'bottom'; ?>">
 								<?php woocommerce_template_loop_add_to_cart();?>
 							</div>
+							<?php endif; ?>
 							<!-- tag and sale badge -->
 							<?php
 							$product_tags   = get_the_terms(get_the_ID(), 'product_tag');

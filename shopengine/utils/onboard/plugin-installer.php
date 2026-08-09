@@ -24,17 +24,17 @@ class Plugin_Installer {
 		}
 
 		if ( is_plugin_active( $this->plugin_file ) ) {
+			Auto_Install_Tracker::mark( $this->plugin_file );
 			return;
 		}
 
 		if ( $this->is_plugin_installed() ) {
 			$ignore_silent_activation = ['popup-builder-block/popup-builder-block.php'];
 			$silent = in_array( $this->plugin_file, $ignore_silent_activation ) ? false : true;
-			
-			$activate = activate_plugin( $this->plugin_file, '', false, $silent );
-			if ( ! is_wp_error( $activate ) ) {
-				return true;
-			}
+
+			Auto_Install_Tracker::mark( $this->plugin_file );
+			activate_plugin( $this->plugin_file, '', false, $silent );
+			return true;
 		} else {
 			$this->install_plugin();
 		}
@@ -63,10 +63,9 @@ class Plugin_Installer {
 			$ignore_silent_activation = ['popup-builder-block/popup-builder-block.php'];
 			$silent = in_array( $this->plugin_file, $ignore_silent_activation ) ? false : true;
 
-			$activate = activate_plugin( $this->plugin_file, '', false, $silent );
-			if ( ! is_wp_error( $activate ) ) {
-				return true;
-			}
+			Auto_Install_Tracker::mark( $this->plugin_file );
+			activate_plugin( $this->plugin_file, '', false, $silent );
+			return true;
 		}
 	}
 

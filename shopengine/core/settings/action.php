@@ -41,6 +41,14 @@ class Action
 	 */
 	public function get_fields() {
 
+		// Skip onboarding if ShopEngine was silently installed during another wpmet plugin's onboarding flow.
+		if ( ! get_option( Onboard::STATUS ) ) {
+			$auto_installed = (array) get_option( 'wpmet_onboarded_plugins', [] );
+			if ( isset( $auto_installed['shopengine/shopengine.php'] ) ) {
+				update_option( Onboard::STATUS, true );
+			}
+		}
+
 		$data = [
 			'widgets'         => [],
 			'modules'         => [],

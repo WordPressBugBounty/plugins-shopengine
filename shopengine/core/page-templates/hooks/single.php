@@ -32,6 +32,44 @@ class Single extends Base {
 
 	public function before_hooks() {
 		do_action( 'woocommerce_before_single_product' );
+
+		$this->generate_product_structured_data();
+	}
+
+	/**
+	 * Emit WooCommerce Product JSON-LD (schema.org) structured data.
+	 *
+	 * ShopEngine renders the single product from builder widgets and never fires
+	 * the `woocommerce_single_product_summary` action, which is where WooCommerce
+	 * normally hooks WC_Structured_Data::generate_product_data() (priority 60).
+	 * Without this call the collected structured-data array stays empty and
+	 * WooCommerce's wp_footer output prints nothing, so the Product schema
+	 * disappears whenever a ShopEngine single template is active. Generating it
+	 * here lets WooCommerce's own output_structured_data() render it as usual.
+	 *
+	 * @return void
+	 */
+	protected function generate_product_structured_data() {
+
+		// Skip Quick View: its markup is loaded into a modal and would inject
+		// duplicate/misplaced product schema into the host page's footer.
+		if ( $this->get_page_type_option_slug() === 'quick_view' ) {
+			return;
+		}
+
+		if ( ! function_exists( 'WC' ) || empty( WC()->structured_data ) ) {
+			return;
+		}
+
+		global $product;
+
+		if ( ! $product instanceof \WC_Product ) {
+			$product = wc_get_product( get_queried_object_id() );
+		}
+
+		if ( $product instanceof \WC_Product ) {
+			WC()->structured_data->generate_product_data( $product );
+		}
 	}
 
 	public function after_hooks()

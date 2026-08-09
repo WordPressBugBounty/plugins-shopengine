@@ -3,7 +3,7 @@ Contributors: Roxnor, Ataurr, aion11
 Tags: WooCommerce Builder, WooCommerce addons, Elementor WooCommerce, Cross-sell, Variation Swatches, WooCommerce Checkout, WooCommerce Product
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 4.9.2
+Stable tag: 4.9.3
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -336,6 +336,16 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog?utm_source=org&utm_medium=readme)! 
 
 == Changelog ==
+v4.9.3// 09-08-2026
+Improved: Archive product widget controls.
+Improved: Product list widget controls.
+Improved: Checkout template UI.
+Fixed: Express Checkout element not displaying on Cart and Checkout pages when using ShopEngine templates.
+Fixed: WooCommerce Product Schema (JSON-LD) missing when using ShopEngine Single Product Templates.
+Fixed: CSRF vulnerability in the ShopEngine checkout login endpoint.
+Fixed: Hard-coded and untranslatable strings.
+
+
 v4.9.2// 12-07-2026
 Improved: Onboarding process.
 Fixed: Conflict issue with envo-shop theme.

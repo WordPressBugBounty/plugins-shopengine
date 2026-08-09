@@ -31,23 +31,26 @@ class Onboard
             }
 
             if (!empty($data['user_onboard_data']['email']) && !empty(is_email($data['user_onboard_data']['email']))) {
-                $args = [
-                    'email'           => sanitize_email( wp_unslash( $data['user_onboard_data']['email'] ) ),
-                    'slug'            => 'shopengine',
-                ];
+                $email = sanitize_email( wp_unslash( $data['user_onboard_data']['email'] ) );
 
-                $response = Plugin_Data_Sender::instance()->sendEmailSubscribeData( 'plugin-subscribe', $args );
+                Plugin_Data_Sender::instance()->sendEmailSubscribeData( 'plugin-subscribe', [
+                    'email' => $email,
+                    'slug'  => 'shopengine',
+                ] );
+
+                update_option( 'wpmet_onboard_email_collected', true, false );
+                update_option( 'wpmet_onboard_collected_email', $email, false );
             }
             update_option(Onboard::STATUS, true);
         }
 
-       $response = array(
-        'status'  => 'success',
-        'message' => \ShopEngine\Core\Settings\Api::plugin_activate_message('setup_configurations')
-    );
+        $response = array(
+            'status'  => 'success',
+            'message' => \ShopEngine\Core\Settings\Api::plugin_activate_message('setup_configurations')
+        );
 
-    $plugins = !empty($data['our_plugins']) && is_array($data['our_plugins']) ? $data['our_plugins'] : [];
-    
+        $plugins = !empty($data['our_plugins']) && is_array($data['our_plugins']) ? $data['our_plugins'] : [];
+
         if($plugins) {
             $total_plugins = count($plugins);
             $total_steps   = 1 + $total_plugins;

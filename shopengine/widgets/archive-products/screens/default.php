@@ -96,11 +96,11 @@ $editor_mode = ( \Elementor\Plugin::$instance->editor->is_edit_mode() || is_prev
 	     class="shopengine-archive-products <?php echo esc_attr($wrap_extra_class); ?> <?php echo (isset($shopengine_independent_add_to_cart) && $shopengine_independent_add_to_cart === 'yes' && isset($shopengine_independent_add_to_cart_position) && $shopengine_independent_add_to_cart_position === 'top') ? 'shopengine-independent-add-to-cart-position-top' : ''; ?>">
 	<?php
 	// add product description
-	add_action('woocommerce_after_shop_loop_item_title', function () use ($shopengine_is_details, $shopengine_group_btns, $shopengine_independent_add_to_cart, $shopengine_independent_add_to_cart_position, $shopengine_is_hover_details) {
+	add_action('woocommerce_after_shop_loop_item_title', function () use ($shopengine_is_details, $shopengine_group_btns, $shopengine_show_default_add_to_cart, $shopengine_independent_add_to_cart, $shopengine_independent_add_to_cart_position, $shopengine_is_hover_details) {
 		$has_group_buttons    = ($shopengine_group_btns === 'yes');
 		$has_independent      = (isset($shopengine_independent_add_to_cart) && $shopengine_independent_add_to_cart === 'yes');
 		$show_indep_bottom    = $has_independent && isset($shopengine_independent_add_to_cart_position) && $shopengine_independent_add_to_cart_position === 'bottom';
-		$show_default_buttons = !$has_group_buttons && !$has_independent;
+		$show_default_buttons = !$has_group_buttons && !$has_independent && (($shopengine_show_default_add_to_cart ?? 'yes') === 'yes');
 		$show_description     = ($shopengine_is_details === 'yes') && $show_default_buttons;
 		$show_footer          = $show_description || $show_indep_bottom || $show_default_buttons;
 

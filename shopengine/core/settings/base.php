@@ -84,8 +84,10 @@ class Base {
 
 			wp_enqueue_script('htm', \ShopEngine::plugin_url() . 'assets/js/htm.js', null, \ShopEngine::version(), true);
 
-			wp_enqueue_script('shopengine-admin-js', \ShopEngine::plugin_url() . 'assets/js/app.js', ['htm', 'jquery', 'wp-element'], \ShopEngine::version(), true);
-			
+			wp_enqueue_script('shopengine-admin-js', \ShopEngine::plugin_url() . 'assets/js/app.js', ['htm', 'jquery', 'wp-element', 'wp-i18n'], \ShopEngine::version(), true);
+
+			wp_set_script_translations('shopengine-admin-js', 'shopengine', \ShopEngine::plugin_dir() . 'languages');
+
 			// page template lists
 			$page_templates = Page_Templates::instance()->getTemplates();
 

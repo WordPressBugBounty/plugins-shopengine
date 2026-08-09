@@ -81,6 +81,25 @@ class Route extends Api
 	}
 
 	public function post_checkout_login() {
+
+		// Verify nonce for CSRF protection
+		$nonce = $this->request->get_header('X-WP-Nonce');
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'wp_rest')) {
+			return new \WP_Error('rest_forbidden', esc_html__('Invalid nonce.', 'shopengine'), array('status' => 403));
+		}
+
+		// The wp_rest nonce above is not session-bound for logged-out requests, so it
+		// can be harvested from any public page and replayed cross-origin. Require the
+		// request to actually originate from this site as the real CSRF guard.
+		$source = $this->request->get_header('Origin');
+		if (empty($source)) {
+			$source = $this->request->get_header('Referer');
+		}
+		$source_host = $source ? wp_parse_url($source, PHP_URL_HOST) : '';
+		if (empty($source_host) || strcasecmp($source_host, wp_parse_url(home_url(), PHP_URL_HOST)) !== 0) {
+			return new \WP_Error('rest_forbidden', esc_html__('Invalid request origin.', 'shopengine'), array('status' => 403));
+		}
+
 		$data = $this->request->get_params();
 		if(isset($data['rememberme'])) {
 			$data['rememberme'] = $data['rememberme'] == 'true' ? true : false;

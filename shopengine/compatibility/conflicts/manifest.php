@@ -7,7 +7,12 @@ use ShopEngine\Widgets\Widget_Helper;
 class Manifest {
 
 	public function init() {
-		
+
+		// Check if the WooCommerce Stripe Gateway plugin is active
+		if (is_plugin_active('woocommerce-gateway-stripe/woocommerce-gateway-stripe.php')) {
+			add_filter('wc_stripe_express_checkout_params', [$this, 'fix_stripe_express_checkout_has_block']);
+		}
+
 		add_action('elementor/element/before_section_start', [$this, 'elementor_editor_conflict'], 10, 2);
 		add_action('elementor/element/before_section_start', function ($element) {
 
@@ -83,6 +88,21 @@ class Manifest {
 		}
 		
 	}	
+
+	/**
+	 * Stripe skips mounting Express Checkout when has_block is true, assuming
+	 * WC Blocks markup exists. Force it false when ShopEngine rendered instead.
+	 */
+	public function fix_stripe_express_checkout_has_block($params) {
+
+		global $is_used_shopengine_template;
+
+		if ($is_used_shopengine_template && (is_cart() || is_checkout())) {
+			$params['has_block'] = false;
+		}
+
+		return $params;
+	}
 
 	// This function will remove the background overlay hooks added by Unlimited Elements for Elementor Pro plugin
 	public function remove_unlimited_elements_background_hooks() {

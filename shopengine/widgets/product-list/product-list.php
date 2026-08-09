@@ -455,6 +455,7 @@ class ShopEngine_Product_List extends \ShopEngine\Base\Widget {
 				'label_off'    => esc_html__('No', 'shopengine'),
 				'default'      => 'yes',
 				'return_value' => 'yes',
+				'render_type'  => 'template',
 				'frontend_available' => true,
 				'selectors'    => [
 					'{{WRAPPER}} .shopengine-product-list .overlay-add-to-cart' => 'display: flex;',

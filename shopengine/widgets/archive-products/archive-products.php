@@ -162,6 +162,22 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 		);
 
 		$this->add_control(
+			'shopengine_show_default_add_to_cart',
+			[
+				'label'        => esc_html__('Show Default Add to Cart', 'shopengine'),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__('Show', 'shopengine'),
+				'label_off'    => esc_html__('Hide', 'shopengine'),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'description'  => esc_html__('When Button Group is Hidden, this controls whether the plain Add to Cart button still shows.', 'shopengine'),
+				'condition'    => [
+					'shopengine_group_btns!' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
 			'shopengine_action_buttons_heading',
 			[
 				'label'     => esc_html__('Action Buttons', 'shopengine'),
@@ -214,6 +230,41 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				'default'      => 'yes',
 				'condition'    => [
 					'shopengine_group_btns' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_add_to_cart_show_text',
+			[
+				'label'        => esc_html__('Show Add to Cart Text', 'shopengine'),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__('Show', 'shopengine'),
+				'label_off'    => esc_html__('Hide', 'shopengine'),
+				'return_value' => 'yes',
+				'default'      => 'no',
+				'description'  => esc_html__('Shows the "Add to Cart" label next to the icon inside the button group.', 'shopengine'),
+				'condition'    => [
+					'shopengine_group_btns'       => 'yes',
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_add_to_cart_icon_position',
+			[
+				'label'     => esc_html__('Icon Position', 'shopengine'),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'before',
+				'options'   => [
+					'before' => esc_html__('Before Text', 'shopengine'),
+					'after'  => esc_html__('After Text', 'shopengine'),
+				],
+				'condition' => [
+					'shopengine_group_btns'             => 'yes',
+					'shopengine_show_add_to_cart'       => 'yes',
+					'shopengine_add_to_cart_show_text'  => 'yes',
 				],
 			]
 		);
@@ -815,6 +866,36 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .shopengine-archive-products .product .attachment-woocommerce_thumbnail' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .shopengine-archive-products .shopengine-archive-products__left-image .attachment-woocommerce_thumbnail' => 'height: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => ['shopengine_image_height_switch' => 'yes'],
+			]
+		);
+
+		$this->add_responsive_control(
+			'shopengine_image_width',
+			[
+				'label'      => esc_html__('Width', 'shopengine'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => ['px', '%'],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 600,
+						'step' => 5,
+					],
+					'%'  => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default'    => [
+					'unit' => '%',
+					'size' => 100,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .shopengine-archive-products .product .attachment-woocommerce_thumbnail' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .shopengine-archive-products .shopengine-archive-products__left-image .attachment-woocommerce_thumbnail' => 'width: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => ['shopengine_image_height_switch' => 'yes'],
 			]
@@ -2056,6 +2137,11 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 			]
 		);
 
+		// Add to Cart has its own dedicated style controls (see the "Add to Cart
+		// Button" section below), so these general Button Group controls exclude
+		// it to avoid the two control sets fighting over the same element.
+		$not_cart_btn = ':not(.add_to_cart_button):not(.product_type_variable):not(.product_type_grouped):not(.product_type_external)';
+
 		$this->add_control(
 			'shopengine_group_btns_over_image',
 			[
@@ -2114,14 +2200,28 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 		);
 
 		$this->add_control(
+			'shopengine_button_group_always_visible',
+			[
+				'label'        => esc_html__('Always Visible', 'shopengine'),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__('Yes', 'shopengine'),
+				'label_off'    => esc_html__('On Hover', 'shopengine'),
+				'return_value' => 'yes',
+				'default'      => 'no',
+				'description'  => esc_html__('Show the button group at all times instead of only on hover.', 'shopengine'),
+				'prefix_class' => 'shopengine-group-btns-always-visible-',
+			]
+		);
+
+		$this->add_control(
 			'shopengine_button_group_btn_bg_clr',
 			[
 				'label'     => esc_html__('Button Group Background color', 'shopengine'),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#FFFFFF',
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a, button, .button)'       => 'background: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a, button, .button):hover' => 'background: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a, button, .button)' . $not_cart_btn       => 'background: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a, button, .button):hover' . $not_cart_btn => 'background: {{VALUE}} !important;',
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner'                               => 'background-color: {{VALUE}} !important;',
 				],
 			]
@@ -2134,10 +2234,11 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#101010',
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a:not(.shopengine-wishlist) :is(i, span, svg, path, a::before)' => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a:not(.shopengine-wishlist)' . $not_cart_btn . ' :is(i, span, svg, path, a::before)' => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner .shopengine-wishlist path'                                      => 'color: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.button:not(.shopengine-quickview-trigger)::before'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a i'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.button:not(.shopengine-quickview-trigger)' . $not_cart_btn . '::before'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a' . $not_cart_btn . ' i'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn            => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -2149,15 +2250,15 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#F03D3F',
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a:not(.shopengine-wishlist):hover :is(i, span, svg, path, a::before)' => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a:not(.shopengine-wishlist)' . $not_cart_btn . ':hover :is(i, span, svg, path, a::before)' => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner .shopengine-wishlist:hover :is(i, span, svg, path, a::before)'                                      => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner .shopengine-wishlist:hover path'                                      => 'color: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.button:hover:not(.shopengine-quickview-trigger)::before'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.button:hover:not(.shopengine-quickview-trigger)' . $not_cart_btn . '::before'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
 
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.active:not(.shopengine-wishlist) :is(i, span, svg, path, a::before)' => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.active:not(.shopengine-wishlist)' . $not_cart_btn . ' :is(i, span, svg, path, a::before)' => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner .shopengine-wishlist.active path'                                      => 'fill:{{VALUE}} !important; color: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.button.active:not(.shopengine-quickview-trigger)::before'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button):hover'            => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.button.active:not(.shopengine-quickview-trigger)' . $not_cart_btn . '::before'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button):hover' . $not_cart_btn            => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -2170,7 +2271,7 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#FFFFFF',
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)'  => 'background: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn  => 'background: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -2181,7 +2282,7 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#FFFFFF',
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button):hover'  => 'background: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button):hover' . $not_cart_btn  => 'background: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -2202,15 +2303,15 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 							'left'   => '0',
 						],
 						'selectors' => [
-							'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-							'.rtl {{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' => 'border-width: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}};',
+							'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+							'.rtl {{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn => 'border-width: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}};',
 						],
 					],
 					'color' => [
 						'label' => esc_html__('Border Color', 'shopengine'),
 					],
 				],
-				'selector' => '{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)',
+				'selector' => '{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn,
 			]
 		);
 
@@ -2231,15 +2332,15 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 							'left'   => '0',
 						],
 						'selectors' => [
-							'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button):hover' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-							'.rtl {{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button):hover' => 'border-width: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}};',
+							'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn . ':hover' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+							'.rtl {{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn . ':hover' => 'border-width: {{TOP}}{{UNIT}} {{LEFT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{RIGHT}}{{UNIT}};',
 						],
 					],
 					'color' => [
 						'label' => esc_html__('Border Color', 'shopengine'),
 					],
 				],
-				'selector' => '{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button):hover',
+				'selector' => '{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn . ':hover',
 			]
 		);
 
@@ -2296,7 +2397,7 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%'],
 				'selectors'  => [
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -2314,7 +2415,7 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' => 'width: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button)' . $not_cart_btn => 'width: {{SIZE}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -2361,8 +2462,188 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 			]
 		);
 
+		/*
+			----------------------------
+			Add to Cart Button (styled independently from the other
+			button-group icons: wishlist / quick view / comparison / direct checkout)
+			----------------------------
+		*/
+
+		$this->add_control(
+			'shopengine_cart_btn_heading',
+			[
+				'label'     => esc_html__('Add to Cart Button', 'shopengine'),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => [
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+			]
+		);
+
+		$cart_btn_sel = 'a.add_to_cart_button, a.product_type_variable, a.product_type_grouped, a.product_type_external';
+
+		$this->add_control(
+			'shopengine_cart_btn_bg_clr',
+			[
+				'label'     => esc_html__('Background Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'condition' => [
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . ')' => 'background: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_btn_hbg_clr',
+			[
+				'label'     => esc_html__('Hover Background Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#FFFFFF',
+				'condition' => [
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . '):hover' => 'background: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_btn_clr',
+			[
+				'label'     => esc_html__('Text/Icon Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#101010',
+				'condition' => [
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . ')'            => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . ')::before'    => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . ') :is(i, span, svg, path)' => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_cart_btn_hover_clr',
+			[
+				'label'     => esc_html__('Hover Text/Icon Color', 'shopengine'),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#F03D3F',
+				'condition' => [
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . '):hover'            => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . '):hover::before'    => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . '):hover :is(i, span, svg, path)' => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'           => 'shopengine_cart_btn_border',
+				'condition'      => [
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+				'fields_options' => [
+					'border' => [],
+					'width'  => [
+						'label'   => esc_html__('Border Width', 'shopengine'),
+						'default' => [
+							'top'    => '0',
+							'right'  => '0',
+							'bottom' => '0',
+							'left'   => '0',
+						],
+					],
+					'color'  => [
+						'label' => esc_html__('Border Color', 'shopengine'),
+					],
+				],
+				'selector' => '{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . ')',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'           => 'shopengine_cart_btn_border_hover',
+				'condition'      => [
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+				'fields_options' => [
+					'border' => [
+						'label' => esc_html__('Hover Border Type', 'shopengine'),
+					],
+					'width'  => [
+						'label'   => esc_html__('Border Width', 'shopengine'),
+						'default' => [
+							'top'    => '0',
+							'right'  => '0',
+							'bottom' => '0',
+							'left'   => '0',
+						],
+					],
+					'color'  => [
+						'label' => esc_html__('Border Color', 'shopengine'),
+					],
+				],
+				'selector' => '{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . '):hover',
+			]
+		);
+
+		$this->add_responsive_control(
+			'shopengine_cart_btn_radius',
+			[
+				'label'      => esc_html__('Border Radius', 'shopengine'),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%'],
+				'condition'  => [
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . ')' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'shopengine_cart_btn_width',
+			[
+				'label'      => esc_html__('Width', 'shopengine'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => ['px', '%'],
+				'condition'  => [
+					'shopengine_show_add_to_cart' => 'yes',
+				],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 400,
+					],
+					'%'  => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(' . $cart_btn_sel . ')' => 'width: {{SIZE}}{{UNIT}} !important; flex: none;',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 		// end button group
+
 		/*
 			----------------------------
 			Button Tooltip
@@ -2799,6 +3080,11 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 		if (($settings['shopengine_show_add_to_cart'] ?? 'yes') !== 'yes')     $classes[] = 'se-hide-add-to-cart';
 		if (($settings['shopengine_show_comparison'] ?? 'yes') !== 'yes')      $classes[] = 'se-hide-comparison';
 		if (($settings['shopengine_show_direct_checkout'] ?? 'yes') !== 'yes') $classes[] = 'se-hide-direct-checkout';
+		if (($settings['shopengine_add_to_cart_show_text'] ?? 'no') === 'yes') {
+			$classes[] = 'se-cart-show-text';
+			$icon_position = $settings['shopengine_add_to_cart_icon_position'] ?? 'before';
+			$classes[] = 'se-cart-icon-' . sanitize_html_class($icon_position);
+		}
 		return implode(' ', $classes);
 	}
 
@@ -2817,7 +3103,15 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 	 */
 	public function open_product_thumb_wrap()
 	{
-		echo '<div class="shopengine-product-thumb-wrap">';
+		$settings = $this->get_settings_for_display();
+		$position = $settings['shopengine_button_group_position'] ?? 'bottom';
+		if ($position === 'left') $position = 'left-center';
+		if ($position === 'right') $position = 'right-center';
+		if (!in_array($position, ['bottom', 'top', 'left-top', 'left-center', 'right-top', 'right-center'], true)) {
+			$position = 'bottom';
+		}
+
+		echo '<div class="shopengine-product-thumb-wrap shopengine-thumb-wrap-pos-' . sanitize_html_class($position) . '">';
 	}
 
 	public function show_product_action_btns()
@@ -2927,6 +3221,36 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 		echo '</style>';
 	}
 
+	/**
+	 * Overrides the icon-only add-to-cart button styles so the "Add to Cart"
+	 * text can render alongside the icon, with the icon placed before/after it.
+	 */
+	private function generate_add_to_cart_text_css()
+	{
+		$parent = '.elementor-element-' . $this->get_id() . ' .shopengine-archive-products';
+		$cart_btns = 'a.add_to_cart_button, a.product_type_variable, a.product_type_grouped, a.product_type_external';
+
+		$styles  = $parent . ' ul li .loop-product--btns.se-cart-show-text .loop-product--btns-inner :is(' . $cart_btns . ') {';
+		$styles .= 'font-size: 13px !important; width: auto !important; height: auto !important; display: inline-flex !important; align-items: center; justify-content: center; white-space: nowrap;';
+		$styles .= '}';
+
+		$styles .= $parent . ' ul li .loop-product--btns.se-cart-show-text .loop-product--btns-inner :is(' . $cart_btns . ')::before {';
+		$styles .= 'margin-right: 6px;';
+		$styles .= '}';
+
+		$styles .= $parent . ' ul li .loop-product--btns.se-cart-icon-after .loop-product--btns-inner :is(' . $cart_btns . ')::before {';
+		$styles .= 'order: 1; margin-right: 0; margin-left: 6px;';
+		$styles .= '}';
+
+		$styles .= $parent . ' ul li .loop-product--btns.se-cart-show-text .loop-product--btns-inner {';
+		$styles .= 'grid-template-columns: repeat(auto-fit, minmax(30px, max-content));';
+		$styles .= '}';
+
+		echo '<style>';
+		shopengine_content_render($styles);
+		echo '</style>';
+	}
+
 	private function generate_order_item_css($order_items)
 	{
 		$styles = '';
@@ -2974,6 +3298,10 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 			$this->generate_product_info_order_css($shopengine_product_info_ordering_list);
 		}
 
+		if ($shopengine_group_btns === 'yes' && ($shopengine_add_to_cart_show_text ?? 'no') === 'yes') {
+			$this->generate_add_to_cart_text_css();
+		}
+
 		$post_type = get_post_type();
 
 		if (WC()->session && function_exists('wc_print_notices')) {
@@ -3008,7 +3336,7 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 
 		$tpl = Products::instance()->get_widget_template($this->get_name());
 
-		$settings_to_pass = compact('shopengine_group_btns', 'shopengine_is_cats', 'shopengine_pagination_style', 'shopengine_is_details', 'shopengine_is_hover_details', 'shopengine_archive_product_title_header_size', 'shopengine_title_excerpt_enable', 'shopengine_title_excerpt_length', 'shopengine_independent_add_to_cart', 'shopengine_independent_add_to_cart_position');
+		$settings_to_pass = compact('shopengine_group_btns', 'shopengine_show_default_add_to_cart', 'shopengine_is_cats', 'shopengine_pagination_style', 'shopengine_is_details', 'shopengine_is_hover_details', 'shopengine_archive_product_title_header_size', 'shopengine_title_excerpt_enable', 'shopengine_title_excerpt_length', 'shopengine_independent_add_to_cart', 'shopengine_independent_add_to_cart_position');
 
 		include $tpl;
 
