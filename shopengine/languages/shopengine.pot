@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: ShopEngine 4.9.3\n"
+"Project-Id-Version: ShopEngine 4.9.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shopengine\n"
-"POT-Creation-Date: 2026-08-09 10:16:05+00:00\n"
+"POT-Creation-Date: 2026-08-11 09:13:48+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -294,74 +294,103 @@ msgstr ""
 msgid "Dimension"
 msgstr ""
 
-#: core/register/module-list.php:161
+#: core/register/module-list.php:155
+msgid "Pro Features"
+msgstr ""
+
+#: core/register/module-list.php:157
+msgid "Attributes To Show"
+msgstr ""
+
+#: core/register/module-list.php:158
+msgid "Custom Meta"
+msgstr ""
+
+#: core/register/module-list.php:159
+msgid "Share Button"
+msgstr ""
+
+#: core/register/module-list.php:160
+msgid "Show Compare Button/Bar On Bottom"
+msgstr ""
+
+#: core/register/module-list.php:163
+#. translators: %s: linked name of the Premium version.
+msgid "You need to upgrade to the %s Version."
+msgstr ""
+
+#: core/register/module-list.php:164
 msgid "Upgrade Feature"
 msgstr ""
 
-#: core/register/module-list.php:183
+#: core/register/module-list.php:164
+msgid "Premium"
+msgstr ""
+
+#: core/register/module-list.php:187
 msgid "Badges"
 msgstr ""
 
-#: core/register/module-list.php:190 widgets/add-to-cart/add-to-cart.php:693
+#: core/register/module-list.php:194 widgets/add-to-cart/add-to-cart.php:693
 msgid "Quick Checkout"
 msgstr ""
 
-#: core/register/module-list.php:197 widgets/add-to-cart/add-to-cart.php:283
+#: core/register/module-list.php:201 widgets/add-to-cart/add-to-cart.php:283
 msgid "Partial Payment"
 msgstr ""
 
-#: core/register/module-list.php:203
+#: core/register/module-list.php:207
 msgid "Pre-Order"
 msgstr ""
 
-#: core/register/module-list.php:209
+#: core/register/module-list.php:213
 msgid "Back-Order"
 msgstr ""
 
-#: core/register/module-list.php:215
+#: core/register/module-list.php:219
 msgid "Sales Notification"
 msgstr ""
 
-#: core/register/module-list.php:221 core/register/widget-list.php:385
+#: core/register/module-list.php:225 core/register/widget-list.php:385
 #: widgets/manifest.php:225
 msgid "Currency Switcher"
 msgstr ""
 
-#: core/register/module-list.php:227
+#: core/register/module-list.php:231
 msgid "Flash Sale Countdown"
 msgstr ""
 
-#: core/register/module-list.php:233
+#: core/register/module-list.php:237
 msgid "Checkout Additional Field"
 msgstr ""
 
-#: core/register/module-list.php:239 widgets/manifest.php:249
+#: core/register/module-list.php:243 widgets/manifest.php:249
 msgid "Product Size Charts"
 msgstr ""
 
-#: core/register/module-list.php:245
+#: core/register/module-list.php:249
 msgid "Sticky Fly Cart"
 msgstr ""
 
-#: core/register/module-list.php:251 core/register/widget-list.php:415
+#: core/register/module-list.php:255 core/register/widget-list.php:415
 #: widgets/manifest.php:255
 msgid "Vacation"
 msgstr ""
 
-#: core/register/module-list.php:257
+#: core/register/module-list.php:261
 msgid "Multistep Checkout"
 msgstr ""
 
-#: core/register/module-list.php:263 core/register/widget-list.php:421
+#: core/register/module-list.php:267 core/register/widget-list.php:421
 #: widgets/manifest.php:261
 msgid "Advanced Coupon"
 msgstr ""
 
-#: core/register/module-list.php:269
+#: core/register/module-list.php:273
 msgid "Cross Sell Popup"
 msgstr ""
 
-#: core/register/module-list.php:275 widgets/manifest.php:267
+#: core/register/module-list.php:279 widgets/manifest.php:267
 msgid "Avatar"
 msgstr ""
 
@@ -547,6 +576,7 @@ msgstr ""
 
 #: core/register/widget-list.php:183
 #: widgets/call-for-price/call-for-price.php:21
+#: widgets/call-for-price/call-for-price.php:31
 msgid "Call for Price"
 msgstr ""
 
@@ -611,6 +641,7 @@ msgstr ""
 
 #: core/register/widget-list.php:243
 #: widgets/recently-viewed-products/recently-viewed-products-config.php:14
+#: widgets/recently-viewed-products/recently-viewed-products.php:81
 msgid "Recently Viewed Products"
 msgstr ""
 
@@ -790,6 +821,14 @@ msgstr ""
 msgid "Shop Design 4"
 msgstr ""
 
+#: core/sample-designs/designs.php:322 core/sample-designs/designs.php:331
+msgid "Shop Design 5"
+msgstr ""
+
+#: core/sample-designs/designs.php:340
+msgid "Shop Design 6 RTL"
+msgstr ""
+
 #: core/sample-designs/designs.php:351 core/sample-designs/designs.php:360
 msgid "Cart Design 1"
 msgstr ""
@@ -808,6 +847,50 @@ msgstr ""
 
 #: core/sample-designs/designs.php:416 core/sample-designs/designs.php:425
 msgid "Checkout Design 3"
+msgstr ""
+
+#: core/sample-designs/designs.php:434 core/sample-designs/designs.php:443
+msgid "Checkout Design 4"
+msgstr ""
+
+#: core/sample-designs/designs.php:452 core/sample-designs/designs.php:461
+msgid "Checkout Design 5"
+msgstr ""
+
+#: core/sample-designs/designs.php:470 core/sample-designs/designs.php:479
+msgid "Checkout Design 6"
+msgstr ""
+
+#: core/sample-designs/designs.php:488 core/sample-designs/designs.php:497
+msgid "Checkout Design 7"
+msgstr ""
+
+#: core/sample-designs/designs.php:506 core/sample-designs/designs.php:515
+msgid "Checkout 8"
+msgstr ""
+
+#: core/sample-designs/designs.php:524 core/sample-designs/designs.php:533
+msgid "Checkout 9"
+msgstr ""
+
+#: core/sample-designs/designs.php:542 core/sample-designs/designs.php:551
+msgid "Checkout 10"
+msgstr ""
+
+#: core/sample-designs/designs.php:560 core/sample-designs/designs.php:569
+msgid "Checkout 11"
+msgstr ""
+
+#: core/sample-designs/designs.php:578 core/sample-designs/designs.php:587
+msgid "Checkout 12"
+msgstr ""
+
+#: core/sample-designs/designs.php:596
+msgid "Checkout 13 RTL"
+msgstr ""
+
+#: core/sample-designs/designs.php:605
+msgid "Checkout 14 Multistep"
 msgstr ""
 
 #: core/sample-designs/designs.php:616 core/sample-designs/designs.php:625
@@ -994,15 +1077,16 @@ msgstr ""
 msgid "Upgrade to Premium"
 msgstr ""
 
-#: core/settings/plugin-status.php:83 utils/plugins/plugins.php:371
+#: core/settings/plugin-status.php:83 utils/plugins/plugins.php:381
+#: utils/plugins/plugins.php:711
 msgid "Activated"
 msgstr ""
 
-#: core/settings/plugin-status.php:86 utils/plugins/plugins.php:374
+#: core/settings/plugin-status.php:86 utils/plugins/plugins.php:384
 msgid "Activate Now"
 msgstr ""
 
-#: core/settings/plugin-status.php:91 utils/plugins/plugins.php:379
+#: core/settings/plugin-status.php:91 utils/plugins/plugins.php:389
 msgid "Install Now"
 msgstr ""
 
@@ -1160,6 +1244,29 @@ msgstr ""
 
 #: libs/notice/notice.php:363
 msgid "Notice Details"
+msgstr ""
+
+#: libs/rating/rating.php:290
+msgid ""
+"Designing high-converting WooCommerce pages with "
+"<strong>ShopEngine?</strong> 🛒<br>Your support means everything! Help us "
+"grow by dropping a <strong>5-star</strong> review today. ✨"
+msgstr ""
+
+#: libs/rating/rating.php:298
+msgid "Ok, you deserved it"
+msgstr ""
+
+#: libs/rating/rating.php:307
+msgid "Already did"
+msgstr ""
+
+#: libs/rating/rating.php:316
+msgid "Need support"
+msgstr ""
+
+#: libs/rating/rating.php:326
+msgid "Not good"
 msgstr ""
 
 #: libs/updater/plugin-updater.php:292
@@ -1613,6 +1720,20 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
+#: plugin.php:253 utils/plugins/plugins.php:64
+msgid "Our Plugins"
+msgstr ""
+
+#: plugin.php:254
+msgid "Get More out of Your WooCommerce Website!"
+msgstr ""
+
+#: plugin.php:255
+msgid ""
+"Install other plugins from us and take your WooCommerce site to the next "
+"level for absolutely free!"
+msgstr ""
+
 #: plugin.php:260
 msgid "ElementsKit"
 msgstr ""
@@ -2018,8 +2139,43 @@ msgstr ""
 msgid "View Product Details"
 msgstr ""
 
+#: utils/metform-promo-banner/metform-promo-banner.php:51
+msgid ""
+"MetForm requires! Clicking the button will download MetForm and unlock all "
+"form templates."
+msgstr ""
+
+#: utils/metform-promo-banner/metform-promo-banner.php:62
+msgid "🛒Turn Visitors into Customers with Smart Forms!🎯"
+msgstr ""
+
+#: utils/metform-promo-banner/metform-promo-banner.php:64
+msgid ""
+"Don’t miss valuable leads! Claim <strong>FREE WooCommerce-friendly form "
+"templates</strong> to seamlessly capture inquiries, collect feedback, and "
+"grow your email list."
+msgstr ""
+
+#: utils/metform-promo-banner/metform-promo-banner.php:77
+msgid "Get Free Forms"
+msgstr ""
+
+#: utils/metform-promo-banner/metform-promo-banner.php:275
+#: utils/plugins/plugins.php:710
+msgid "Activating..."
+msgstr ""
+
+#: utils/metform-promo-banner/metform-promo-banner.php:276
+#: utils/plugins/plugins.php:708
+msgid "Installing..."
+msgstr ""
+
 #: utils/notice.php:192 utils/notice.php:194
 msgid "Notification"
+msgstr ""
+
+#: utils/notice.php:194
+msgid "or"
 msgstr ""
 
 #: utils/onboard/auto-install-notice.php:47
@@ -2044,21 +2200,31 @@ msgstr ""
 msgid "Applying…"
 msgstr ""
 
-#: utils/plugins/plugins.php:424
+#: utils/plugins/plugins.php:65 utils/pro-awareness/pro-awareness.php:243
+msgid "Take your website to the next level"
+msgstr ""
+
+#: utils/plugins/plugins.php:66
+msgid ""
+"We have some plugins you can install to get most from Wordpress. These are "
+"absolute FREE to use."
+msgstr ""
+
+#: utils/plugins/plugins.php:434
 msgid "Activate"
 msgstr ""
 
-#: utils/plugins/plugins.php:441
+#: utils/plugins/plugins.php:451
 msgid "Read Docs"
+msgstr ""
+
+#: utils/plugins/plugins.php:709
+msgid "Installed"
 msgstr ""
 
 #: utils/pro-awareness/pro-awareness.php:159
 #: utils/pro-awareness/pro-awareness.php:174
 msgid "Default Title"
-msgstr ""
-
-#: utils/pro-awareness/pro-awareness.php:243
-msgid "Take your website to the next level"
 msgstr ""
 
 #: utils/pro-awareness/pro-awareness.php:244
@@ -2293,6 +2459,8 @@ msgstr ""
 #: widgets/add-to-cart/add-to-cart.php:208
 #: widgets/add-to-cart/add-to-cart.php:223
 #: widgets/add-to-cart/add-to-cart.php:238
+#: widgets/advanced-search/advanced-search.php:63
+#: widgets/advanced-search/advanced-search.php:82
 #: widgets/advanced-search/advanced-search.php:126
 #: widgets/advanced-search/advanced-search.php:139
 #: widgets/advanced-search/advanced-search.php:169
@@ -2374,6 +2542,8 @@ msgstr ""
 #: widgets/add-to-cart/add-to-cart.php:209
 #: widgets/add-to-cart/add-to-cart.php:224
 #: widgets/add-to-cart/add-to-cart.php:239
+#: widgets/advanced-search/advanced-search.php:62
+#: widgets/advanced-search/advanced-search.php:81
 #: widgets/advanced-search/advanced-search.php:125
 #: widgets/advanced-search/advanced-search.php:138
 #: widgets/advanced-search/advanced-search.php:168
@@ -2772,6 +2942,8 @@ msgstr ""
 #: widgets/filterable-product-list/filterable-product-list.php:1922
 #: widgets/filterable-product-list/filterable-product-list.php:2122
 #: widgets/product-categories/product-categories.php:167
+#: widgets/product-category-lists/product-category-lists.php:534
+#: widgets/product-category-lists/product-category-lists.php:637
 #: widgets/product-list/product-list.php:1506
 #: widgets/product-list/product-list.php:1612
 #: widgets/product-meta/product-meta.php:207
@@ -2804,9 +2976,12 @@ msgstr ""
 #: widgets/recently-viewed-products/recently-viewed-products.php:1675
 #: widgets/related/related.php:580 widgets/related/related.php:874
 #: widgets/related/related.php:1047 widgets/related/related.php:1126
-#: widgets/related/related.php:1706 widgets/up-sells/up-sells.php:539
-#: widgets/up-sells/up-sells.php:834 widgets/up-sells/up-sells.php:1009
-#: widgets/up-sells/up-sells.php:1101 widgets/up-sells/up-sells.php:1673
+#: widgets/related/related.php:1706
+#: widgets/return-to-shop/return-to-shop.php:77
+#: widgets/up-sells/up-sells.php:539 widgets/up-sells/up-sells.php:834
+#: widgets/up-sells/up-sells.php:1009 widgets/up-sells/up-sells.php:1101
+#: widgets/up-sells/up-sells.php:1673
+#: widgets/view-single-product/view-single-product.php:84
 msgid "Line Height (px)"
 msgstr ""
 
@@ -3017,6 +3192,7 @@ msgstr ""
 #: widgets/cart-table/cart-table.php:733 widgets/cart-table/cart-table.php:812
 #: widgets/cart-totals/cart-totals.php:621
 #: widgets/cart-totals/cart-totals.php:850
+#: widgets/checkout-coupon-form/checkout-coupon-form.php:175
 #: widgets/checkout-form-shipping/checkout-form-shipping.php:542
 #: widgets/checkout-form-shipping/checkout-form-shipping.php:605
 #: widgets/checkout-payment/checkout-payment.php:577
@@ -3568,6 +3744,26 @@ msgstr ""
 msgid "Products Column"
 msgstr ""
 
+#: widgets/advanced-search/advanced-search.php:41
+msgid "Column 1"
+msgstr ""
+
+#: widgets/advanced-search/advanced-search.php:42
+msgid "Column 2"
+msgstr ""
+
+#: widgets/advanced-search/advanced-search.php:43
+msgid "Column 3"
+msgstr ""
+
+#: widgets/advanced-search/advanced-search.php:44
+msgid "Column 4"
+msgstr ""
+
+#: widgets/advanced-search/advanced-search.php:45
+msgid "Column 5"
+msgstr ""
+
 #: widgets/advanced-search/advanced-search.php:58
 msgid "Show Category on search result?"
 msgstr ""
@@ -3582,6 +3778,10 @@ msgstr ""
 
 #: widgets/advanced-search/advanced-search.php:97
 msgid "Add text for all categories options."
+msgstr ""
+
+#: widgets/advanced-search/advanced-search.php:99
+msgid "All Categories"
 msgstr ""
 
 #: widgets/advanced-search/advanced-search.php:111
@@ -3719,8 +3919,11 @@ msgstr ""
 #: widgets/advanced-search/advanced-search.php:845
 #: widgets/archive-products/archive-products.php:980
 #: widgets/archive-products/archive-products.php:2752
+#: widgets/archive-title/archive-title.php:102
 #: widgets/checkout-form-additional/checkout-form-additional.php:237
+#: widgets/checkout-form-shipping/checkout-form-shipping.php:291
 #: widgets/deal-products/deal-products.php:1201
+#: widgets/product-excerpt/product-excerpt.php:71
 #: widgets/product-image/product-image.php:642
 msgid "Line-height (px)"
 msgstr ""
@@ -4653,6 +4856,12 @@ msgstr ""
 msgid "Link Hover Color"
 msgstr ""
 
+#: widgets/breadcrumbs/breadcrumbs.php:81
+#: widgets/product-description/product-description.php:60
+#: widgets/product-excerpt/product-excerpt.php:63
+msgid "Font size (px)"
+msgstr ""
+
 #: widgets/breadcrumbs/breadcrumbs.php:133
 #: widgets/product-category-lists/product-category-lists.php:136
 #: widgets/product-category-lists/product-category-lists.php:161
@@ -4880,6 +5089,10 @@ msgstr ""
 msgid "Table"
 msgstr ""
 
+#: widgets/cart-totals/cart-totals.php:36
+msgid "Title and Price Typography"
+msgstr ""
+
 #: widgets/cart-totals/cart-totals.php:117
 msgid "Shipping Methods"
 msgstr ""
@@ -4969,6 +5182,10 @@ msgstr ""
 
 #: widgets/checkout-coupon-form/checkout-coupon-form.php:47
 msgid "Info"
+msgstr ""
+
+#: widgets/checkout-coupon-form/checkout-coupon-form.php:161
+msgid "Border Width (px)"
 msgstr ""
 
 #: widgets/checkout-coupon-form/checkout-coupon-form.php:456
@@ -7343,7 +7560,7 @@ msgstr ""
 msgid "No recently viewed products to display"
 msgstr ""
 
-#: widgets/related/related-config.php:14
+#: widgets/related/related-config.php:14 widgets/related/related.php:105
 msgid "Related Products"
 msgstr ""
 
@@ -7372,6 +7589,10 @@ msgstr ""
 msgid ""
 "Slider dosen't work if up-sells products and products to show is smaller "
 "than or equal to slides per view."
+msgstr ""
+
+#: widgets/up-sells/up-sells.php:138
+msgid "Upsell Products"
 msgstr ""
 
 #: widgets/view-single-product/view-single-product.php:27

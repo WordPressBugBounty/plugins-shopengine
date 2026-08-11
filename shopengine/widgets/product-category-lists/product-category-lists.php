@@ -531,7 +531,7 @@ class ShopEngine_Product_Category_Lists extends \ShopEngine\Base\Widget
 					],
 					'line_height'	=> [
 						'size_units' => ['px'],
-						'label'		=> 'Line Height (px)',
+						'label'		=> esc_html__('Line Height (px)', 'shopengine'),
 						'default' 	=> [
 							'size' 	=> '22',
 							'unit' 	=> 'px'
@@ -634,7 +634,7 @@ class ShopEngine_Product_Category_Lists extends \ShopEngine\Base\Widget
 					],
 					'line_height'	=> [
 						'size_units' => ['px'],
-						'label'		=> 'Line Height (px)',
+						'label'		=> esc_html__('Line Height (px)', 'shopengine'),
 						'default' 	=> [
 							'size' 	=> '22',
 							'unit' 	=> 'px'

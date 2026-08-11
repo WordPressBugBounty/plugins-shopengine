@@ -28,7 +28,7 @@ class ShopEngine_Call_For_Price extends \ShopEngine\Base\Widget
 			[
 				'label'       => esc_html__('Button Text', 'shopengine'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => 'Call for Price',
+				'default'     => esc_html__('Call for Price', 'shopengine'),
 				'frontend_available' => true,
 			]
 		);

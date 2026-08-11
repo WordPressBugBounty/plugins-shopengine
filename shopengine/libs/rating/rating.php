@@ -287,8 +287,7 @@ class Rating
 
 			$not_good_enough_btn_id = ($this->never_show_triggered) ? '_btn_never_show' : '_btn_not_good';
 
-			$message = "Designing high-converting WooCommerce pages with <strong>ShopEngine?</strong> 🛒<br>
-			Your support means everything! Help us grow by dropping a <strong>5-star</strong> review today. ✨";
+			$message = __('Designing high-converting WooCommerce pages with <strong>ShopEngine?</strong> 🛒<br>Your support means everything! Help us grow by dropping a <strong>5-star</strong> review today. ✨', 'shopengine');
 
 			Notice::instance()->set_config($this->text_domain, '_plugin_rating_msg_used_in_day')
 				->set_message($message)
@@ -296,7 +295,7 @@ class Rating
 				->set_button(
 					array(
 						'url'   => $this->rating_url,
-						'text'  => 'Ok, you deserved it',
+						'text'  => __('Ok, you deserved it', 'shopengine'),
 						'class' => 'button-primary',
 						'id'    => $this->text_domain . '_btn_deserved',
 						'target_blank' => true,
@@ -305,7 +304,7 @@ class Rating
 				->set_button(
 					array(
 						'url'   => '#',
-						'text'  => 'Already did',
+						'text'  => __('Already did', 'shopengine'),
 						'class' => 'button-default',
 						'id'    => $this->text_domain . '_btn_already_did',
 						'icon'  => 'dashicons-before dashicons-smiley',
@@ -314,7 +313,7 @@ class Rating
 				->set_button(
 					array(
 						'url'   => 'https://wpmet.com/support-ticket',
-						'text'  => 'Need support',
+						'text'  => __('Need support', 'shopengine'),
 						'class' => 'button-default',
 						'id'    => '#',
 						'icon'  => 'dashicons-before dashicons-sos',
@@ -324,7 +323,7 @@ class Rating
 				->set_button(
 					array(
 						'url'   => '#',
-						'text'  => 'Not good',
+						'text'  => __('Not good', 'shopengine'),
 						'class' => 'button-default',
 						'id'    => $this->text_domain . $not_good_enough_btn_id,
 						'icon'  => 'dashicons-before dashicons-thumbs-down',

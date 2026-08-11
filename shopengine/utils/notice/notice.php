@@ -12,7 +12,7 @@ class Notice{
      *
      * @var string
      */
-    protected $script_version = '2.1.0';
+    protected $script_version = '2.2.0';
 
     /**
      * Unique ID to identify each notice
@@ -305,6 +305,59 @@ class Notice{
         return $this;
     }
 
+    /**
+     * URL schemes accepted inside notice markup.
+     */
+    public static function allowed_protocols() {
+        return ['http', 'https', 'mailto'];
+    }
+
+    /**
+     * HTML allowed inside a notice body.
+     *
+     * Callers may hand this class markup that originated from a remote API
+     * (see \Wpmet\Libs\Banner), so output is filtered here rather than
+     * trusted. Kept self-contained on purpose: this file is a shared library
+     * and whichever wpmet plugin loads first wins the class_exists() guard,
+     * so it must not depend on any single plugin's helper being present.
+     *
+     * Event handler attributes (on*) need no explicit rule -- wp_kses() drops
+     * every attribute that is not listed below.
+     */
+    public static function allowed_html() {
+
+        $common = [
+            'class' => [],
+            'style' => [],
+            'title' => [],
+            'id'    => [],
+        ];
+
+        return [
+            'a'      => array_merge($common, ['href' => [], 'target' => [], 'rel' => []]),
+            'b'      => $common,
+            'br'     => [],
+            'div'    => $common,
+            'em'     => $common,
+            'h1'     => $common,
+            'h2'     => $common,
+            'h3'     => $common,
+            'h4'     => $common,
+            'h5'     => $common,
+            'h6'     => $common,
+            'i'      => $common,
+            'img'    => array_merge($common, ['src' => [], 'alt' => [], 'width' => [], 'height' => []]),
+            'li'     => $common,
+            'ol'     => $common,
+            'p'      => $common,
+            'small'  => $common,
+            'span'   => $common,
+            'strong' => $common,
+            'u'      => $common,
+            'ul'     => $common,
+        ];
+    }
+
     public function  generate_html() {
 
 		?>
@@ -325,7 +378,7 @@ class Notice{
                     <?php echo (empty($this->title) ? '' : sprintf('<div class="notice-main-title notice-vert-space">%s</div>', esc_html($this->title))); ?>
 
                     <div class="notice-message notice-vert-space">
-                        <?php  shopengine_content_render($this->message); ?>
+                        <?php echo wp_kses($this->message, self::allowed_html(), self::allowed_protocols()); ?>
                     </div>
 
                     <?php if(!empty($this->buttons)): ?>
@@ -345,7 +398,7 @@ class Notice{
                     <?php endif;?>
 
                 <?php else:?>
-                    <?php shopengine_content_render($this->html); ?>
+                    <?php echo wp_kses($this->html, self::allowed_html(), self::allowed_protocols()); ?>
                 <?php endif;?>
 
             </div>

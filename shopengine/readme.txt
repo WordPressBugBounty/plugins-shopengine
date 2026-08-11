@@ -3,7 +3,7 @@ Contributors: Roxnor, Ataurr, aion11
 Tags: WooCommerce Builder, WooCommerce addons, Elementor WooCommerce, Cross-sell, Variation Swatches, WooCommerce Checkout, WooCommerce Product
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 4.9.3
+Stable tag: 4.9.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -336,6 +336,10 @@ Learn [How to Install and Use ShopEngine](https://wpmet.com/doc/getting-started-
 **Check out** [Tutorials, Tips & Tricks](https://wpmet.com/blog?utm_source=org&utm_medium=readme)! 
 
 == Changelog ==
+v4.9.4// 11-08-2026
+Added: Translation support for missing text.
+Improved: Admin dashboard UI/UX.
+
 v4.9.3// 09-08-2026
 Improved: Archive product widget controls.
 Improved: Product list widget controls.

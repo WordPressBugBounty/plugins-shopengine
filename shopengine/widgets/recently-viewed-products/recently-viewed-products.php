@@ -78,7 +78,7 @@ class Shopengine_Recently_Viewed_Products extends \ShopEngine\Base\Widget {
 			[
 				'label'       => esc_html__('Heading Text', 'shopengine'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => 'Recently Viewed Products',
+				'default'     => esc_html__('Recently Viewed Products', 'shopengine'),
 				'placeholder' => esc_html__('Enter heading text', 'shopengine'),
 				'condition'   => [
 					'shopengine_recently_viewed_product_show_products_heading' => 'yes',

@@ -74,7 +74,7 @@ class ShopEngine_Return_To_Shop extends \ShopEngine\Base\Widget
 					],
 					'line_height' => [
 						'size_units' => ['px'],
-						'label'		=> 'Line Height (px)',
+						'label'		=> esc_html__('Line Height (px)', 'shopengine'),
 						'responsive' => false,
 					]
 				],

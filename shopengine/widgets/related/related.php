@@ -102,7 +102,7 @@ class ShopEngine_Related extends \ShopEngine\Base\Widget
 			[
 				'label'       => esc_html__('Heading Text', 'shopengine'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => 'Related Products',
+				'default'     => esc_html__('Related Products', 'shopengine'),
 				'placeholder' => esc_html__('Enter heading text', 'shopengine'),
 				'condition'   => [
 					'shopengine_related_product_show_products_heading' => 'yes',

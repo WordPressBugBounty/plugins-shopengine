@@ -99,7 +99,7 @@ class ShopEngine_Archive_Title extends \ShopEngine\Base\Widget
 
 					'line_height' => [
 						'size_units' => ['px'],
-						'label'		 => 'Line-height (px)',
+						'label'		 => esc_html__('Line-height (px)', 'shopengine'),
 					]
 
 				],

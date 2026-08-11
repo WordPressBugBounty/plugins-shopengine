@@ -38,11 +38,11 @@ class ShopEngine_Advanced_Search extends \ShopEngine\Base\Widget
 				'tablet_default' => '2',
 				'mobile_default' => '1',
 				'options'        => [
-					'1' => 'Column 1',
-					'2' => 'Column 2',
-					'3' => 'Column 3',
-					'4' => 'Column 4',
-					'5' => 'Column 5',
+					'1' => esc_html__('Column 1', 'shopengine'),
+					'2' => esc_html__('Column 2', 'shopengine'),
+					'3' => esc_html__('Column 3', 'shopengine'),
+					'4' => esc_html__('Column 4', 'shopengine'),
+					'5' => esc_html__('Column 5', 'shopengine'),
 				],
 				'selectors'      => [
 					'{{WRAPPER}} .shopengine-advanced-search .shopengine-search-product' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
@@ -59,8 +59,8 @@ class ShopEngine_Advanced_Search extends \ShopEngine\Base\Widget
 				'type'           => Controls_Manager::SELECT,
 				'default'        => 'block',
 				'options'        => [
-					'block' => 'Show',
-					'none'  => 'Hide',
+					'block' => esc_html__('Show', 'shopengine'),
+					'none'  => esc_html__('Hide', 'shopengine'),
 				],
 				'selectors'      => [
 					'{{WRAPPER}} .shopengine-advanced-search .shopengine-category-name' => 'display: {{VALUE}};',
@@ -78,8 +78,8 @@ class ShopEngine_Advanced_Search extends \ShopEngine\Base\Widget
 				'tablet_default' => 'block',
 				'mobile_default' => 'none',
 				'options'        => [
-					'block' => 'Show',
-					'none'  => 'Hide',
+					'block' => esc_html__('Show', 'shopengine'),
+					'none'  => esc_html__('Hide', 'shopengine'),
 				],
 				'selectors'      => [
 					'{{WRAPPER}} .shopengine-advanced-search .shopengine-category-select-wraper' => 'display: {{VALUE}};',
@@ -96,7 +96,7 @@ class ShopEngine_Advanced_Search extends \ShopEngine\Base\Widget
 				'label'       => esc_html__('Text for All Categories', 'shopengine'),
 				'description' => esc_html__('Add text for all categories options.', 'shopengine'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => 'All Categories',
+				'default'     => esc_html__('All Categories', 'shopengine'),
 				'condition'   => [
 					'shopengine_advanced_search_disable_category_btn' => 'block',
 				],

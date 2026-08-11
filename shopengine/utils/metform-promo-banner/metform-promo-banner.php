@@ -31,8 +31,27 @@ if( !class_exists('\Wpmet\Libs\Metform_Promo_Banner') ) {
 			$installed_plugins = get_plugins();
 			$this->is_already_installed = isset($installed_plugins['metform/metform.php']) ? 1 : 0;
 
+			/**
+			 * The notice is registered on `init` so the translated strings are not
+			 * requested before the text domain is available.
+			 */
+			add_action('init', [$this, 'register_promo_notice']);
+
+			add_action('admin_head', [$this, 'metform_promotion_admin_head']);
+		}
+
+		/**
+		 * Register the promotional notice.
+		 *
+		 * @access public
+		 * @return void
+		 */
+		public function register_promo_notice() {
+
+			$tooltip = esc_html__('MetForm requires! Clicking the button will download MetForm and unlock all form templates.', 'shopengine');
+
 			$message = '
-			
+
 			<div class="metform-promo-banner-wrapper">
 				<div class="metform-promo-banner-banner-left">
 					<div class="metform-promo-banner-banner-main">
@@ -40,25 +59,28 @@ if( !class_exists('\Wpmet\Libs\Metform_Promo_Banner') ) {
 							<img src="' . plugin_dir_url(__FILE__) . '/assets/logo.svg" />
 						</div>
 						<div class="metform-promo-banner-banner-middle">
-							<div class="metform-promo-banner-banner-title">🛒Turn Visitors into Customers with Smart Forms!🎯</div>
-							<p>Don’t miss valuable leads! Claim <strong>FREE WooCommerce-friendly form templates</strong> to seamlessly capture inquiries, collect feedback, and grow your email list.</p>
+							<div class="metform-promo-banner-banner-title">' . esc_html__('🛒Turn Visitors into Customers with Smart Forms!🎯', 'shopengine') . '</div>
+							<p>' . wp_kses(
+								__('Don’t miss valuable leads! Claim <strong>FREE WooCommerce-friendly form templates</strong> to seamlessly capture inquiries, collect feedback, and grow your email list.', 'shopengine'),
+								['strong' => []]
+							) . '</p>
 						</div>
 					</div>
 				</div>
 				<div class="metform-promo-banner-banner-right">
 					<span class="metform-promo-banner-icon">
-						<abbr title="MetForm requires! Clicking the button will download MetForm and unlock all form templates.">
+						<abbr title="' . esc_attr($tooltip) . '">
 							<div><span class="dashicons dashicons-info-outline"></span></div>
-							<div class="tooltip">MetForm requires! Clicking the button will download MetForm and unlock all form templates.</div>
+							<div class="tooltip">' . $tooltip . '</div>
 						</abbr>
 					</span>
-					<div class="metform-install-activate-btn">Get Free Forms</div>
+					<div class="metform-install-activate-btn">' . esc_html__('Get Free Forms', 'shopengine') . '</div>
 				</div>
 			</div>';
 
-			$dismissed_coutner = get_option('shopengine-metform_get_free_templates_banner_dismissed_'.get_current_user_id(), 0);			
+			$dismissed_coutner = get_option('shopengine-metform_get_free_templates_banner_dismissed_'.get_current_user_id(), 0);
 			$notice_showing_delay_time = (3600 * 24 * 15);
-			
+
 			if($dismissed_coutner == 1){
 				$notice_showing_delay_time = (3600 * 24 * 30);
 			}elseif($dismissed_coutner == 2){
@@ -66,13 +88,11 @@ if( !class_exists('\Wpmet\Libs\Metform_Promo_Banner') ) {
 			}elseif($dismissed_coutner >= 3){
 				$notice_showing_delay_time = (3600 * 24 * 99999);
 			}
-			
+
 			\Oxaim\Libs\Notice::instance('shopengine', 'metform_get_free_templates_banner')
             ->set_dismiss('user', $notice_showing_delay_time)
             ->set_message($message)
             ->call();
-
-			add_action('admin_head', [$this, 'metform_promotion_admin_head']);
 		}
 
 		public function metform_promotion_admin_head() {
@@ -252,12 +272,15 @@ if( !class_exists('\Wpmet\Libs\Metform_Promo_Banner') ) {
 
 						e.preventDefault();
 
+						const activatingText = "<?php echo esc_js(__('Activating...', 'shopengine')); ?>";
+						const installingText = "<?php echo esc_js(__('Installing...', 'shopengine')); ?>";
+
 						if(isAlreadyInstalled === '0'){
 							metform_install_active_plugin.call(this, installationUrl, () => {
-								metform_install_active_plugin.call(this, activationUrl, null, 'Activating...');
-							}, 'Installing...');
+								metform_install_active_plugin.call(this, activationUrl, null, activatingText);
+							}, installingText);
 						} else if (isAlreadyInstalled === '1') {
-							metform_install_active_plugin.call(this, activationUrl, null, 'Activating...');
+							metform_install_active_plugin.call(this, activationUrl, null, activatingText);
 						}
 					});
 				});

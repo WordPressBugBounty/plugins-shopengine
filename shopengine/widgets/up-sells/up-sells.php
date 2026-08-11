@@ -135,7 +135,7 @@ class ShopEngine_Up_Sells extends \ShopEngine\Base\Widget
 			[
 				'label'       => esc_html__('Heading Text', 'shopengine'),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => 'Upsell Products',
+				'default'     => esc_html__('Upsell Products', 'shopengine'),
 				'placeholder' => esc_html__('Enter heading text', 'shopengine'),
 				'condition'   => [
 					'shopengine_up_sells_product_show_products_heading' => 'yes',

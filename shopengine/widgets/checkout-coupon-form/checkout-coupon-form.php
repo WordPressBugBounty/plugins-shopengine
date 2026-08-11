@@ -158,7 +158,7 @@ class ShopEngine_Checkout_Coupon_Form extends \ShopEngine\Base\Widget {
 						'default' => 'solid',
 					],
 					'width'  => [
-						'label'	  => 'Border Width (px)',
+						'label'	  => esc_html__('Border Width (px)', 'shopengine'),
 						'default' => [
 							'top'      => '0',
 							'right'    => '0',
@@ -172,7 +172,7 @@ class ShopEngine_Checkout_Coupon_Form extends \ShopEngine\Base\Widget {
 						]
 					],
 					'color'  => [
-						'label'	  => 'Border Color',
+						'label'	  => esc_html__('Border Color', 'shopengine'),
 						'default' => '#e4e4e4',
 						'alpha'   => false
 					],

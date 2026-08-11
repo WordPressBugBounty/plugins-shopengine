@@ -33,7 +33,7 @@ class ShopEngine_Cart_Totals extends \ShopEngine\Base\Widget
 			Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'shopengine_cart_totals_typography',
-				'label'			=> 'Title and Price Typography',
+				'label'			=> esc_html__('Title and Price Typography', 'shopengine'),
 				'selector'       => '{{WRAPPER}} .shopengine-cart-totals :is(a:not(.checkout-button), tr, td, th, #shipping_method .price, #shipping_method .amount)',
 				'exclude'		 => ['font_family', 'text_decoration', 'font_style'], 
 				'fields_options' => [

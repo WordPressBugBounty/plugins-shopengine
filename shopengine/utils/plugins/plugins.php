@@ -21,11 +21,11 @@ if( !class_exists('\ShopEngine\Wpmet\Libs\Plugins') ) {
         private $text_domain;
         private $parent_menu_slug;
         private $menu_slug = '_wpmet_plugins';
-        private $submenu_name = 'Our Plugins';
+        private $submenu_name = '';
         private $plugins = [];
         public $items_per_row = 4;
-        private $section_title = 'Take your website to the next level';
-        private $section_description = 'We have some plugins you can install to get most from Wordpress. These are absolute FREE to use.';
+        private $section_title = '';
+        private $section_description = '';
         private $installed_plugins = [];
         private $activated_plugins = [];
         /**
@@ -53,8 +53,18 @@ if( !class_exists('\ShopEngine\Wpmet\Libs\Plugins') ) {
          * @since 1.0.0
          */
         public function init( $text_domain ) {
-            
+
             $this->set_text_domain( $text_domain );
+
+            /**
+             * Default labels are assigned here (instead of in the property declaration)
+             * because PHP does not allow function calls in property defaults, which
+             * would leave these strings untranslatable.
+             */
+            $this->submenu_name        = __( 'Our Plugins', 'shopengine' );
+            $this->section_title       = __( 'Take your website to the next level', 'shopengine' );
+            $this->section_description = __( 'We have some plugins you can install to get most from Wordpress. These are absolute FREE to use.', 'shopengine' );
+
             $this->collect_installed_plugins();
             $this->collect_activated_plugins();
             
@@ -694,6 +704,13 @@ if( !class_exists('\ShopEngine\Wpmet\Libs\Plugins') ) {
                     });
                     }
     
+                    var wpmet_plugin_i18n = {
+                        installing: "<?php echo esc_js(__('Installing...', 'shopengine')); ?>",
+                        installed:  "<?php echo esc_js(__('Installed', 'shopengine')); ?>",
+                        activating: "<?php echo esc_js(__('Activating...', 'shopengine')); ?>",
+                        activated:  "<?php echo esc_js(__('Activated', 'shopengine')); ?>"
+                    };
+
                     $('.wpmet-onboard-single-plugin--install_plugin').on('click', function(e){
                         e.preventDefault();
                         var installation_url = $(this).attr('href'),
@@ -706,10 +723,10 @@ if( !class_exists('\ShopEngine\Wpmet\Libs\Plugins') ) {
     
                         if(plugin_status == 'not_installed'){
                             wpmet_install_active_plugin.call(this, installation_url, () => {
-                                wpmet_install_active_plugin.call(this, activation_url, null, 'Activating...', 'Activated');
-                            }, 'Installing...', 'Installed');
+                                wpmet_install_active_plugin.call(this, activation_url, null, wpmet_plugin_i18n.activating, wpmet_plugin_i18n.activated);
+                            }, wpmet_plugin_i18n.installing, wpmet_plugin_i18n.installed);
                         } else if (plugin_status == 'installed') {
-                            wpmet_install_active_plugin.call(this, activation_url, null, 'Activating...', 'Activated');
+                            wpmet_install_active_plugin.call(this, activation_url, null, wpmet_plugin_i18n.activating, wpmet_plugin_i18n.activated);
                         }
                     });
     

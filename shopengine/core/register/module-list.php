@@ -152,13 +152,17 @@ class Module_List extends List_Model {
 						'field_settings' => [
 							'type'  => 'pro-alert',
 							'value'  => '',
-							'label' => '<h2> Pro Features </h2>',
+							'label' => '<h2> ' . esc_html__('Pro Features', 'shopengine') . ' </h2>',
 							'description' => '<p>
-										1. Attributes To Show<br/>
-										2.  Custom Meta<br/>
-										3. Share Button<br/>
-										4. Show Compare Button/Bar On Bottom<br/>
-										 You need to upgrade to the <strong><a title="' . esc_html__("Upgrade Feature","shopengine") . '" href="https://wpmet.com/plugin/shopengine/pricing" rel="noopener" target="_blank" style="color: red;">Premium</a> </strong> Version.</p>',
+										1. ' . esc_html__('Attributes To Show', 'shopengine') . '<br/>
+										2.  ' . esc_html__('Custom Meta', 'shopengine') . '<br/>
+										3. ' . esc_html__('Share Button', 'shopengine') . '<br/>
+										4. ' . esc_html__('Show Compare Button/Bar On Bottom', 'shopengine') . '<br/>
+										 ' . sprintf(
+											/* translators: %s: linked name of the Premium version. */
+											esc_html__('You need to upgrade to the %s Version.', 'shopengine'),
+											'<strong><a title="' . esc_attr__('Upgrade Feature', 'shopengine') . '" href="https://wpmet.com/plugin/shopengine/pricing" rel="noopener" target="_blank" style="color: red;">' . esc_html__('Premium', 'shopengine') . '</a> </strong>'
+										) . '</p>',
 							'alert_type'  => 'success' //success, info, warning, error
 						]
 					],

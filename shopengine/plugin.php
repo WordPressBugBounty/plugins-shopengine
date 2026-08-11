@@ -250,9 +250,9 @@ final class Plugin {
 			*/
 			\ShopEngine\Wpmet\Libs\Plugins::instance()->init('shopengine')
 			->set_parent_menu_slug('shopengine-settings')
-			->set_submenu_name('Our Plugins')
-			->set_section_title('Get More out of Your WooCommerce Website!')
-			->set_section_description('Install other plugins from us and take your WooCommerce site to the next level for absolutely free!')
+			->set_submenu_name(esc_html__('Our Plugins', 'shopengine'))
+			->set_section_title(esc_html__('Get More out of Your WooCommerce Website!', 'shopengine'))
+			->set_section_description(esc_html__('Install other plugins from us and take your WooCommerce site to the next level for absolutely free!', 'shopengine'))
 			->set_items_per_row(4)
 			->set_plugins(
 			[

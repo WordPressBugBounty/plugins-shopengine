@@ -81,7 +81,7 @@ class ShopEngine_View_Single_Product extends \ShopEngine\Base\Widget {
 					],
 					'line_height' => [
 						'size_units' => ['px'],
-						'label'		=> 'Line Height (px)',
+						'label'		=> esc_html__('Line Height (px)', 'shopengine'),
 						'responsive' => false,
 					]
 				],

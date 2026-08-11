@@ -78,7 +78,7 @@ class ShopEngine_Breadcrumbs extends \ShopEngine\Base\Widget
 							'size' => '14',
 							'unit' => 'px'
 						],
-						'label'      => 'Font size (px)',
+						'label'      => esc_html__('Font size (px)', 'shopengine'),
 						'size_units' => ['px'],
 					],
 					'font_weight'    => [

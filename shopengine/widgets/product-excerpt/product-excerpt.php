@@ -60,7 +60,7 @@ class ShopEngine_Product_Excerpt extends \ShopEngine\Base\Widget
 							'size' => '17',
 							'unit' => 'px'
 						],
-						'label'      => 'Font size (px)',
+						'label'      => esc_html__('Font size (px)', 'shopengine'),
 						'size_units' => ['px'],
 					],
 					'line_height'    => [
@@ -68,7 +68,7 @@ class ShopEngine_Product_Excerpt extends \ShopEngine\Base\Widget
 							'size' => '22',
 							'unit' => 'px'
 						],
-						'label'      => 'Line-height (px)',
+						'label'      => esc_html__('Line-height (px)', 'shopengine'),
 						'size_units' => ['px']
 					],
 					'letter_spacing' => [

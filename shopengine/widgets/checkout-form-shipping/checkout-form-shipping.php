@@ -288,7 +288,7 @@ class ShopEngine_Checkout_Form_Shipping extends \ShopEngine\Base\Widget
 							'size' => '22',
 							'unit' => 'px'
 						],
-						'label'      => 'Line-height (px)',
+						'label'      => esc_html__('Line-height (px)', 'shopengine'),
 						'size_units' => ['px']
 					],
 					'letter_spacing' => [
