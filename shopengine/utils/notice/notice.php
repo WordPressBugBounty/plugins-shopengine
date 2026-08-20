@@ -335,6 +335,7 @@ class Notice{
 
         return [
             'a'      => array_merge($common, ['href' => [], 'target' => [], 'rel' => []]),
+            'abbr'   => $common,
             'b'      => $common,
             'br'     => [],
             'div'    => $common,

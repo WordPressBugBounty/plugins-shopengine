@@ -901,6 +901,23 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 			]
 		);
 
+		$this->add_control(
+			'shopengine_image_fit',
+			[
+				'label'     => esc_html__('Image Fit', 'shopengine'),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'contain',
+				'options'   => [
+					'contain' => esc_html__('Contain', 'shopengine'),
+					'cover'   => esc_html__('Cover', 'shopengine'),
+				],
+				'selectors' => [
+					'{{WRAPPER}} .shopengine-archive-products .product .attachment-woocommerce_thumbnail' => 'object-fit: {{VALUE}}; object-position: center center;',
+				],
+				'condition' => ['shopengine_image_height_switch' => 'yes'],
+			]
+		);
+
 		$this->add_responsive_control(
 			'shopengine_image_padding',
 			[
@@ -1157,7 +1174,7 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				'default'   => '#101010',
 				'alpha'     => false,
 				'selectors' => [
-					'{{WRAPPER}} .shopengine-archive-products .product .price' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .shopengine-archive-products:not(.shopengine-archive-products--view-list) .product .price' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -1167,7 +1184,7 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 			[
 				'name'           => 'shopengine_product_price_typography',
 				'label'          => esc_html__('Typography', 'shopengine'),
-				'selector'       => '{{WRAPPER}} .shopengine-archive-products .product .price .amount',
+				'selector'       => '{{WRAPPER}} .shopengine-archive-products:not(.shopengine-archive-products--view-list) .product .price .amount',
 				'exclude'        => ['font_family', 'text_transform', 'font_style', 'text_decoration', 'letter_spacing'],
 				'fields_options' => [
 					'typography'  => [
@@ -2251,12 +2268,12 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				'default'   => '#F03D3F',
 				'selectors' => [
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a:not(.shopengine-wishlist)' . $not_cart_btn . ':hover :is(i, span, svg, path, a::before)' => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner .shopengine-wishlist:hover :is(i, span, svg, path, a::before)'                                      => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner .shopengine-wishlist' . $not_cart_btn . ':hover :is(i, span, svg, path, a::before)'                                      => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner .shopengine-wishlist:hover path'                                      => 'color: {{VALUE}} !important;',
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.button:hover:not(.shopengine-quickview-trigger)' . $not_cart_btn . '::before'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
 
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.active:not(.shopengine-wishlist)' . $not_cart_btn . ' :is(i, span, svg, path, a::before)' => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
-					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner .shopengine-wishlist.active path'                                      => 'fill:{{VALUE}} !important; color: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner .shopengine-wishlist' . $not_cart_btn . '.active :is(i, span, svg, path, a::before)'                                      => 'fill:{{VALUE}} !important; color: {{VALUE}} !important;',
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner a.button.active:not(.shopengine-quickview-trigger)' . $not_cart_btn . '::before'            => 'fill: {{VALUE}} !important; color: {{VALUE}} !important;',
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button):hover' . $not_cart_btn            => 'color: {{VALUE}} !important;',
 				],
@@ -2283,6 +2300,7 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				'default'   => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(a:not(.wc-forward), button, .button):hover' . $not_cart_btn  => 'background: {{VALUE}} !important;',
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner :is(.shopengine-wishlist.active, .shopengine-comparison.active)' . $not_cart_btn  => 'background: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -2458,6 +2476,29 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns .loop-product--btns-inner' => 'column-gap: {{SIZE}}{{UNIT}} !important; row-gap: {{SIZE}}{{UNIT}} !important; gap: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'shopengine_button_group_bottom_spacing',
+			[
+				'label'      => esc_html__('Space Below', 'shopengine'),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => ['px'],
+				'range'      => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 0,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .shopengine-archive-products ul li .loop-product--btns.loop-product--btns-pos-bottom' => 'height: calc(var(--shopengine-group-container-height) + {{SIZE}}{{UNIT}}) !important; margin-top: calc((var(--shopengine-group-container-height) + {{SIZE}}{{UNIT}}) * -1) !important;',
 				],
 			]
 		);
