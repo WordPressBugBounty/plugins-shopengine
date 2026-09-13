@@ -136,11 +136,17 @@ class ShopEngine_Product_Title extends \ShopEngine\Base\Widget
 
 		$product = Products::instance()->get_product($post_type);
 
+		// Keep in sync with the 'shopengine_product_title_header_size' SELECT control's options above.
+		$allowed_title_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'span', 'p'];
+		$header_size        = isset( $settings['shopengine_product_title_header_size'] )
+			? \ShopEngine\Utils\Helper::esc_options( $settings['shopengine_product_title_header_size'], $allowed_title_tags, 'h1' )
+			: 'h1';
+
 		shopengine_content_render(
 			sprintf(
 				'<div class="shopengine-product-title"><%1$s class="product-title">%2$s</%1$s></div>',
-				isset( $settings['shopengine_product_title_header_size'] ) ? $settings['shopengine_product_title_header_size'] : 'h1',
-				get_the_title($product->get_id())
+				esc_html( $header_size ),
+				esc_html( get_the_title( $product->get_id() ) )
 			)
 		);
 	}

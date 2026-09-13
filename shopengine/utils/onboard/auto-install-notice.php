@@ -258,24 +258,6 @@ class Auto_Install_Notice {
 			'slug'  => 'shopengine',
 		] );
 
-		// Also send for auto-installed plugins that don't have their own notice banner.
-		$registry = Auto_Install_Tracker::get_registry();
-		$slug_map = [
-			'elementskit-lite/elementskit-lite.php'           => 'elementskit-lite',
-			'emailkit/EmailKit.php'                           => 'emailkit',
-			'gutenkit-blocks-addon/gutenkit-blocks-addon.php' => 'gutenkit-blocks-addon',
-			'getgenie/getgenie.php'                           => 'getgenie',
-			'popup-builder-block/popup-builder-block.php'     => 'popupkit',
-		];
-		foreach ( array_keys( $registry ) as $plugin_file ) {
-			if ( isset( $slug_map[ $plugin_file ] ) ) {
-				\ShopEngine\Core\Onboard\Plugin_Data_Sender::instance()->sendEmailSubscribeData( 'plugin-subscribe', [
-					'email' => $email,
-					'slug'  => $slug_map[ $plugin_file ],
-				] );
-			}
-		}
-
 		update_option( self::EMAIL_COLLECTED_KEY, true, false );
 		update_option( self::DISMISSED_KEY, true, false );
 		wp_send_json_success();
