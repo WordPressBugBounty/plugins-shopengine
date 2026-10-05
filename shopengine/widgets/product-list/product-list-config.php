@@ -36,55 +36,25 @@ class ShopEngine_Product_List_Config extends \ShopEngine\Base\Widget_Config{
 
 	public function product_order_by() {
 
-        if (class_exists('ShopEngine_Pro')) {
-            return [
-                'ID'            => esc_html__('ID', 'shopengine'),
-                'title'         => esc_html__('Title', 'shopengine'),
-                'name'          => esc_html__('Name', 'shopengine'),
-                'date'          => esc_html__('Date', 'shopengine'),
-                'comment_count' => esc_html__('Popular', 'shopengine'),
-                'modified'      => esc_html__('Modified', 'shopengine'),
-                'price'         => esc_html__('Price', 'shopengine'),
-                'sales'         => esc_html__('Sales', 'shopengine'),
-                'rated'         => esc_html__('Top Rated', 'shopengine'),
-                'rand'          => esc_html__('Random', 'shopengine'),
-                'menu_order'    => esc_html__('Menu Order', 'shopengine'),
-                'sku'           => esc_html__('SKU', 'shopengine'),
-                'stock_status'  => esc_html__('Stock Status', 'shopengine')
-            ];
-        }
-        return [
+        return apply_filters('shopengine/widgets/product-list/order_by_options', [
             'ID'            => esc_html__('ID', 'shopengine'),
             'title'         => esc_html__('Title', 'shopengine'),
             'name'          => esc_html__('Name', 'shopengine'),
             'date'          => esc_html__('Date', 'shopengine'),
             'comment_count' => esc_html__('Popular', 'shopengine')
-        ];
+        ]);
     }
 
     public function product_query_by() {
 
-        if (class_exists('ShopEngine_Pro')) {
-            return [
-                'category'  => esc_html__('Category', 'shopengine'),
-                'tag'       => esc_html__('Tag', 'shopengine'),
-                'product'   => esc_html__('Product', 'shopengine'),
-                'rating'    => esc_html__('Rating', 'shopengine'),
-                'attribute' => esc_html__('Attribute', 'shopengine'),
-                'author'    => esc_html__('Author', 'shopengine'),
-				'featured' => esc_html__('Featured', 'shopengine'),
-				'sale'     => esc_html__('Sale', 'shopengine'),
-				'viewed'   => esc_html__('Recently Viewed', 'shopengine')
-            ];
-        }
-        return [
+        return apply_filters('shopengine/widgets/product-list/query_by_options', [
             'category'  => esc_html__('Category', 'shopengine'),
 			'tag'       => esc_html__('Tag', 'shopengine'),
 			'product'   => esc_html__('Product', 'shopengine'),
 			'rating'    => esc_html__('Rating', 'shopengine'),
 			'attribute' => esc_html__('Attribute', 'shopengine'),
 			'author'    => esc_html__('Author', 'shopengine'),
-        ];
+        ]);
     }
 
 }

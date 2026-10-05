@@ -146,7 +146,7 @@ class ShopEngine_Product_Title extends \ShopEngine\Base\Widget
 			sprintf(
 				'<div class="shopengine-product-title"><%1$s class="product-title">%2$s</%1$s></div>',
 				esc_html( $header_size ),
-				esc_html( get_the_title( $product->get_id() ) )
+				\ShopEngine\Utils\Helper::esc_title( get_the_title( $product->get_id() ) )
 			)
 		);
 	}

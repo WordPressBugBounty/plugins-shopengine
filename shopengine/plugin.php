@@ -87,6 +87,10 @@ final class Plugin {
 			return;
 		}
 
+		if(Utils\Helper::is_pro_outdated()) {
+			add_action('admin_notices', [$this, 'outdated_pro']);
+		}
+
 
 		
 		add_filter("plugin_action_links_shopengine/shopengine.php", function ($links) {
@@ -609,6 +613,27 @@ final class Plugin {
 				'dismissible' => true,
 				'btn'         => $btn,
 				'message'     => sprintf(esc_html__('ShopEngine requires Elementor version %1$s+, which is currently NOT RUNNING.', 'shopengine'), '3.0.0'),
+			]
+		);
+	}
+
+
+	public function outdated_pro() {
+
+		if(!current_user_can('update_plugins')) {
+			return;
+		}
+
+		$btn['label'] = esc_html__('Go to Plugins', 'shopengine');
+		$btn['url']   = self_admin_url('plugins.php');
+
+		Utils\Notice::push(
+			[
+				'id'          => 'outdated-shopengine-pro',
+				'type'        => 'error',
+				'dismissible' => true,
+				'btn'         => $btn,
+				'message'     => esc_html__('Your ShopEngine Pro version does not work with this version of ShopEngine, so some Pro features are unavailable. Please update ShopEngine Pro to the latest version.', 'shopengine'),
 			]
 		);
 	}

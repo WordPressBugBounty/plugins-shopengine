@@ -15,6 +15,15 @@ defined('ABSPATH') || exit;
  */
 class Helper {
 
+	/**
+	 * ShopEngine Pro versions from before its pro features moved out of ShopEngine
+	 * still expect ShopEngine to ship them.
+	 */
+	public static function is_pro_outdated() {
+
+		return class_exists('ShopEngine_Pro') && !class_exists('\ShopEngine_Pro\Modules\Comparison\Comparison_Share');
+	}
+
     public static function is_elementor_active() {
 
         return did_action('elementor/loaded');
@@ -252,6 +261,60 @@ class Helper {
 		return $str;
 	}
 
+	/**
+	 * Prepare a product/post title for output.
+	 *
+	 * WooCommerce core prints product titles unescaped, so store owners commonly put
+	 * markup in them (`<span class="...">`, `<strong>`, `<br>`) for styling. Running
+	 * esc_html() over those titles turns the markup into visible plain text, so titles
+	 * are passed through wp_kses() instead: regular formatting tags and their classes
+	 * survive, while <script>, <iframe> and on* event handlers are stripped.
+	 *
+	 * @since 4.9.7
+	 *
+	 * @param string $title Raw title, typically from get_the_title() or $product->get_name().
+	 *
+	 * @return string Title safe to echo.
+	 */
+	public static function esc_title($title) {
+		$title = $title ?? '';
+
+		/**
+		 * Bypass ShopEngine's title sanitization entirely and output the title as stored.
+		 *
+		 * Only useful on stores that already control who can edit product titles, since
+		 * it restores the pre-4.9.7 (and WooCommerce core) behaviour of echoing them raw.
+		 *
+		 * @since 4.9.7
+		 *
+		 * @param bool   $disable Whether to skip sanitization. Default false.
+		 * @param string $title   The title being rendered.
+		 */
+		if(apply_filters('shopengine_disable_title_sanitization', false, $title)) {
+			return $title;
+		}
+
+		// Plain titles are the common case - skip the kses pass entirely.
+		if(strpos($title, '<') === false) {
+			return $title;
+		}
+
+		/**
+		 * Filter the HTML allowed inside product/post titles rendered by ShopEngine.
+		 *
+		 * Accepts the same array shape as wp_kses(), so tags can be added or removed
+		 * without disabling sanitization outright.
+		 *
+		 * @since 4.9.7
+		 *
+		 * @param array  $allowed_html Allowed tags/attributes. Defaults to the 'post' context.
+		 * @param string $title        The title being rendered.
+		 */
+		$allowed_html = apply_filters('shopengine_allowed_title_html', wp_kses_allowed_html('post'), $title);
+
+		return wp_kses($title, $allowed_html);
+	}
+
 	public static function img_meta($id) {
 		$attachment = get_post($id);
 		if($attachment == null || $attachment->post_type != 'attachment') {
@@ -396,7 +459,7 @@ class Helper {
 		global $product;
 		?>
         <h3 class='product-title'>
-            <a title="<?php esc_html_e('View Product Details','shopengine')?>" href="<?php echo esc_url(get_the_permalink($product->get_id())); ?>"><?php echo esc_html(get_the_title($product->get_id())); ?></a>
+            <a title="<?php esc_html_e('View Product Details','shopengine')?>" href="<?php echo esc_url(get_the_permalink($product->get_id())); ?>"><?php shopengine_content_render(self::esc_title(get_the_title($product->get_id()))); ?></a>
         </h3>
 		<?php
 	}
@@ -480,29 +543,6 @@ class Helper {
 
 		return 'yes' === get_option('woocommerce_enable_checkout_login_reminder');
 	}
-
-
-	private static function generate_products_meta() {
-		global $wpdb;
-		$post_type = 'product';
-		$meta_keys = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT($wpdb->postmeta.meta_key) 
-        FROM $wpdb->posts 
-        LEFT JOIN $wpdb->postmeta 
-        ON $wpdb->posts.ID = $wpdb->postmeta.post_id 
-        WHERE $wpdb->posts.post_type = %s 
-        AND $wpdb->postmeta.meta_key != '' 
-        AND $wpdb->postmeta.meta_key NOT RegExp '(^[_0-9].+$)' 
-        AND $wpdb->postmeta.meta_key NOT RegExp '(^[0-9]+$)'", $post_type ) );
-		//set_transient( 'shopengine-all-products_meta_keys', $meta_keys, 60 * 60 * 0.01 );
-
-		return $meta_keys;
-	}
-
-	public static function get_products_meta_keys() {
-		//$cache = get_transient( 'shopengine-all-products_meta_keys' );
-		return   static::generate_products_meta();
-	}
-
 
 
     public static function get_template_type($pid) {

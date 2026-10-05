@@ -6,20 +6,6 @@ defined('ABSPATH') || exit;
 
 class ShopEngine_Product_Image_Config extends \ShopEngine\Base\Widget_Config {
 
-	public function __construct() {
-		if(\ShopEngine::package_type() == 'pro') {
-			add_filter( 'woocommerce_single_product_carousel_options', [$this, 'woo_update_flexslider_options'] );
-		}
-	}
-
-	function woo_update_flexslider_options( $options ) {
-		$options['directionNav'] = true;
-		$options['touch'] = false;
-		$options['manualControls'] = ".flex-control-nav li";
-  
-		return $options;
-	}
-
 	public function get_name() {
 		return 'single-product-images';
 	}

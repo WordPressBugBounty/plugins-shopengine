@@ -24,7 +24,7 @@
                 </span>
                 <p class="wishlist-product-name">
                     <a title="<?php esc_html_e('View Product Full Details','shopengine')?>" target="_blank" href="<?php echo esc_url($product->get_permalink()) ?>">
-                        <?php echo esc_html($product->get_name()) ?>
+                        <?php shopengine_content_render(\ShopEngine\Utils\Helper::esc_title($product->get_name())) ?>
                     </a>
                 </p>
             </td>

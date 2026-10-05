@@ -12,15 +12,14 @@ use WC_Product;
 
 class Comparison_Field_Value {
 
-    public $product_ids = [] ;
 	private $generated_attributes = [];
 
-	public function get_value( WC_Product $product, $slug , $data = null) {
+	public function get_value( WC_Product $product, $slug ) {
 
-		return $this->set_value( $product, $slug, $data);
+		return $this->set_value( $product, $slug );
 	}
 
-	private function set_value( WC_Product $product, $slug, $data = null) {
+	private function set_value( WC_Product $product, $slug ) {
 		switch ( $slug ) {
 			case 'url':
 				return $product->add_to_cart_url();
@@ -45,8 +44,6 @@ class Comparison_Field_Value {
 				return $product->get_weight();
 			case 'dimension':
 				return $product->get_dimensions( false );
-			case 'attributes':
-				return $this->get_attributes( $product, $data );
 			case 'height':
 				return $product->get_height();
 		}
@@ -54,58 +51,15 @@ class Comparison_Field_Value {
 		return '';
 	}
 
-	public function get_attributes( WC_Product $product , $data = null) {
-		if(!$data) $data = [];
-		$product_id = $product->get_id();
-		$formatted_attributes[$product_id] = [];
-
-		if (!$product->has_attributes()) return $formatted_attributes;
-
-		foreach ($product->get_attributes() as $attribute) {
-			$attribute_name = wc_attribute_label($attribute->get_name());
-			$attribute_slug = $attribute->is_taxonomy() 
-				? wc_attribute_taxonomy_slug($attribute->get_name())
-				: strtolower(str_replace(' ', '_', $attribute_name));
-			
-			// Find matching slug (exact or partial match)
-			$matched_slug = $this->find_matching_slug($attribute_slug, $data);
-			if (!$matched_slug) continue;
-
-			// Use the actual attribute name for display, not the matched slug
-			$display_key = strtolower(str_replace(' ', '_', $attribute_name));
-
-			// Get attribute values
-			if ($attribute->is_taxonomy()) {
-				$terms = wp_get_post_terms($product_id, $attribute->get_name(), ['fields' => 'names']);
-				$formatted_attributes[$product_id][$display_key] = !is_wp_error($terms) && !empty($terms) ? $terms : [];
-			} else {
-				$values = $product->get_attribute($attribute_name);
-				$formatted_attributes[$product_id][$display_key] = !empty($values) ? array_map('trim', explode(', ', $values)) : [];
-			}
-		}
-
-		return $formatted_attributes;
-	}
-
-	private function find_matching_slug($attribute_slug, $data) {
-		if (empty($data) || !is_array($data)) return null;
-		
-		// Exact match first
-		if (in_array($attribute_slug, $data, true)) return $attribute_slug;
-		
-		// Partial match
-		foreach ($data as $data_slug) {
-			if (is_string($data_slug) && (
-				strpos($attribute_slug, $data_slug) === 0 || 
-				strpos($attribute_slug, $data_slug . '-') !== false
-			)) {
-				return $data_slug;
-			}
-		}
-		return null;
-	}
-
 	public function get_html( $slug, $data ) {
+
+		// Rows added through the `shopengine/module/comparison/table_rows` filter
+		if ( has_action( 'shopengine/module/comparison/render_table_row/' . $slug ) ) {
+			do_action( 'shopengine/module/comparison/render_table_row/' . $slug, $data );
+
+			return;
+		}
+
 		switch ( $slug ) {
 			case 'first_tr':
 				?>
@@ -118,38 +72,6 @@ class Comparison_Field_Value {
 
 
 				<?php
-				break;
-			case 'attributes':
-				if (!empty($data) && is_array($data)) {
-					foreach ($data as $attribute_key => $attributes ){
-						// Convert slug back to readable format for display
-						$display_name = ucwords(str_replace('_', ' ', $attribute_key));
-						?>
-		                <tr>
-		                    <th style="vertical-align: middle;">  <?php
-								echo esc_html($display_name) ?> </th>
-							<?php
-							$this->print_attributes( $attribute_key, $attributes ); ?>
-		                </tr>
-						<?php
-		             }
-				}
-				break;
-			case 'custom_meta':
-				if (!empty($data) && is_array($data)) {
-					foreach ($data as $meta ){
-						if (!empty($meta)) {
-							?>
-			                <tr>
-			                    <th style="vertical-align: middle;">  <?php
-									echo esc_html(ucwords( preg_replace( '~([^a-z0-9\-])~i', ' ', $meta ) )) ?> </th>
-								<?php
-								$this->print_custom_meta( $meta ); ?>
-			                </tr>
-							<?php
-						}
-		             }
-				}
 				break;
 			case 'color':
 				?>
@@ -293,45 +215,6 @@ class Comparison_Field_Value {
 				</div>
 			</td>
 			<?php
-		}
-	}
-
-	private function print_attributes($slug, $data) {
-		if (!$data) $data = [];
-	
-		foreach ($this->product_ids as $product_id) {
-			?>
-			<td class="first--row">
-				<?php
-				if (!empty($data[$product_id])) {
-					foreach ($data[$product_id] as $value) {
-						echo wp_kses('<span class="comparison-attribute-badge">' . $value . '</span> ', UtilsHelper::get_kses_array());
-					}
-				} 
-				?>
-			</td>
-			<?php
-		}
-	}
-
-	private function print_custom_meta( $slug) {
-
-		foreach ($this->product_ids as $product_id) {
-		    if($product_id) {
-			    $meta_value = get_post_meta( $product_id, $slug, true );
-
-			    echo '<td class="first--row">';
-
-			    if ( gettype( $meta_value ) == 'array' ) {
-				    foreach ( $meta_value as $value ) {
-						echo wp_kses('<span class="comparison-meta-badge" > ' . $value . '</span> ', UtilsHelper::get_kses_array());
-				    }
-			    } else {
-				    echo esc_html(get_post_meta( $product_id, $slug, true ));
-			    }
-
-			    echo '</td>';
-		    }
 		}
 	}
 

@@ -16,36 +16,7 @@ if( $out_of_stock_product_visibility == 'hide'|| ( $out_of_stock_product_visibil
         'compare' => '!='
 	);
 }
-if (isset($product_orderby)) {
-	switch ($product_orderby) {
-	case 'price':
-		$args['meta_key'] = '_price';
-		$args['orderby']  = 'meta_value_num';
-		break;
-	case 'sales':
-		$args['meta_key'] = 'total_sales';
-		$args['orderby']  = 'meta_value_num';
-		break;
-	case 'rated':
-		$args['meta_key'] = '_wc_average_rating';
-		$args['orderby']  = 'meta_value_num';
-		break;
-	case 'sku':
-		$args['meta_key'] = '_sku';
-		$args['orderby']  = 'meta_value';
-		break;
-	case 'stock_status':
-		$args['meta_key'] = '_stock_status';
-		$args['orderby']  = 'meta_value';
-		break;
-	default:
-		$args['orderby'] = $product_orderby;
-	}
-} else {
-	$args['orderby'] = 'date';
-}
-
-$product_visibility_term_ids = wc_get_product_visibility_term_ids();
+$args['orderby'] = isset($product_orderby) ? $product_orderby : 'date';
 
 switch ($product_by) {
 	case 'category':
@@ -140,22 +111,9 @@ switch ($product_by) {
 	case 'product':
 		$args['post__in'] = (isset($product_list) && !empty($product_list)) ? $product_list : [];
 		break;
-	case 'featured':
-		$args['tax_query'][] = [
-			'taxonomy' => 'product_visibility',
-			'field'    => 'term_taxonomy_id',
-			'terms'    => $product_visibility_term_ids['featured']
-		];
-		break;
-	case 'sale':
-		$args['post__in'] = wc_get_product_ids_on_sale();
-		break;
-	case 'viewed':
-		$viewed_products        = !empty($_COOKIE['woocommerce_recently_viewed']) ? (array) explode('|', sanitize_text_field(wp_unslash($_COOKIE['woocommerce_recently_viewed']))) : [];
-		$viewed_products        = array_reverse(array_filter(array_map('absint', $viewed_products)));
-		$query_args['post__in'] = $viewed_products;
-		break;
 }
+
+$args = apply_filters('shopengine/widgets/product-list/query_args', $args, $settings);
 
 $productQuery = new \WP_Query($args);
 
@@ -277,9 +235,10 @@ if ($themeName === 'woostify') {
                         <a title="<?php esc_html_e('View Product Full Details','shopengine')?>" href="<?php the_permalink();?>">
 							<?php
                                 if (isset($title_character) && !empty($title_character)):
-                                    echo esc_html(substr(get_the_title(), 0, $title_character));
+                                    // Titles may contain markup, so re-balance whatever the cut left open.
+                                    shopengine_content_render(\ShopEngine\Utils\Helper::esc_title(force_balance_tags(substr(get_the_title(), 0, $title_character))));
                                 else:
-                                    echo esc_html(get_the_title());
+                                    shopengine_content_render(\ShopEngine\Utils\Helper::esc_title(get_the_title()));
                                 endif;
                             ?>
                         </a>

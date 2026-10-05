@@ -102,7 +102,7 @@ $use_cl = empty($view_mode_settings)
 					sprintf(
 						'<%1$s class="woocommerce-loop-product__title">%2$s</%1$s>',
 						esc_attr($header_size),
-						esc_html($title)
+						\ShopEngine\Utils\Helper::esc_title($title)
 					)
 				);
 		}
@@ -166,10 +166,12 @@ $use_cl = empty($view_mode_settings)
 				? $view_mode_settings->shopengine_cl_title_tag
 				: 'h2';
 
-			printf(
-				'<%1$s class="shopengine-cl-title">%2$s</%1$s>',
-				esc_attr($cl_title_tag),
-				esc_html(get_the_title())
+			shopengine_content_render(
+				sprintf(
+					'<%1$s class="shopengine-cl-title">%2$s</%1$s>',
+					esc_attr($cl_title_tag),
+					\ShopEngine\Utils\Helper::esc_title(get_the_title())
+				)
 			);
 			?>
 

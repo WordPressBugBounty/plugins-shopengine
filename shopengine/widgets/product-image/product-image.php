@@ -53,14 +53,12 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 			);
 		}
 
-		$position_opts = [
-			'bottom'  => __( 'Bottom', 'shopengine' )
-		];
+		$position_opts = apply_filters('shopengine/widgets/product-image/gallery_position_options', [
+			'bottom' => __( 'Bottom', 'shopengine' ),
+		]);
 
-		if(\ShopEngine::package_type() == 'pro'){
-			$position_opts['left'] = __( 'Left', 'shopengine' );
-			$position_opts['right'] = __( 'Right', 'shopengine' );
-		}
+		// A left/right position saved with ShopEngine Pro keeps the bottom layout when Pro is inactive or outdated
+		$bottom_fallback = array_values(array_diff(['left', 'right'], array_keys($position_opts)));
 
 		$this->add_control(
 			'shopengine_image_gallery_position',
@@ -70,6 +68,7 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 				'default' => 'bottom',
 				'options' => $position_opts,
 				'prefix_class' => 'shopengine_image_gallery_position_',
+				'classes_dictionary' => array_fill_keys($bottom_fallback, 'bottom'),
 			]
 		);
 
@@ -211,13 +210,9 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 					'size' => 20,
 					'unit' => '%',
 				],
-				'selectors'  => [
-					'{{WRAPPER}}:not(.shopengine_image_gallery_position_bottom) .shopengine-gallery-wrapper' => 'width: {{SIZE}}{{UNIT}};',
+				'selectors'  => apply_filters('shopengine/widgets/product-image/thumbs_width_selectors', [
 					'{{WRAPPER}}.shopengine_image_gallery_position_bottom .flex-control-thumbs li' => 'flex: 0 0 {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}}.shopengine_image_gallery_position_left .flex-viewport, {{WRAPPER}}.shopengine_image_gallery_position_right .flex-viewport' => 'width: calc(100% - {{SIZE}}{{UNIT}});',
-					'{{WRAPPER}}.shopengine_image_gallery_position_left .shopengine-product-image .onsale, {{WRAPPER}}.shopengine_image_gallery_position_left .shopengine-product-image-toggle' => 'margin-left: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}}.shopengine_image_gallery_position_right .shopengine-product-image .onsale, {{WRAPPER}}.shopengine_image_gallery_position_right .shopengine-product-image-toggle' => 'margin-right: {{SIZE}}{{UNIT}}',
-				],
+				]),
 			]
 		);
 
@@ -286,14 +281,6 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 			]
 		);
 
-		$column_condition = [];
-
-		if(\ShopEngine::package_type() == 'pro'){
-			$column_condition = [
-				'shopengine_image_gallery_position!' => 'bottom'
-			];
-		}
-
 		$this->add_control(
 			'shopengine_gallery_thumbs_column_gap',
 			[
@@ -317,7 +304,7 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 					'{{WRAPPER}} .shopengine-product-image .product-thumbs-slider:not( .owl-loaded )' => 'padding-top: {{SIZE}}{{UNIT}};padding-bottom: {{SIZE}}{{UNIT}};;',
 					'{{WRAPPER}} .shopengine-product-image .product-thumbs-slider .owl-stage'         => 'padding-top: {{SIZE}}{{UNIT}};padding-bottom: {{SIZE}}{{UNIT}};;',
 				],
-				'condition'	=> $column_condition
+				'condition'	=> apply_filters('shopengine/widgets/product-image/thumbs_column_gap_condition', [])
 			]
 		);
 
@@ -336,7 +323,7 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 				],
 				'separator'	 => 'before',
 				'condition'	=> [
-					'shopengine_image_gallery_position' => 'bottom',
+					'shopengine_image_gallery_position' => array_merge(['bottom'], $bottom_fallback),
 				]
 			]
 		);
@@ -824,70 +811,6 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 		);
 
 		$this->end_controls_section();
-
-		/*
-			--------------------------
-			Slider Nav style
-			--------------------------
-		*/
-		$this->start_controls_section(
-			'shopengine_gallery_nav_style',
-			[
-				'label'     => esc_html__('Slider Nav', 'shopengine'),
-				'tab'       => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'shopengine_slider_icon_size',
-			[
-				'label'      => esc_html__('Size (px)', 'shopengine'),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => ['px'],
-				'range'      => [
-					'px' => [
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 1,
-					],
-				],
-				'default'    => [
-					'unit' => 'px',
-					'size' => 16,
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .shopengine-product-image .flex-direction-nav .flex-prev:before, .shopengine-widget .shopengine-product-image .flex-direction-nav .flex-next:before' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'shopengine_slider_nav_icon_color',
-			[
-				'label'     => esc_html__('Icon Color', 'shopengine'),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#101010',
-				'alpha'     => false,
-				'selectors' => [
-					'{{WRAPPER}} .shopengine-product-image .flex-direction-nav .flex-prev:before, .shopengine-widget .shopengine-product-image .flex-direction-nav .flex-next:before' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_control(
-			'shopengine_slider_nav_background',
-			[
-				'label'     => esc_html__('Background Color', 'shopengine'),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#fff',
-				'alpha'     => false,
-				'selectors' => [
-					'{{WRAPPER}} .shopengine-product-image .flex-direction-nav .flex-prev:before, .shopengine-widget .shopengine-product-image .flex-direction-nav .flex-next:before' => 'background-color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->end_controls_section();
 	}
 
 	/**
@@ -902,7 +825,7 @@ class ShopEngine_Product_Image extends \ShopEngine\Base\Widget {
 		$settings = $this->get_settings_for_display();
 		?>
 
-        <div class="shopengine-product-image <?php echo \ShopEngine::package_type() == 'pro' ? 'shopengine-gallery-slider' : 'shopengine-gallery-slider-no' ?>">
+        <div class="shopengine-product-image <?php echo esc_attr(apply_filters('shopengine/widgets/product-image/gallery_class', 'shopengine-gallery-slider-no', $settings)); ?>">
             <button title="<?php esc_html_e('Product Thumbnail','shopengine')?>" 
                class="shopengine-product-image-toggle position-<?php echo esc_attr($settings['shopengine_lightbox_icon_position']); ?>">
 				<?php Icons_Manager::render_icon($settings['shopengine_image_lightbox_icon'], ['aria-hidden' => 'true']); ?>

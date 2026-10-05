@@ -5,6 +5,7 @@ namespace ShopEngine\Modules;
 defined('ABSPATH') || exit;
 
 use ShopEngine\Core\Register\Module_List;
+use ShopEngine\Utils\Helper;
 
 class Manifest
 {
@@ -38,7 +39,8 @@ class Manifest
 
 		}
 
- 		if ( !wp_doing_ajax() && !empty($_SERVER['REQUEST_URI']) && strpos(sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])), 'wp-json/') === false ) {
+		// Outdated ShopEngine Pro versions use comparison classes that ShopEngine no longer ships
+ 		if ( !Helper::is_pro_outdated() && !wp_doing_ajax() && !empty($_SERVER['REQUEST_URI']) && strpos(sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])), 'wp-json/') === false ) {
 		    do_action('shopengine/module/comparison-module-pro-support');
  		}
 	}

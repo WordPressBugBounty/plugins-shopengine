@@ -5,7 +5,6 @@ namespace ShopEngine\Modules\Comparison;
 
 
 use ShopEngine\Core\Register\Module_List;
-use ShopEngine\Utils\Helper;
 
 class Comparison_Helper {
 
@@ -16,23 +15,15 @@ class Comparison_Helper {
 		}
 
 		$settings       = Module_List::instance()->get_active_settings( 'comparison' );
-		$attributes_fields = $settings['attribute_fields']['value'] ?? [] ;
 
 		$default_fields = [ 'url', 'image', 'price' ];
-		if( class_exists('ShopEngine_Pro') ) {
-			$default_fields['attributes']   = $attributes_fields;
-        }
 
 		$fields = array_merge($default_fields, $settings['shop_field_in_table']['value'] ?? []);
 
-		$fields['attributes'] = $attributes_fields;
-
-		$share_buttons = $settings['share_button']['value'] ?? [];
-
 		$field_value_manager =  new Comparison_Field_Value();
-		$field_value_manager->product_ids =   $content;
 
 		$displayable_fields = [];
+		$product_ids        = [];
 
 		foreach ( $content as $pid ) {
 			if ( empty( $pid ) ) {
@@ -49,31 +40,12 @@ class Comparison_Helper {
 				continue;
 			}
 
-			foreach ( $fields as $key => $field ) {
+			$product_ids[] = $pid;
 
-                if(gettype($field) != 'string'){
-                   $slug = $key;
-                }else{
-	                $slug =  $field ;
-                }
-
-				$displayable_fields[ $slug ][ $pid ] = $field_value_manager->get_value( $product,
-					$slug, $field );
+			foreach ( $fields as $slug ) {
+				$displayable_fields[ $slug ][ $pid ] = $field_value_manager->get_value( $product, $slug );
 			}
 		}
-
-		$format_attributes = [];
-		if(isset($displayable_fields['attributes'])){
-			foreach ($displayable_fields['attributes'] as $product_id => $attribute_data){
-
-                foreach ($attribute_data[$product_id] as $key => $attributes){
-	                $format_attributes[$key][$product_id] = $attributes;
-                }
-        	}
-		}
-		
-
-		$displayable_fields['attributes'] = $format_attributes;
 
 		// group first tr values
 		$first_tr = [];
@@ -83,11 +55,13 @@ class Comparison_Helper {
 		$first_tr['first_tr']['price'] = $displayable_fields['price'] ?? [];
 
 		$displayable_fields = $first_tr + $displayable_fields ;
-		if( class_exists('ShopEngine_Pro') ) {
-			$displayable_fields['custom_meta'] = $settings['custom_meta_fields']['value'] ?? [];
-		}
 
 		unset($displayable_fields['url'], $displayable_fields['image'], $displayable_fields['title'], $displayable_fields['price']);
+
+		/**
+		 * Rows added here are printed by the `shopengine/module/comparison/render_table_row/{$slug}` action.
+		 */
+		$displayable_fields = apply_filters('shopengine/module/comparison/table_rows', $displayable_fields, $product_ids, $settings);
 
 		?>
 		<div class="shopengine-modal-wrap">
@@ -95,46 +69,7 @@ class Comparison_Helper {
 				<div class="shopengine-comparison">
 					<h2><?php echo esc_html__('Product comparison', 'shopengine') ?> </h2>
 
-					<?php if( class_exists('ShopEngine_Pro') && $share_buttons ) : ?>
-						<div class="social-share">
-							<?php
-							$share_url = home_url( '?comparison=yes&product_ids=' . implode( ',', $content ) );
-							$share = esc_html__("Share On Facebook","shopengine");
-							$twitter =  esc_html__("Share On Twitter","shopengine");
-							$copy =  esc_html__("Copy To Clipboard","shopengine");
-
-							foreach ( $share_buttons as $share_button ) {
-								$button = '';
-								switch ( $share_button ) {
-									case 'facebook':
-										$button = sprintf(
-											'<a title="' . $share . '" href="%1$s" target="_blank" rel="noopener noreferrer nofollow "><i class="eicon-facebook"></i> <span>%2$s</span></a>',
-											'https://www.facebook.com/sharer.php?u=' . $share_url,
-											esc_html__('Share on Facebook', 'shopengine')
-										);
-										break;
-									case 'twitter':
-										$button = sprintf(
-											'<a title="' . $twitter . '" href="%1$s" target="_blank" rel="noopener noreferrer nofollow "><i class="eicon-twitter"></i> <span>%2$s</span></a>',
-											'https://twitter.com/intent/tweet?url=' . $share_url,
-											esc_html__('Share on Twitter', 'shopengine')
-										);
-										break;
-									case 'copy_url':
-										$button = sprintf(
-                    
-											'<button title="' . $copy . '" class="copy-comparison-share-url" data-share-url="%1$s" data-message="%2$s"> <i class="eicon-copy"></i> <span>%3$s</span> </button>',
-											$share_url,
-											esc_html__('Copied', 'shopengine'),
-											esc_html__('Copy', 'shopengine')
-										);
-										break;
-								}
-								echo wp_kses($button, Helper::get_kses_array());
-							}
-							?>
-						</div>
-					<?php endif;?>
+					<?php do_action('shopengine/module/comparison/after_title', $content, $settings); ?>
 
 					<div class="comparison-table-wrap">
 						<table class="table table-bordered <?php echo $comparison_page ? 'comparison-page' : '' ?>">
@@ -152,27 +87,4 @@ class Comparison_Helper {
 		</div>
 		<?php
 	}
-
-	public static function generate_meta_keys_array( $keys ) {
-		/*$cache = get_transient( 'shopengine-all-products_meta_keys_array' );
-		if($cache){
-		  	return $cache;
-		}*/
-
-		$keys_array = [];
-		foreach ( $keys as $key ) {
-		   $title = ucwords( preg_replace( '~([^a-z0-9\-])~i', ' ', $key ) );
-			$keys_array[ $key ] = $title;
-		}
-
-	 //	set_transient( 'shopengine-all-products_meta_keys_array', $keys_array, 60 * 60 * 0.01 );
-
-		return $keys_array;
-	}
-
-	public static function get_products_meta_keys() {
-		return static::generate_meta_keys_array(Helper::get_products_meta_keys());
-	}
-
-
 }

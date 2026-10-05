@@ -271,6 +271,7 @@ class Theme_Hooks {
 		$this->remove_action_if_found_14('woocommerce_after_shop_loop_item', '\OceanWP_WooCommerce_Config', 'close_shop_loop_item_inner_div');
 		$this->remove_action_if_found_14('woocommerce_before_shop_loop_item_title', '\OceanWP_WooCommerce_Config', 'loop_product_thumbnail');
 		$this->remove_action_if_found_14('woocommerce_after_shop_loop_item', '\OceanWP_WooCommerce_Config', 'archive_product_content');
+		$this->theme_conflicts__oceanwp_shop_loop();
 
 		/**
 		 * End of OceanWP theme hook reverting
@@ -406,6 +407,19 @@ class Theme_Hooks {
 		/**
 		* End of Woostify theme hook reverting
 		******************************************************/
+
+		/*******************************************************
+		 * Bustar theme hook reverting...
+		 *
+		 ******************************************************/
+
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'bustar_wc_shop_thumb_area', 11);
+		$this->remove_action_if_exists('woocommerce_shop_loop_item_title', 'bustar_wc_loop_product_title', 10);
+
+
+		/**
+		 * End of Bustar theme hook reverting
+		 ******************************************************/
 	}
 
 	/**
@@ -1211,6 +1225,91 @@ class Theme_Hooks {
 
 		$this->remove_action_if_exists( 'woocommerce_shop_loop_item_title', 'porto_woocommerce_shop_loop_item_title_open', 1 );
 		$this->remove_action_if_exists( 'woocommerce_shop_loop_item_title', 'porto_woocommerce_shop_loop_item_title_close', 100 );
+
+		$this->theme_conflicts__oceanwp_shop_loop();
+	}
+
+
+	/**
+	 * OceanWP theme shop loop hook reverting.
+	 *
+	 * Called right before the archive products widget renders, so it covers the
+	 * frontend, the elementor editor and the preview alike. The removal is priority
+	 * agnostic, so it keeps working when OceanWP moves a hook to another priority.
+	 */
+	public function theme_conflicts__oceanwp_shop_loop() {
+
+		if(!class_exists('\OceanWP_WooCommerce_Config')) {
+			return;
+		}
+
+		$class_name = '\OceanWP_WooCommerce_Config';
+
+		// Toolbar: wrapper div, off canvas filter, grid/list buttons, result count (View: 12 / 24 / All)
+		$this->remove_class_method_hooks('woocommerce_before_shop_loop', $class_name, [
+			'add_shop_loop_div',
+			'off_canvas_filter_button',
+			'grid_list_buttons',
+			'result_count',
+			'close_shop_loop_div',
+		]);
+
+		// Product item markup
+		$this->remove_class_method_hooks('woocommerce_before_shop_loop_item', $class_name, ['add_shop_loop_item_inner_div']);
+		$this->remove_class_method_hooks('woocommerce_after_shop_loop_item', $class_name, [
+			'archive_product_content',
+			'close_shop_loop_item_inner_div',
+		]);
+		$this->remove_class_method_hooks('woocommerce_before_shop_loop_item_title', $class_name, [
+			'loop_product_thumbnail',
+			'yith_wcbm_shop_badge_container_start',
+			'yith_wcbm_shop_badge_container_end',
+		]);
+
+		// In elementor editor OceanWP strips the default loop elements on every template part
+		$this->remove_class_method_hooks('woocommerce_before_template_part', $class_name, ['before_template_part']);
+	}
+
+
+	/**
+	 * Remove every callback of the given class methods from a hook, whatever the priority.
+	 *
+	 * @param string $tag
+	 * @param string $class_name - full qualified class name
+	 * @param array $methods
+	 * @return void
+	 */
+	private function remove_class_method_hooks($tag, $class_name, array $methods) {
+
+		global $wp_filter;
+
+		if(empty($wp_filter[$tag]->callbacks)) {
+			return;
+		}
+
+		$class_name = ltrim($class_name, '\\');
+
+		foreach($wp_filter[$tag]->callbacks as $priority => $callbacks) {
+
+			foreach($callbacks as $conf) {
+
+				$function = isset($conf['function']) ? $conf['function'] : null;
+
+				if(is_string($function) && strpos($function, '::') !== false) {
+					$function = explode('::', $function, 2);
+				}
+
+				if(!is_array($function) || empty($function[0]) || empty($function[1])) {
+					continue;
+				}
+
+				if(!in_array($function[1], $methods, true) || !is_a($function[0], $class_name, true)) {
+					continue;
+				}
+
+				remove_action($tag, $conf['function'], $priority);
+			}
+		}
 	}
 
 
@@ -1295,6 +1394,7 @@ class Theme_Hooks {
 		$this->remove_action_if_found_14('woocommerce_after_shop_loop_item', '\OceanWP_WooCommerce_Config', 'close_shop_loop_item_inner_div');
 		$this->remove_action_if_found_14('woocommerce_before_shop_loop_item_title', '\OceanWP_WooCommerce_Config', 'loop_product_thumbnail');
 		$this->remove_action_if_found_14('woocommerce_after_shop_loop_item', '\OceanWP_WooCommerce_Config', 'archive_product_content');
+		$this->theme_conflicts__oceanwp_shop_loop();
 
 		$this->add_action_if_not_exists('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
 		$this->add_action_if_not_exists('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
@@ -1392,6 +1492,12 @@ class Theme_Hooks {
 		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_meta_close', 20);
 		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_content_close', 50);
 		$this->remove_action_if_exists('woocommerce_after_shop_loop_item', 'woostify_loop_product_wrapper_close', 100);
+
+
+		//Bustar theme  shop loop item title hooks
+		$this->remove_action_if_exists('woocommerce_before_shop_loop_item_title', 'bustar_wc_shop_thumb_area', 11);
+		$this->remove_action_if_exists('woocommerce_shop_loop_item_title', 'bustar_wc_loop_product_title', 10);
+
 
 	}
 

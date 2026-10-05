@@ -132,7 +132,7 @@
          
          <!-- product description -->
          <div class="deal-products__desc">
-            <h4 class="deal-products__desc--name">  <a title="<?php esc_html_e('Dealing Product','shopengine')?>" href="<?php the_permalink() ?>"> <?php echo esc_html($title) ?> </a>  </h4>
+            <h4 class="deal-products__desc--name">  <a title="<?php esc_html_e('Dealing Product','shopengine')?>" href="<?php the_permalink() ?>"> <?php shopengine_content_render(\ShopEngine\Utils\Helper::esc_title($title)) ?> </a>  </h4>
          </div>
          
          <!-- product description -->
