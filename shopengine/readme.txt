@@ -1,4 +1,4 @@
-=== ShopEngine Elementor WooCommerce Builder Addon – All in One WooCommerce Solution with eCommerce Templates & Woo Widgets ===
+=== ShopEngine – All-in-One Elementor WooCommerce Builder with eCommerce Templates & Woo Widgets ===
 Contributors: Roxnor, Ataurr, aion11
 Tags: WooCommerce Builder, WooCommerce addons, Elementor WooCommerce, Cross-sell, Variation Swatches, WooCommerce Checkout, WooCommerce Product
 Requires at least: 6.0
@@ -20,11 +20,11 @@ This comprehensive WooCommerce page builder also supports the Gutenberg block ed
 
 https://youtu.be/vjfrA-xI8F4
 
-With the ShopEngine Woobuilder plugin, you can enjoy all the Woo features and functionalities to build a full-fledged WooCommerce store.
+With ShopEngine's Woo Builder, enjoy all the features of a complete WooCommerce Builder to build a full-fledged WooCommerce store.
 
 [ShopEngine Addons](https://wpmet.com/plugin/shopengine/modules/?utm_source=org&utm_medium=readme) | [ShopEngine Templates](https://wpmet.com/plugin/shopengine/templates/?utm_source=org&utm_medium=readme)  | [Support](http://account.wpmet.com/support-help/?utm_source=org&utm_medium=readme) | [Docs](https://wpmet.com/doc/getting-started-with-shopengine-installation/?utm_source=org&utm_medium=readme) | [Check Roadmap & Request a Feature](https://wpmet.com/plugin/shopengine/roadmaps?utm_source=org&utm_medium=readme#ideas) | [Purchase ShopEngine Pro](https://wpmet.com/plugin/shopengine/pricing/?utm_source=org&utm_medium=readme)
 
-## 100,000+ Business Owners are building stores with ShopEngine WooCommerce Builder
+## 100,000+ Stores Built with ShopEngine Elementor WooCommerce Builder
 ShopEngine’s WooCommerce features work smoothly with both Elementor and the WordPress block editor. You can drag and drop widgets, add-ons, and templates to build the store layout you want without any hassle.
 
 It’s one of the most complete WooCommerce builders for Elementor and Gutenberg, giving store creators a flexible and powerful toolkit to design their shops.
@@ -37,7 +37,7 @@ It’s one of the most complete WooCommerce builders for Elementor and Gutenberg
 ⭐ **Flash Sale Countdown** to drive urgency for faster sales.
 ⭐ **Product Wishlist** let users save favorites for later.
 ⭐ **Quick Checkout** for instant purchase with one-click checkout.
-⭐ **Cross-sell** and **Upsell** for higher AOV.
+⭐ **Cross-sell** WooCommerce popup and **Upsell** for higher AOV.
 ⭐ **Sales Notification** to build trust with live sales information.
 ⭐ **Product Quick View** to show details without page load.
 ⭐ **Partial Payments** to let customers pay in installments.
@@ -75,7 +75,7 @@ This Woo Builder also includes…
 
 **📃** [Single Product Page](https://wpmet.com/plugin/shopengine/templates/single-page/?utm_source=org&utm_medium=readme): Showcase specification of a single WooCommerce product.
 
-**📃** [WooCommerce Cart Page](https://wpmet.com/plugin/shopengine/templates/cart-page/?utm_source=org&utm_medium=readme): Design your cart page WooCommerce shopping cart, empty cart, cross-sell.
+**📃** [WooCommerce Cart Page](https://wpmet.com/plugin/shopengine/templates/cart-page/?utm_source=org&utm_medium=readme): Design cart page with cross-sell sections, empty cart, and WooCommerce shopping cart.
 
 **📃** [Checkout Template](https://wpmet.com/plugin/shopengine/templates/checkout-page/?utm_source=org&utm_medium=readme): Enable smooth payment process with various styles like multistep, banner, and columnized  in WooCommerce checkout page.
 
@@ -113,7 +113,7 @@ https://youtu.be/Fo-z_OxTwM4?si=pSS7dbAVJrBHvpvi
 
 https://www.youtube.com/embed/DcaA2rC0Rg0?si=6bj0gEmfRQN0A2qs
 
-**🔷** [Woo Wishlist](https://wpmet.com/plugin/shopengine/modules/product-wishlist/?utm_source=org&utm_medium=readme) helps you by adding a stylish product wishlist page where your shoppers love to save their products to buy and share with loved ones later.  
+**🔷** [Woo Wishlist](https://wpmet.com/plugin/shopengine/modules/product-wishlist/?utm_source=org&utm_medium=readme) A customizable Woo Wishlist addon. Shoppers save products to their Woo Wishlist page and share with friends. No separate Woo Wishlist plugin needed.
 
 https://youtu.be/RlTB20_pgA0?si=zZ-AVN7CxoVMAgoC
 
@@ -171,7 +171,7 @@ https://youtu.be/XOZSqWLjgyk?si=bSjzwk0vMz4KitvQ
 
 **🔷** Set up coupons for a country-specific state/region using ShopEngine, Elementor WooCommerce builder addon's [Advanced coupons add-on](https://wpmet.com/plugin/shopengine/modules/advanced-coupon/?utm_source=org&utm_medium=readme). Only customers in those areas can use the coupon code.
 
-**🔷** [Cross-Sell Popup](https://wpmet.com/plugin/shopengine/modules/cross-sell-popup/?utm_source=org&utm_medium=readme) WooCommerce addon shows targeted cross-sell product recommendations the moment a customer adds to cart. This WooCommerce template boosting average order value automatically. The most effective cross-sell WooCommerce builder for Elementor stores.
+**🔷** [Cross-Sell Popup](https://wpmet.com/plugin/shopengine/modules/cross-sell-popup/?utm_source=org&utm_medium=readme) The most effective cross-sell WooCommerce addon for Elementor stores. This cross-sell tool shows targeted cross-sell product recommendations when a customer adds to cart, boosting average order value automatically.
 
 **🔷** [Avatar add-on](https://wpmet.com/plugin/shopengine/modules/avatar/?utm_source=org&utm_medium=readme) makes websites' user profiles more appealing and personalized by allowing them to add an image and other user information with different customization options.
 
@@ -205,7 +205,7 @@ https://youtu.be/4J8_kVNDi50?si=QAOD2GPtKVWuzKd3
 
 Now, tweaking the order page is just dragging widgets like Order Details and Order Confirm. And, take the opportunity to say thank your WooCommerce users for placing the order.
 
-### Create an Account Page for Shoppers with ShopEngine Elementor WooCommerce Builder
+### Create Shopper Account Pages with ShopEngine Elementor WooCommerce Builder
 
 Have a customized WooCommerce account dashboard that syncs with your brand style and important information with ShopEngine WooCommerce Account page widgets.
 
@@ -297,11 +297,11 @@ https://youtu.be/SVccRBK4XqQ?si=qAxam5ZhZXhHGJ-Z
 
 ### ✨ SHOPENGINE WOOCOMMERCE GUTENBERG BLOCKS ADD-ON
 
-[ShopEngine Gutenberg Addon](https://wordpress.org/plugins/blocks-for-shopengine/?utm_source=org&utm_medium=readme) is an advanced addition to the ShopEngine WooCommerce builder. The ShopEngine Gutenberg addon is compatible with WooCommerce template builders that support Gutenberg.  
+[ShopEngine Gutenberg Addon](https://wordpress.org/plugins/blocks-for-shopengine/?utm_source=org&utm_medium=readme) extends the ShopEngine WooCommerce Builder into the block editor. This WooCommerce Builder addon is compatible with Gutenberg and supports all WooCommerce template pages.
 
 Using this add-on, you can customize the single page, cart page, checkout, archive, etc., pages more effectively.
 
-You will get fully ready **5+ templates with 36+ blocks, 4 advanced add-on** including quick view, wishlist, variation swatches, product comparison to design your shop as per your needs.
+Get **5+ Woo Builder templates, 36+ blocks, and 4 addons**: Woo Wishlist, Quick View, Variation Swatches, and Product Comparison to design your WooCommerce store.
 
 ### 😇 BACKED BY A TRUSTED TEAM
 
