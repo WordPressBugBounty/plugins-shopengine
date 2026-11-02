@@ -4,7 +4,7 @@
  * Plugin Name: ShopEngine
  * Plugin URI:  https://wpmet.com/plugin/shopengine
  * Description: ShopEngine is the most-complete WooCommerce template builder for Elementor. It helps you build and customize the single product page, cart page, archive page, checkout page, order page, my account page, and thank-you page from scratch. It also packed with product comparison, wishlist, quick view, and variation swatches etc.
- * Version: 4.9.7
+ * Version: 4.9.8
  * Author: Wpmet
  * Author URI:  https://wpmet.com
  * Text Domain: shopengine
@@ -43,7 +43,7 @@ final class ShopEngine {
 	 *
 	 */
 	public static function version() {
-		return '4.9.7';
+		return '4.9.8';
 	}
 
 
@@ -65,47 +65,6 @@ final class ShopEngine {
 	}
 
 
-	static function license_status() {
-
-		if(!class_exists('ShopEngine_Pro')) {
-			return 'invalid';
-		}
-
-		if(ShopEngine\Libs\License\Helper::instance()->status() != 'valid') {
-			return 'invalid';
-		}
-
-		return 'valid';
-	}
-
-	public static function license_data() {
-		if(!class_exists('\ElementsKit_Lite\Libs\Framework\Classes\Utils')) {
-			return [
-				'key'            => '',
-				'checksum'       => '',
-				'plugin_package' => self::package_type(),
-			];
-		}
-
-		return array_merge(
-			ShopEngine\Libs\License\Helper::instance()->get_license(),
-			['plugin_package' => self::package_type()]
-		);
-	}
-
-
-	/**
-	 * Product ID
-	 *
-	 * @return string
-	 * @since 1.0.0
-	 *
-	 */
-	static function product_id() {
-		return '0';
-	}
-
-
 	/**
 	 * Plugin Author Name
 	 *
@@ -115,10 +74,6 @@ final class ShopEngine {
 	 */
 	static function author_name() {
 		return 'Wpmet';
-	}
-
-	public static function store_name() {
-		return 'wpmet';
 	}
 
 

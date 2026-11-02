@@ -323,9 +323,12 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 			]
 		);
 		
-		if(class_exists('\ShopEngine_Pro\Widgets\Free_Widget_Pro_Feature\Archive_Products\Archive_Products')) {
-			\ShopEngine_Pro\Widgets\Free_Widget_Pro_Feature\Archive_Products\Archive_Products::content($this);
-		}
+		/**
+		 * Fires in the content settings of the Archive Products widget, for extensions that add controls.
+		 *
+		 * @param \Elementor\Widget_Base $widget
+		 */
+		do_action('shopengine/widgets/archive-products/content_controls', $this);
 
 		$this->add_control(
 			'shopengine_independent_add_to_cart',
@@ -3325,6 +3328,90 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 		echo '</style>';
 	}
 
+
+	/**
+	 * Bustar theme conflict fix for the archive Product Title typography.
+	 *
+	 * The Bustar theme forces `.woocommerce ul.products li .woocommerce-loop-product__title`
+	 * with `font-size`/`padding !important`, which beats the widget's own (non-important)
+	 * title typography — so changes made in the editor don't show on the archive page.
+	 * This re-applies the user's saved Title Typography values with `!important`, scoped
+	 * to the Bustar theme only (via `get_template()`), so other themes are untouched.
+	 * It's emitted at render time, so it does NOT require regenerating Elementor's CSS.
+	 */
+	private function generate_bustar_title_typography_css()
+	{
+		if (get_template() !== 'bustar') {
+			return;
+		}
+
+		// Skip inside the Elementor editor iframe only.
+		if (
+			class_exists('\Elementor\Plugin')
+			&& \Elementor\Plugin::$instance->editor->is_edit_mode()
+		) {
+			return;
+		}
+
+		$settings  = $this->get_settings_for_display();
+		$widget_id = $this->get_id();
+
+		$title_sel = '.elementor-element.elementor-element-' . $widget_id
+			. ' .shopengine-archive-products:not(.shopengine-archive-products--view-list)'
+			. ' ul.products li.product'
+			. ' .woocommerce-loop-product__title.woocommerce-loop-product__title';
+
+		$decls = '';
+
+		// Font size.
+		$fs = $settings['shopengine_title_color_typography_font_size'] ?? [];
+		if (isset($fs['size']) && $fs['size'] !== '') {
+			$unit = !empty($fs['unit']) ? preg_replace('/[^a-z%]/', '', strtolower($fs['unit'])) : 'px';
+			$decls .= 'font-size:' . floatval($fs['size']) . $unit . ' !important;';
+		}
+
+		// Line height.
+		$lh = $settings['shopengine_title_color_typography_line_height'] ?? [];
+		if (isset($lh['size']) && $lh['size'] !== '') {
+			$unit = !empty($lh['unit']) ? preg_replace('/[^a-z%]/', '', strtolower($lh['unit'])) : 'px';
+			$decls .= 'line-height:' . floatval($lh['size']) . $unit . ' !important;';
+		}
+
+		// Font weight.
+		if (!empty($settings['shopengine_title_color_typography_font_weight'])) {
+			$decls .= 'font-weight:' . preg_replace('/[^0-9a-z]/', '', strtolower($settings['shopengine_title_color_typography_font_weight'])) . ' !important;';
+		}
+
+		// Text transform.
+		if (!empty($settings['shopengine_title_color_typography_text_transform'])) {
+			$decls .= 'text-transform:' . preg_replace('/[^a-z-]/', '', strtolower($settings['shopengine_title_color_typography_text_transform'])) . ' !important;';
+		}
+
+		// Word spacing.
+		$ws = $settings['shopengine_title_color_typography_word_spacing'] ?? [];
+		if (isset($ws['size']) && $ws['size'] !== '') {
+			$unit = !empty($ws['unit']) ? preg_replace('/[^a-z%]/', '', strtolower($ws['unit'])) : 'px';
+			$decls .= 'word-spacing:' . floatval($ws['size']) . $unit . ' !important;';
+		}
+
+		// Color.
+		if (!empty($settings['shopengine_title_color'])) {
+			$decls .= 'color:' . esc_attr($settings['shopengine_title_color']) . ' !important;';
+		}
+
+		// Padding.
+		$pad = $settings['shopengine_title_padding'] ?? [];
+		if (isset($pad['top']) && ($pad['top'] !== '' || $pad['right'] !== '' || $pad['bottom'] !== '' || $pad['left'] !== '')) {
+			$pu = !empty($pad['unit']) ? preg_replace('/[^a-z%]/', '', strtolower($pad['unit'])) : 'px';
+			$decls .= 'padding:' . intval($pad['top']) . $pu . ' ' . intval($pad['right']) . $pu . ' ' . intval($pad['bottom']) . $pu . ' ' . intval($pad['left']) . $pu . ' !important;';
+		}
+
+		// Reset Bustar's float and font-family.
+		$decls .= 'float:none !important;font-family:inherit !important;';
+
+		shopengine_content_render('<style>' . $title_sel . '{' . $decls . '}</style>');
+	}
+
 	protected function screen()
 	{
 
@@ -3342,6 +3429,8 @@ class ShopEngine_Archive_Products extends \ShopEngine\Base\Widget
 		if ($shopengine_group_btns === 'yes' && ($shopengine_add_to_cart_show_text ?? 'no') === 'yes') {
 			$this->generate_add_to_cart_text_css();
 		}
+
+		$this->generate_bustar_title_typography_css();
 
 		$post_type = get_post_type();
 

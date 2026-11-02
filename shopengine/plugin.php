@@ -10,9 +10,7 @@ use ShopEngine\Compatibility\Migrations\LangMigration;
 use ShopEngine\Core\Query_Modifier;
 use ShopEngine\Core\Wc_Customizer\Register_Settings;
 use ShopEngine\Core\Template_Cpt;
-use ShopEngine\Libs\License\License_Route;
 use ShopEngine\Libs\Rating\Rating;
-use ShopEngine\Libs\Updater\Init as Updater;
 use ShopEngine\Modules\Manifest as Module_Manifest;
 use ShopEngine\Utils\Feedback\Plugin_Unsubscribe;
 use ShopEngine\Widgets\Manifest;
@@ -131,22 +129,10 @@ final class Plugin {
 		}
 
 
-		/**
-		 * Routes initialization
-		 *
-		 */
-		new License_Route();
-		
 		// Initialize deactivation feedback modal
         new \ShopEngine\Utils\Feedback\Plugin_Unsubscribe();
-		/**
-		 * Run pro plugin updater here....
-		 *
-		 */
+
 		add_action('admin_init', function () {
-			if(class_exists('ShopEngine_Pro')) {
-				new Updater();
-			}
 			new \ShopEngine\Compatibility\Migrations\Direct_Checkout;
 		});
 
@@ -219,13 +205,14 @@ final class Plugin {
 		Rating::instance('shopengine')
 		->set_plugin( 'ShopEngine', 'https://wpmet.com/wordpress.org/rating/shopengine' )
 		->set_rating_url( 'https://wordpress.org/support/plugin/shopengine/reviews/#new-post' )
-		->set_plugin_logo( 'https://ps.w.org/shopengine/assets/icon-256x256.gif?rev=2505061', 'width:150px !important' )
+		->set_plugin_logo( \ShopEngine::plugin_url() . 'assets/images/apps-page/shopengine.gif', 'width:150px !important' )
 		->set_priority( 11 )
 		->set_first_appear_day( 7 )
 		->set_condition( true )
 		->call();
 		
-		if ( is_admin() && \ShopEngine\Utils\Util::get_settings( 'shopengine_user_consent_for_banner', 'true' ) == 'true' ) {
+		// Stories and banners are fetched from api.wpmet.com, so they stay off until the user opts in.
+		if ( is_admin() && \ShopEngine\Utils\Util::get_settings( 'shopengine_user_consent_for_banner', 'false' ) == 'true' ) {
 
 		 /**
          * Show WPMET stories widget in dashboard
@@ -277,14 +264,14 @@ final class Plugin {
 				'rox-dynamic-cpt-fields-engine/rox-dynamic-cpt-fields-engine.php' => [
 					'name' => esc_html__('Rox Dynamic CPT Fields', 'shopengine'),
 					'url'  => 'https://wordpress.org/plugins/rox-dynamic-cpt-fields-engine/',
-					'icon' => 'https://ps.w.org/rox-dynamic-cpt-fields-engine/assets/icon-256x256.jpeg?rev=3538537',
+					'icon' => $apps_img_path . 'rox-dynamic-cpt-fields.jpeg',
 					'desc' => esc_html__('Build custom post types, fields, taxonomies, and dynamic frontend layouts for WordPress, with zero coding and full AI-generated schema.', 'shopengine'),
 					'docs' => 'https://wpmet.com/doc/rox-dynamic-cpt-fields-engine/',
             	],
              	'rox-appointment-booking/rox-appointment-booking.php' => [
 					'name' => esc_html__('Rox Appointment Booking', 'shopengine'),
 					'url'  => 'https://wordpress.org/plugins/rox-appointment-booking/',
-					'icon' => 'https://ps.w.org/rox-appointment-booking/assets/icon-256x256.png?rev=3575641',
+					'icon' => $apps_img_path . 'rox-appointment-booking.png',
 					'desc' => esc_html__('Manage bookings, agents, payments, and calendars from one dashboard! A complete appointment and scheduling solution for WordPress.', 'shopengine'),
 					'docs' => 'https://wpmet.com/doc/rox-appointment-booking/',
             	],
@@ -298,14 +285,14 @@ final class Plugin {
 				'popup-builder-block/popup-builder-block.php' => [
 					'name' => esc_html__('PopupKit', 'shopengine'),
 					'url'  => 'https://wordpress.org/plugins/popup-builder-block/',
-					'icon' => 'https://ps.w.org/popup-builder-block/assets/icon-256x256.png?rev=3316844',
+					'icon' => $apps_img_path . 'popupkit.png',
 					'desc' => esc_html__('Design popups that convert, right in your WordPress dashboard.', 'shopengine'),
 					'docs' => 'https://wpmet.com/doc/popupkit/',
             	],
 				'table-builder-block/table-builder-block.php' => [
 					'name' => esc_html__('TableKit', 'shopengine'),
 					'url'  => 'https://wordpress.org/plugins/table-builder-block/',
-					'icon' => 'https://ps.w.org/table-builder-block/assets/icon-256x256.png?rev=3509972',
+					'icon' => $apps_img_path . 'tablekit.png',
 					'desc' => esc_html__('Fully Customizable. Multi-Media Integration. Synch Any Data Files. All Within Block Editor.', 'shopengine'),
 					'docs' => 'https://wpmet.com/doc/tablekit/',
 				],

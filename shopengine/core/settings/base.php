@@ -91,10 +91,14 @@ class Base {
 			// page template lists
 			$page_templates = Page_Templates::instance()->getTemplates();
 
-			wp_localize_script('shopengine-admin-js', 'shopengine_admin_var', [
+			/**
+			 * Data handed to the admin dashboard script as `shopengine_admin_var`.
+			 *
+			 * @param array $vars
+			 */
+			wp_localize_script('shopengine-admin-js', 'shopengine_admin_var', apply_filters('shopengine/admin/localized_vars', [
 				'version'             => \ShopEngine::version(),
 				'package_type'        => \ShopEngine::package_type(),
-				'license_status'      => \ShopEngine::license_status(),
 				'cpt'                 => $cptName,
 				'resturl'             => get_rest_url(),
 				'adminurl'            => get_admin_url(),
@@ -109,12 +113,12 @@ class Base {
 				'supported_builders'  => $this->get_supported_builders(),
 				'default_builder'     => $this->get_default_builder(),
 				'both_builders_active' => (did_action('elementor/loaded') && did_action('shopengine-gutenberg-addon/before_loaded')) ? 'yes' : 'no',
-				'license_activated_message' => sprintf(esc_html__('Congratulations! Your product is activated for "%s"', 'shopengine'), parse_url(home_url(), PHP_URL_HOST)),			
 				'is_rtl'			=> is_rtl() ? 'true' : 'false',
+				'can_refresh_library' => current_user_can('manage_options') ? 'yes' : 'no',
 				'ajaxurl' => admin_url(  ).'admin-ajax.php',
 				'nonce'   => wp_create_nonce(),
-				'banner_show' => \ShopEngine\Utils\Util::get_settings( 'shopengine_user_consent_for_banner', 'true' )
-			]);
+				'banner_show' => \ShopEngine\Utils\Util::get_settings( 'shopengine_user_consent_for_banner', 'false' )
+			]));
 			
 			wp_enqueue_style('shopengine-admin-style', \ShopEngine::plugin_url() . 'assets/css/admin-style.css', false, \ShopEngine::version());
 		}
@@ -171,16 +175,15 @@ class Base {
 			$this->menu_link_part . '#shopengine-get-help'
 		);
 
-		// license activation & go premium menu links
-		if(\ShopEngine::package_type() != 'free') { // is pro
-			add_submenu_page(
-				'shopengine-settings',
-				'<span style="color: #49dd85;" class="shopengine_pro_license pro">' . esc_html__('License', 'shopengine') . '</span>',
-				'<span style="color: #49dd85;" class="shopengine_pro_license pro">' . esc_html__('License', 'shopengine') . '</span>',
-				'manage_options',
-				$this->menu_link_part . '#shopengine-license'
-			);
-		} else { // is free
+		/**
+		 * Fires after ShopEngine's own submenu items, for extensions that add theirs.
+		 *
+		 * @param string $menu_link_part Admin URL of the template list, the page that hosts the dashboard.
+		 */
+		do_action('shopengine/admin/submenu', $this->menu_link_part);
+
+		// go premium menu link
+		if(\ShopEngine::package_type() == 'free') {
 			add_submenu_page(
 				'shopengine-settings',
 				'<span style="color: #f9b015;" class="shopengine_pro_aware pro">' . esc_html__('Upgrade to Premium', 'shopengine') . '</span>',

@@ -95,25 +95,6 @@ class Plugin_Data_Sender
      * @param $route
      * @param $data
      */
-    public function sendAutomizyData($route, $data)
-    {
-        return wp_remote_post(
-            $this->getUrl($route),
-            [
-                'method'      => 'POST',
-                'data_format' => 'body',
-                'headers'     => [
-                    'Content-Type' => 'application/json'
-                ],
-                'body'        => json_encode($data)
-            ]
-        );
-    }
-
-    /**
-     * @param $route
-     * @param $data
-     */
     public function sendEmailSubscribeData( $route, $data )
     {
         return wp_remote_post(

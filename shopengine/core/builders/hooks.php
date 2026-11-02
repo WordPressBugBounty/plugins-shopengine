@@ -131,18 +131,19 @@ class Hooks {
 		$template_type        = isset($data['form_type']) ? $data['form_type'] : '';
 		$template_config_data = Page_Templates::instance()->getTemplate($template_type);
 		$template_class       = $template_config_data['class'] ?? null;
-		$category_id          = !empty($data['category_id']) ? $data['category_id'] : 0;
 		$template_language    = get_post_meta($post_id, 'language_code', true);
 
 		switch($column) {
 			case 'type':
 				echo esc_html(empty($template_config_data['title']) ?  '' : $template_config_data['title']);
-				if(class_exists(\ShopEngine_Pro::class)) {
-					$cat_name = get_the_category_by_ID($category_id);
-					if(isset($cat_name) && !is_wp_error($cat_name)) {
-						echo '<br>' . esc_html__('Category', 'shopengine') .' : '. esc_html($cat_name);
-					}
-				}
+
+				/**
+				 * Fires after the template type in the "Type" column of the template list.
+				 *
+				 * @param int   $post_id
+				 * @param mixed $data    Saved template settings.
+				 */
+				do_action('shopengine/templates/column/type', $post_id, $data);
 				break;
 
 			case 'lang':

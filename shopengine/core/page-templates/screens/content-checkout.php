@@ -1,7 +1,5 @@
 <?php
 
-use ShopEngine\Core\Register\Module_List;
-
 defined('ABSPATH') || exit; 
 $block_container_classes =  wp_is_block_theme() ? 'has-global-padding is-layout-constrained wp-block-group' : '';
 ?>
@@ -28,29 +26,6 @@ $block_container_classes =  wp_is_block_theme() ? 'has-global-padding is-layout-
 			while(have_posts()) : the_post();
 
 				do_action('woocommerce_before_checkout_form', $checkout);
-
-				$skip_content = false;
-
-                /**
-                 * check multistep module active or not
-                 * if active then check multistep checkout enabled or not in section
-                 */
-                $is_multistep_checkout_active = Module_List::instance()->is_widget_active('multistep-checkout');
-
-                $multistep_status = false;
-                if($is_multistep_checkout_active){
-                    $checkout_sections =  json_decode(get_post_meta($this->prod_tpl_id,'_elementor_data', true), true);
-					if(is_array($checkout_sections)) {
-						foreach ($checkout_sections as $key => $checkout_section){
-							$multistep = $checkout_section['settings']['shopengine_multistep_checkout_enable'] ?? '';
-							if($multistep == 'enabled'){
-								$multistep_status = true;
-							}
-						}
-					}
-				}
-
-				$login_reminder =   get_option( 'woocommerce_enable_checkout_login_reminder' );
 
 				if ( isset( $wp->query_vars['order-pay'] ) ) : ?>
 					<div class="shopengine-order-pay-container">

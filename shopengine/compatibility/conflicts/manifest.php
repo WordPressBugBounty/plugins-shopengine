@@ -86,6 +86,7 @@ class Manifest {
 			add_action('elementor/init', [$this, 'remove_unlimited_elements_background_hooks'], 999);
 			
 		}
+
 		
 	}	
 

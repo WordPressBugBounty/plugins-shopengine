@@ -241,8 +241,10 @@ if( !class_exists('\Wpmet\Libs\Metform_Promo_Banner') ) {
 					const isAlreadyInstalled = "<?php echo esc_attr($this->is_already_installed) ?>";
 					let installationUrl = "<?php echo esc_url($this->installation_url('metform/metform.php')) ?>";
 					let activationUrl = "<?php echo esc_url($this->activation_url('metform/metform.php')) ?>";
+					let formCreationUrl = "<?php echo esc_url($this->form_creation_url()) ?>";
 					installationUrl = installationUrl?.replace(/&#038;/g, '&');
 					activationUrl = activationUrl?.replace(/&#038;/g, '&');
+					formCreationUrl = formCreationUrl?.replace(/&#038;/g, '&');
 
 					function metform_install_active_plugin(ajaxurl, success_callback, beforeText) {
 						try {
@@ -256,7 +258,7 @@ if( !class_exists('\Wpmet\Libs\Metform_Promo_Banner') ) {
 									if (success_callback) {
 										success_callback();
 									}else{
-										window.location.href = window.shopengine_admin_var.adminurl + 'edit.php?post_type=metform-form&redirect_from=mf_promo_banner#show-metform-form-creation-modal';
+										window.location.href = formCreationUrl;
 									}
 								},
 								error: function (error) {
@@ -342,6 +344,24 @@ if( !class_exists('\Wpmet\Libs\Metform_Promo_Banner') ) {
 				),
 				admin_url( 'plugins.php' )
 			), 'activate-plugin_' . $pluginName );
+		}
+
+		/**
+		 * Get MetForm form creation url
+		 *
+		 * @access public
+		 * @return string
+		 */
+		public function form_creation_url() {
+
+			return add_query_arg(
+				array(
+					'post_type' => 'metform-form',
+					'mf_action' => 'create_form',
+					'_wpnonce'  => wp_create_nonce( 'metform_create_form' ),
+				),
+				admin_url( 'edit.php' )
+			) . '#show-metform-form-creation-modal';
 		}
 	}
 }

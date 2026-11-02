@@ -42,10 +42,21 @@ class Auto_Install_Notice {
 			return;
 		}
 
+		// The notice only offers a newsletter sign-up, so there is nothing to show without an address.
+		$email = self::get_subscribe_email();
+		if ( '' === $email ) {
+			return;
+		}
+
 		$nonce        = wp_create_nonce( 'shopengine_auto_install_notice_nonce' );
 		$ajax_url     = esc_js( admin_url( 'admin-ajax.php' ) );
 		$heading      = esc_js( __( 'Get more from your new plugins 🚀', 'shopengine' ) );
-		$desc         = esc_js( __( 'Allow us to use non-sensitive data from your site to improve our products and get personalized performance tips.', 'shopengine' ) );
+		// HTML (it carries a link), so it reaches the script as a JSON string rather than through esc_js().
+		$desc_html    = sprintf(
+			/* translators: %s: link to the Wpmet privacy policy */
+			esc_html__( 'Allow us to use non-sensitive data and basic info from your site to improve our products and send you personalized performance tips. Read %s.', 'shopengine' ),
+			'<a href="' . esc_url( 'https://wpmet.com/privacy-policy/' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Privacy Policy', 'shopengine' ) . '</a>'
+		);
 		$skip_label   = esc_js( __( 'Skip for Now', 'shopengine' ) );
 		$confirm_label = esc_js( __( 'Confirm & Apply', 'shopengine' ) );
 		$applying     = esc_js( __( 'Applying…', 'shopengine' ) );
@@ -119,6 +130,7 @@ class Auto_Install_Notice {
 		(function() {
 			var NONCE   = '<?php echo esc_js( $nonce ); ?>';
 			var AJAXURL = '<?php echo $ajax_url; ?>';
+			var DESC    = <?php echo wp_json_encode( $desc_html ); ?>;
 			var dismissed = false;
 
 			function setContentPadding( height ) {
@@ -176,7 +188,7 @@ class Auto_Install_Notice {
 				div.innerHTML =
 					'<div style="flex:1 1 auto;">' +
 						'<h3 style="margin:0 0 6px;font-family:Inter,sans-serif;font-size:24px;font-weight:700;line-height:24px;letter-spacing:0;"><?php echo $heading; ?></h3>' +
-						'<p style="margin:0;color:#50575E;font-family:Inter,sans-serif;font-weight:500;font-size:16px;line-height:24px;letter-spacing:0;"><?php echo $desc; ?></p>' +
+						'<p style="margin:0;color:#50575E;font-family:Inter,sans-serif;font-weight:500;font-size:16px;line-height:24px;letter-spacing:0;">' + DESC + '</p>' +
 					'</div>' +
 					'<div style="flex:0 0 auto;display:flex;gap:10px;">' +
 						'<button class="button" id="wpmet-shopengine-notice-skip"><?php echo $skip_label; ?></button>' +
@@ -248,18 +260,28 @@ class Auto_Install_Notice {
 			wp_send_json_error();
 		}
 
-		$stored_email = get_option( 'wpmet_onboard_collected_email' );
-		$email        = $stored_email
-			? sanitize_email( $stored_email )
-			: sanitize_email( get_option( 'admin_email' ) );
+		$email = self::get_subscribe_email();
 
-		\ShopEngine\Core\Onboard\Plugin_Data_Sender::instance()->sendEmailSubscribeData( 'plugin-subscribe', [
-			'email' => $email,
-			'slug'  => 'shopengine',
-		] );
+		if ( '' !== $email ) {
+			\ShopEngine\Core\Onboard\Plugin_Data_Sender::instance()->sendEmailSubscribeData( 'plugin-subscribe', [
+				'email' => $email,
+				'slug'  => 'shopengine',
+			] );
 
-		update_option( self::EMAIL_COLLECTED_KEY, true, false );
+			update_option( self::EMAIL_COLLECTED_KEY, true, false );
+		}
+
 		update_option( self::DISMISSED_KEY, true, false );
 		wp_send_json_success();
+	}
+
+	/**
+	 * Address the notice names and subscribes on confirm: the one given during
+	 * a wpmet onboarding, otherwise the site admin email.
+	 */
+	private static function get_subscribe_email(): string {
+		$stored_email = get_option( 'wpmet_onboard_collected_email' );
+
+		return (string) sanitize_email( $stored_email ? $stored_email : get_option( 'admin_email' ) );
 	}
 }

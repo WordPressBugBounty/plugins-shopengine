@@ -31,8 +31,8 @@ defined('ABSPATH') || exit;
 					<div class="shopengine-table__body-item--td table-first-body-column">
 						<!-- Product Thumbnail and remove button together -->
 						<div class="product-thumbnail" data-title="Image">
-							<a title="<?php esc_html_e('Product Thumbnail', 'shopengine') ?>" href="https://en.gravatar.com/userimage/215260729/3cb6b9fe31d9ee9112faba4c056a9d0e.jpg?size=300">
-								<img width="300" height="300" src="https://en.gravatar.com/userimage/215260729/3cb6b9fe31d9ee9112faba4c056a9d0e.jpg?size=300" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="<?php esc_attr_e('Beanie with logo','shopengine'); ?>" loading="lazy" sizes="(max-width: 300px) 100vw, 300px">
+							<a title="<?php esc_html_e('Product Thumbnail', 'shopengine') ?>" href="#">
+								<img width="300" height="300" src="<?php echo esc_url(wc_placeholder_img_src('woocommerce_thumbnail')); ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="<?php esc_attr_e('Beanie with logo','shopengine'); ?>" loading="lazy" sizes="(max-width: 300px) 100vw, 300px">
 							</a>
 							<!-- remove button -->
 							<div class="product-remove">
@@ -49,7 +49,7 @@ defined('ABSPATH') || exit;
 
 					<!-- product name -->
 					<div class="shopengine-table__body-item--td product-name" data-title="Product">
-						<a title="<?php esc_html_e('Product Name','shopengine')?>"href="https://en.gravatar.com/userimage/215260729/3cb6b9fe31d9ee9112faba4c056a9d0e.jpg?size=300">Beanie with Logo</a>
+						<a title="<?php esc_html_e('Product Name','shopengine')?>" href="#">Beanie with Logo</a>
 					</div>
 					<!-- product price -->
 					<div class="shopengine-table__body-item--td product-price" data-title="Price">

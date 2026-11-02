@@ -121,6 +121,8 @@ class Plugin_Unsubscribe
 							<?php endforeach; ?>
 						</div>
 
+						<?php $this->render_data_notice(); ?>
+
 						<?php $this->render_modal_footer(); ?>
 
 					</form>
@@ -153,6 +155,7 @@ class Plugin_Unsubscribe
 			? sanitize_text_field(wp_unslash($_POST['reason']))
 			: '';
 
+		// Only sent on "Submit & Deactivate"; "Skip & Deactivate" sends nothing (see render_data_notice()).
 		$data = array(
 			'plugin_slug'    => 'shopengine',
 			'plugin_name'    => 'ShopEngine',
@@ -312,6 +315,29 @@ class Plugin_Unsubscribe
 	}
 
 	/**
+	 * Output the notice explaining that "Submit & Deactivate" shares feedback and usage data
+	 * and "Skip & Deactivate" shares nothing.
+	 *
+	 * @since 4.9.8
+	 *
+	 * @return void
+	 */
+	private function render_data_notice()
+	{
+	?>
+		<p class="shopengine-deactivation-notice">
+			<?php
+			printf(
+				/* translators: %s: link to the Wpmet privacy policy */
+				esc_html__('Clicking “Submit & Deactivate” will help us improve ShopEngine by sharing your feedback and usage insights. Choose “Skip & Deactivate” to deactivate the plugin without sharing any data. %s', 'shopengine'),
+				'<a href="https://wpmet.com/privacy-policy/" target="_blank" rel="noopener noreferrer">' . esc_html__('Privacy Policy', 'shopengine') . '</a>'
+			);
+			?>
+		</p>
+	<?php
+	}
+
+	/**
 	 * Output the modal footer containing the action buttons.
 	 *
 	 * @since 1.0.0
@@ -414,24 +440,21 @@ class Plugin_Unsubscribe
 	}
 
 	/**
-	 * Return the current user's license/subscription type.
-	 *
-	 * Possible return values:
-	 * - `'pro_valid'`  – Pro plugin is active with a valid licence.
-	 * - `'pro'`        – Pro plugin is installed but licence is missing or invalid.
-	 * - `'free'`       – Only the Lite version is installed.
+	 * Return the package the site runs. ShopEngine itself is `'free'`;
+	 * extensions report theirs through the filter.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string One of `'pro_valid'`, `'pro'`, or `'free'`.
+	 * @return string
 	 */
 	private function get_user_type()
 	{
-		if ('pro' !== \ShopEngine::package_type()) {
-			return 'free';
-		}
-
-		return 'valid' === \ShopEngine::license_status() ? 'pro_valid' : 'pro';
+		/**
+		 * Package reported with the deactivation feedback.
+		 *
+		 * @param string $user_type
+		 */
+		return (string) apply_filters('shopengine/feedback/user_type', 'free');
 	}
 
 	/**

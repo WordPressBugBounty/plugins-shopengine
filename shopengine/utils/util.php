@@ -19,7 +19,7 @@ class Util{
 	}
 
 	public static function save_option( $key, $value = '' ) {
-		$data_all         = get_option( self::$key );
+		$data_all         = get_option( self::$key, array() );
 
 		$data_all[ $key ] = $value;
 		return update_option(  self::$key, $data_all );

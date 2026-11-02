@@ -54,10 +54,9 @@ class Api extends \ShopEngine\Base\Api {
 
 
 	public function get_fields() {
-		$fields = array_merge(
-			Action::instance()->get_fields(), 
-			['sample_designs' => \ShopEngine\Core\Sample_Designs\Base::instance()->get_designs()]
-		);
+		// Ready-made designs are no longer sent here (they carried server file
+		// paths): the admin UI loads them from shopengine/v1/library/list.
+		$fields = Action::instance()->get_fields();
 
 		return apply_filters('shopengine/core/settings/return_fields', $fields);
 	}
@@ -70,12 +69,14 @@ class Api extends \ShopEngine\Base\Api {
 
 	public function get_our_others_plugin_install_api() {
         $plugins = [
-            'elementskit-lite'        => 'elementskit-lite.php',
-            'metform'                 => 'metform.php',
-			'gutenkit-blocks-addon'	  => 'gutenkit-blocks-addon.php',
-			'popup-builder-block'	  =>  'popup-builder-block.php',
-			'emailkit'				  => 'EmailKit.php',
-			'getgenie' 				  => 'getgenie.php',
+            'elementskit-lite'              => 'elementskit-lite.php',
+            'metform'                       => 'metform.php',
+			'rox-dynamic-cpt-fields-engine' => 'rox-dynamic-cpt-fields-engine.php',
+			'rox-appointment-booking'       => 'rox-appointment-booking.php',
+			'gutenkit-blocks-addon'         => 'gutenkit-blocks-addon.php',
+			'popup-builder-block'           => 'popup-builder-block.php',
+			'emailkit'                      => 'EmailKit.php',
+			'getgenie'                      => 'getgenie.php',
         ];
 
 		$plugin_status = Plugin_Status::instance();
@@ -88,6 +89,11 @@ class Api extends \ShopEngine\Base\Api {
     }
 
 	public function post_save_onboard() {
+
+		if( !current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
 		$data    = $this->request->get_params();
 		$onboard = new Onboard();
 		return $onboard->submit($data);
@@ -257,6 +263,8 @@ class Api extends \ShopEngine\Base\Api {
 			'getgenie/getgenie.php' => esc_html__('AI Content & SEO Tool Activated', 'shopengine'),
 			'shopengine/shopengine.php' => esc_html__('WooCommerce Builder Activated', 'shopengine'),
 			'metform/metform.php' => esc_html__('Form Builder Activated', 'shopengine'),
+			'rox-dynamic-cpt-fields-engine/rox-dynamic-cpt-fields-engine.php' => esc_html__('Dynamic CPT Fields Activated', 'shopengine'),
+			'rox-appointment-booking/rox-appointment-booking.php' => esc_html__('Appointment Booking Activated', 'shopengine'),
 			'emailkit/EmailKit.php' => esc_html__('Email Customizer Activated', 'shopengine'),
 			'gutenkit-blocks-addon/gutenkit-blocks-addon.php' => esc_html__('Page Builder Blocks Activated', 'shopengine'),
 			'popup-builder-block/popup-builder-block.php' => esc_html__('Popup Builder Activated', 'shopengine'),

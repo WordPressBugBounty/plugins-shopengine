@@ -16,6 +16,8 @@ class Single extends Base {
 		add_action('wp_enqueue_scripts', [$this,'single_page_css_conflict_remove'], 20);
 
 		$this->delayed_hook_conflicts();
+
+		$this->bustar_gallery_conflicts();
 	}
 
 	protected function get_page_type_option_slug(): string {
@@ -134,6 +136,38 @@ class Single extends Base {
 			);
 		}
 
+	}
+
+	/**
+	 * Fix WooCommerce product gallery (lightbox + zoom) when the Bustar theme is active.
+	 *
+	 * All hooks here are registered from the single-product template's init(), so they
+	 * only run on single product pages. The rs-swiper/slick dequeue in particular must
+	 * stay page-scoped: dequeuing them site-wide (e.g. from a global conflict manifest)
+	 * breaks other pages that rely on Swiper ("Swiper is not defined").
+	 */
+	public function bustar_gallery_conflicts() {
+		if ( get_template() !== 'bustar' ) {
+			return;
+		}
+
+		// Bustar removes wc-product-gallery-lightbox/zoom theme support in
+		// after_setup_theme, which stops WooCommerce from enqueuing the photoswipe
+		// scripts and sets photoswipe_enabled:false. Re-add at wp_enqueue_scripts
+		// priority 1, before WooCommerce reads the support flags.
+		add_action('wp_enqueue_scripts', function() {
+			add_theme_support('wc-product-gallery-zoom');
+			add_theme_support('wc-product-gallery-lightbox');
+		}, 1);
+
+		// Bustar Addons enqueues rs-swiper and slick, which conflict with
+		// WooCommerce's flexslider-based gallery and break the lightbox on click.
+		if ( is_plugin_active('bustar-addons/bustar-addons.php') ) {
+			add_action('wp_enqueue_scripts', function() {
+				wp_dequeue_script('rs-swiper');
+				wp_dequeue_script('slick');
+			}, 50);
+		}
 	}
 
 	public function delayed_hook_conflicts() {

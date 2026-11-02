@@ -54,17 +54,15 @@ class Templates {
 		if(isset($activated_templates[$template_type]['lang'][$language_code])) {
 			$templates = $activated_templates[$template_type]['lang'][$language_code];
 
-			$category_id = apply_filters('shopengine_template_category_id', 0);
+			/**
+			 * Which of the activated templates of this type and language to use.
+			 *
+			 * @param int|false $key           Index into $templates; the template without a category by default.
+			 * @param array     $templates     Activated templates: template_id, status, category_id.
+			 * @param string    $template_type
+			 */
+			$key = apply_filters('shopengine/templates/active_template_key', Action::get_template_key($templates), $templates, $template_type);
 
-			if(0 === $category_id) {
-				$key = Action::get_template_key($templates);
-			} else {
-				$key = Action::get_template_key($templates, 'category_id', $category_id);
-				if(is_bool($key)) {
-					$key = Action::get_template_key($templates);
-				}
-			}
-			
 			if(is_integer($key)) {
 				$template_data = $templates[$key];
 

@@ -28,6 +28,9 @@ class Onboard
 
             if (isset($data['user_onboard_data']['isDataSharable']) && $data['user_onboard_data']['isDataSharable'] == true) {
                 Plugin_Data_Sender::instance()->send('diagnostic-data');
+
+                // The same consent box also opts in to the update / tutorial / promotional messages from api.wpmet.com.
+                \ShopEngine\Utils\Util::save_settings( [ 'shopengine_user_consent_for_banner' => 'true' ] );
             }
 
             if (!empty($data['user_onboard_data']['email']) && !empty(is_email($data['user_onboard_data']['email']))) {

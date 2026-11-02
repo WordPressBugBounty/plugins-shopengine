@@ -2,11 +2,8 @@
 
 namespace ShopEngine\Core\Builders;
 
-use Elementor\Core\Files\Uploads_Manager;
-use ShopEngine\Core\Sample_Designs\Base;
 use ShopEngine\Core\Template_Cpt;
 use ShopEngine\Traits\Singleton;
-use WP_Filesystem_Direct;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -62,7 +59,7 @@ class Action
         $this->set_form_values( $form_settings );
         $this->template_id       = $template_id;
         $this->template_type     = self::get_form_value( 'form_type', 'single' );
-        $this->category_id       = self::get_form_value( 'category_id', 0 );
+        $this->category_id       = $this->resolve_category_id( $template_id );
         $this->language_code     = self::get_form_value( 'language_code', 'en' );
         $this->old_language_code = self::get_form_value( 'old_language_code', 'en' );
 
@@ -75,6 +72,33 @@ class Action
         } else {
             return $this->update();
         }
+    }
+
+    /**
+     * Category the template is limited to. ShopEngine does not assign one
+     * itself: when no extension registered the `category_id` form field, a
+     * template keeps the category that is already stored for it, so saving
+     * it here does not turn it into the template without a category.
+     *
+     * @param int $template_id
+     * @return int
+     */
+    private function resolve_category_id( $template_id )
+    {
+        if ( isset( $this->get_fields()['category_id'] ) ) {
+            return self::get_form_value( 'category_id', 0 );
+        }
+
+        $stored = $template_id ? self::get_template_category_id( $template_id, self::get_activated_templates() ) : 0;
+
+        if ( empty( $stored ) ) {
+            return 0;
+        }
+
+        // Keep it in the saved form settings as well.
+        self::$form_settings['category_id'] = $stored;
+
+        return $stored;
     }
 
     public function insert()
@@ -124,48 +148,31 @@ class Action
             update_post_meta( $template_id, '_elementor_version', '3.4.6' );
         }
 
-        if ( !empty( $form_settings['sample_design'] ) ) {
-            /**
-             *  Get ready made template data
-             */
-            $template_path =  $form_settings['sample_design'] ;
-            $css_path = str_replace('content.html', 'style.txt', $template_path);            
+        $status  = esc_html__( 'Template settings inserted', 'shopengine' );
+        $warning = false;
 
-            if ( is_file( $template_path ) ) {
-                require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
-                require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+        /**
+         * Ready-made design: only a remote library ID is accepted. The legacy
+         * `sample_design` (a file path) is not in get_fields() and is never read.
+         */
+        $design_id = isset( $form_settings['sample_design_id'] ) ? absint( $form_settings['sample_design_id'] ) : 0;
 
-                $wp_filesystem = new \WP_Filesystem_Direct(null);
-                $fileContent = $wp_filesystem->get_contents($template_path);
-                $get_generated_css = '';
+        if ( $design_id ) {
+            $imported = \ShopEngine\Core\Template_Library\Import::instance()->run( [
+                'post_id'       => $template_id,
+                'layout_id'     => $design_id,
+                'template_type' => $this->template_type,
+                'editor'        => $edit_with,
+            ] );
 
-                if( file_exists($css_path) ){
-                    $get_generated_css = $wp_filesystem->get_contents($css_path); 
-                }
-             
-                if(!is_null( $fileContent ) && $edit_with === 'gutenberg'){
-                    wp_update_post([
-                        'ID' => $this->template_id,
-                        'post_content' => $fileContent
-                    ]);
-
-                    update_post_meta( $this->template_id, 'gutenova_css', $get_generated_css );
-                }
-
-                if ( !is_null( $fileContent ) && $edit_with === 'elementor' ) {
-
-                    add_filter('elementor/files/allow_unfiltered_upload', '__return_true');
-
-                    $result = \Elementor\Plugin::$instance->templates_manager->import_template( [
-                        'fileData' => base64_encode( $fileContent ),
-                        'fileName' => 'shopengine-content.json'
-                    ] );
-
-                    $imported_template_id = $result[0]['template_id'];
-                    $template_data        = get_post_meta( $imported_template_id, '_elementor_data', true );
-                    update_post_meta( $template_id, '_elementor_data', $template_data );
-                    wp_delete_post( $imported_template_id );
-                }
+            if ( is_wp_error( $imported ) ) {
+                // The template post already exists: keep it blank and tell the user why.
+                $warning = true;
+                $status  = sprintf(
+                    /* translators: %s: reason the design could not be imported */
+                    esc_html__( 'Template created, but the selected design could not be imported: %s', 'shopengine' ),
+                    esc_html( $imported->get_error_message() )
+                );
             }
         }
 
@@ -177,7 +184,8 @@ class Action
                 'type'                => Template_Cpt::TYPE,
                 'activated_templates' => $activated_templates
             ],
-            'status' => esc_html__( 'Template settings inserted', 'shopengine' )
+            'status'  => $status,
+            'warning' => $warning
         ];
     }
 
@@ -475,7 +483,12 @@ class Action
 
     public function get_fields()
     {
-        return [
+        /**
+         * Fields accepted from the template form. Anything else in the request is ignored.
+         *
+         * @param array $fields
+         */
+        return apply_filters( 'shopengine/templates/form_fields', [
             'form_title'        => [
                 'name' => 'form_title'
             ],
@@ -488,11 +501,8 @@ class Action
             'edit_with_option'  => [
                 'name' => 'edit_with_option'
             ],
-            'sample_design'     => [
-                'name' => 'sample_design'
-            ],
-            'category_id'       => [
-                'name' => 'category_id'
+            'sample_design_id'  => [
+                'name' => 'sample_design_id'
             ],
             'language_code'     => [
                 'name' => 'language_code'
@@ -500,6 +510,6 @@ class Action
             'old_language_code' => [
                 'name' => 'old_language_code'
             ]
-        ];
+        ] );
     }
 }

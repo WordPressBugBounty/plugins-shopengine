@@ -17,9 +17,18 @@ class Helper {
 
 	/**
 	 * ShopEngine Pro versions from before its pro features moved out of ShopEngine
-	 * still expect ShopEngine to ship them.
+	 * still expect ShopEngine to ship them. The Product Filters query was among the
+	 * last parts to move, so a Pro without it predates the move.
 	 */
 	public static function is_pro_outdated() {
+
+		return class_exists('ShopEngine_Pro') && !class_exists('\ShopEngine_Pro\Widgets\Product_Filters\Filter_Query');
+	}
+
+	/**
+	 * ShopEngine Pro versions that still use the comparison classes ShopEngine no longer ships.
+	 */
+	public static function is_pro_comparison_outdated() {
 
 		return class_exists('ShopEngine_Pro') && !class_exists('\ShopEngine_Pro\Modules\Comparison\Comparison_Share');
 	}

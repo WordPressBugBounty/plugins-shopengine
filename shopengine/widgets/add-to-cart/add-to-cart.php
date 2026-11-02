@@ -279,11 +279,9 @@ class ShopEngine_Add_To_Cart extends \ShopEngine\Base\Widget
 				'list_title' => esc_html__( 'Comparison', 'shopengine' ),
 				'list_key' => 'comparison',
 			],
-			[
-				'list_title' => esc_html__( 'Partial Payment', 'shopengine' ),
-				'list_key' => 'partial_payment',
-			],
 		];
+
+		$default = apply_filters( 'shopengine/widgets/add-to-cart/ordering_list_defaults', $default );
 		
 		$repeater = new Repeater();
 		$this->add_control(
@@ -2737,6 +2735,11 @@ class ShopEngine_Add_To_Cart extends \ShopEngine\Base\Widget
 
 			$this->end_controls_section();
 		}
+
+	}
+
+	public function has_partial_payment_filter_support() {
+		return true;
 	}
 
 	private function order_item_css($order_items) {
@@ -2760,9 +2763,7 @@ class ShopEngine_Add_To_Cart extends \ShopEngine\Base\Widget
 			if($item['list_key'] == 'comparison') {
 				$styles .= $parent_class . ' .shopengine-swatches .shopengine-comparison  {order: '. $order_number .';}';
 			}
-			if($item['list_key'] == 'partial_payment') {
-				$styles .= $parent_class . ' .shopengine-swatches .shopengine-partial-payment-container  {order: '. $order_number .';}';
-			}
+			$styles = apply_filters( 'shopengine/widgets/add-to-cart/ordering_item_css', $styles, $item, $parent_class, $order_number );
 		}
 
 		echo '<style>';

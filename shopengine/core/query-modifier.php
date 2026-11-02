@@ -3,7 +3,6 @@
 namespace ShopEngine\Core;
 
 use ShopEngine\Traits\Singleton;
-use ShopEngine\Core\Register\Widget_List;
 
 class Query_Modifier
 {
@@ -21,7 +20,7 @@ class Query_Modifier
     public function modify_query($query)
     {
 
-        
+
         if (is_admin() || !$query->is_main_query() || $query->is_single === true) {
             return;
         }
@@ -43,8 +42,7 @@ class Query_Modifier
             $query->set('posts_per_page', absint(intval($_GET['shopengine_products_per_page'])));
         }
 
-        // checking product filter widget active or not
-        // but if `filter_pa_*` params are present on shop archive, allow processing even if widget not active
+        // `filter_pa_*` params (attribute links of the Product Tabs widget) are handled on the shop archive
         $has_filter_params = false;
         if ( $is_shop_archive ) {
             foreach ( $_GET as $k => $v ) {
@@ -65,108 +63,27 @@ class Query_Modifier
             }
         }
 
-        $active_widgets = Widget_List::instance()->get_list(true, 'active');
-        if (!isset($active_widgets['product-filters']) && !$has_filter_params) {
+        /**
+         * Whether the product query is filtered on every request, not only when
+         * the attribute links above are used. Extensions that add their own
+         * filters through the two hooks below turn this on.
+         *
+         * @param bool      $enabled
+         * @param \WP_Query $query
+         */
+        if (!apply_filters('shopengine/query_modifier/enabled', false, $query) && !$has_filter_params) {
             return;
         }
-
-        $color_prefix = 'shopengine_filter_color_';
-
-        $attribute_prefix = 'shopengine_filter_attribute_';
-
-        $image_prefix = 'shopengine_filter_image_';
-
-        $label_prefix = 'shopengine_filter_label_';
-
-        $shipping_prefix = 'shopengine_filter_shipping_';
-
-        $category_prefix = 'shopengine_filter_category';
-
-        $stock_prefix = 'shopengine_filter_stock';
-
-        $sale_prefix = 'shopengine_filter_onsale';
-
-        $brand_prefix = 'shopengine_filter_brand';
 
         $meta_query = ['relation' => 'AND'];
 
         //phpcs:ignore WordPress.Security.NonceVerification.Recommended -- It's a fronted user part, not possible to verify nonce here
         foreach ($_GET as $key => $value) {
 
-            if ($key === 'rating_filter') {
-                $meta_query[] = [
-                    'key' => '_wc_average_rating',
-                    'value' => explode(',', trim($value)),
-                    'type' => 'numeric',
-                    'compare' => 'IN'
-                ];
-            }
-
-            if ($key === $category_prefix) {
-
-                $query->query['product_cat'] = '';
-                $query->query_vars['product_cat'] = '';
-                $query = $this->query($key . 'product_cat', $category_prefix, $value, $query);
-
-            } elseif (strpos($key, $color_prefix) !== false) {
-
-                $query = $this->query($key, $color_prefix, $value, $query);
-
-            } elseif (strpos($key, $attribute_prefix) !== false) {
-
-                $query = $this->query($key, $attribute_prefix, $value, $query);
-
-            } elseif (strpos($key, $image_prefix) !== false) {
-
-                $query = $this->query($key, $image_prefix, $value, $query);
-
-            } elseif (strpos($key, $label_prefix) !== false) {
-
-                $query = $this->query($key, $label_prefix, $value, $query);
-
-            } elseif (strpos($key, $shipping_prefix) !== false) {
-
-                $query = $this->query($key, $shipping_prefix, $value, $query);
-
-            } elseif ($key === $brand_prefix) {
-
-                $query = $this->query($key, $brand_prefix, $value, $query);
-
-            } elseif ($key === $stock_prefix) {
-
-                $meta_query[] = [
-                    'key' => '_stock_status',
-                    'value' => $value,
-                    'compare' => 'IN'
-                ];
-
-
-            } elseif ($key === $sale_prefix) {
-
-                $s = explode(',', $value);
-
-                foreach ($s as $v) {
-
-                    if ($v === 'on_sale') {
-
-                        $product_ids_on_sale = wc_get_product_ids_on_sale(); // including varriation products
-                        $query->set( 'post__in', (array) $product_ids_on_sale );
-
-                    } else {
-                        $meta_query[] = [
-                            'key' => '_sale_price',
-                            'compare' => 'NOT EXISTS',
-                            'operator' => 'OR',
-                        ];
-                    }
-                }
-            }
-
             // Support custom attribute filtering (filter_custom_{slug})
-            elseif (strpos($key, 'filter_custom_') === 0) {
-                $attr_slug = substr($key, strlen('filter_custom_')); // e.g. material, brand
+            if (strpos($key, 'filter_custom_') === 0) {
                 $values = array_map('sanitize_text_field', explode(',', trim($value)));
-                
+
                 // Search in serialized _product_attributes meta for custom attributes
                 foreach ($values as $val) {
                     $meta_query[] = [
@@ -177,6 +94,22 @@ class Query_Modifier
                 }
             }
         }
+
+        /**
+         * Meta query clauses for the main product query.
+         *
+         * @param array     $meta_query
+         * @param \WP_Query $query
+         */
+        $meta_query = apply_filters('shopengine/query_modifier/meta_query', $meta_query, $query);
+
+        /**
+         * Taxonomy query clauses for the main product query.
+         *
+         * @param array     $tax_query
+         * @param \WP_Query $query
+         */
+        $this->custom_query = apply_filters('shopengine/query_modifier/tax_query', $this->custom_query, $query);
 
         if (!empty($meta_query)) {
             $query->set('meta_query', $meta_query);
@@ -195,29 +128,6 @@ class Query_Modifier
             'operator'  => 'NOT IN',
         ]);
 
-        $query->set('tax_query', apply_filters('shopengine-tax-query-modifier', $this->custom_query)); 
-    }
-
-    public function query($key, $prefix, $values, $query)
-    {
-        // Handle brand filter specifically
-        if ($prefix === 'shopengine_filter_brand') {
-            $taxonomy = 'product_brand';
-        } else {
-            $taxonomy = str_replace($prefix, '', $key);
-        }
- 
-        $values = explode(',', trim($values));
- 
-        $this->custom_query['relation'] =  'AND';
-
-        $this->custom_query[] = [
-            'taxonomy' => $taxonomy,
-            'field' => 'slug',
-            'terms' => $values,
-            'operator' => 'IN',
-        ];
-
-        return $query;
+        $query->set('tax_query', apply_filters('shopengine-tax-query-modifier', $this->custom_query));
     }
 }

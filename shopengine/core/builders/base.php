@@ -36,6 +36,7 @@ class Base extends Common {
 	public function init() {
 
 		$this->api = new Api();
+		new \ShopEngine\Core\Template_Library\Api();
 
 		#Registering custom post type
 		Template_Cpt::instance()->init();

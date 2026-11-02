@@ -6,7 +6,7 @@
       <ol class="commentlist">
          <li class="review byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-16">
             <div id="comment-16" class="comment_container">
-               <img alt="<?php esc_attr_e('avatar','shopengine'); ?>" src="https://secure.gravatar.com/avatar/7064f941bf63e90bfe35449c62586bc8?s=60&d=mm&r=g" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">
+               <?php echo wp_kses_post(get_avatar('', 60, 'mm', esc_attr__('avatar', 'shopengine'))); ?>
                <div class="comment-text">
                   <div class="star-rating" role="img" aria-label="Rated 5 out of 5"><span style="width:100%">Rated <strong class="rating">5</strong> out of 5</span></div>
                   <p class="meta">
@@ -23,7 +23,7 @@
          <!-- #comment-## -->
          <li class="review byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="li-comment-17">
             <div id="comment-17" class="comment_container">
-               <img alt="Review Avatar" src="https://secure.gravatar.com/avatar/7064f941bf63e90bfe35449c62586bc8?s=60&d=mm&r=g" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">
+               <?php echo wp_kses_post(get_avatar('', 60, 'mm', esc_attr__('avatar', 'shopengine'))); ?>
                <div class="comment-text">
                   <div class="star-rating" role="img" aria-label="Rated 3 out of 5"><span style="width:60%">Rated <strong class="rating">3</strong> out of 5</span></div>
                   <p class="meta">

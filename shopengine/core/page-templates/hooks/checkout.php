@@ -3,7 +3,6 @@
 namespace ShopEngine\Core\Page_Templates\Hooks;
 
 use ShopEngine;
-use ShopEngine\Core\Register\Module_List;
 use ShopEngine\Widgets\Widget_Helper;
 
 defined('ABSPATH') || exit;
@@ -22,14 +21,12 @@ class Checkout extends Base {
 			return $template;
 		});
 
-		if (class_exists('ShopEngine_Pro\Modules\Multistep_Checkout\Multistep_Checkout')) {
-
-			$module_list = Module_List::instance();
-
-			if ($module_list->get_list()['multistep-checkout']['status'] === 'active') {
-				\ShopEngine_Pro\Modules\Multistep_Checkout\Multistep_Checkout::instance()->load();
-			}
-		}
+		/**
+		 * Fires when a ShopEngine checkout template takes over the checkout page.
+		 *
+		 * @param Checkout $checkout
+		 */
+		do_action('shopengine/templates/checkout/init', $this);
 
 		Widget_Helper::instance()->wc_template_replace_multiple(
 			[
@@ -90,6 +87,24 @@ class Checkout extends Base {
 					}
 				}
 			}
+		}
+
+		// Brevo (WooCommerce Email Marketing) registers its opt-in via the Blocks API when
+		// WooCommerce Blocks checkout is set as the default page. ShopEngine renders the
+		// classic checkout, so the Blocks-registered field never appears. Re-register
+		// Brevo's classic hooks so the newsletter consent checkbox shows up.
+		$brevo_plugin = 'woocommerce-sendinblue-newsletter-subscription/woocommerce-sendinblue.php';
+		$brevo_blocks_path_active =
+			is_plugin_active( $brevo_plugin ) &&
+			class_exists( 'Automattic\WooCommerce\Blocks\Utils\CartCheckoutUtils' ) &&
+			method_exists( 'Automattic\WooCommerce\Blocks\Utils\CartCheckoutUtils', 'is_checkout_block_default' ) &&
+			\Automattic\WooCommerce\Blocks\Utils\CartCheckoutUtils::is_checkout_block_default() &&
+			class_exists( 'SendinblueWoocommerce\Managers\ApiManager' );
+
+		if ( $brevo_blocks_path_active ) {
+			// Brevo took the Blocks code path so classic hooks were never registered.
+			// ShopEngine renders classic checkout, so register them now.
+			( new \SendinblueWoocommerce\Managers\ApiManager() )->add_conditional_hooks();
 		}
 	}
 	
