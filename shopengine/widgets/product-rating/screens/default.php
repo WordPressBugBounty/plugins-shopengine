@@ -22,6 +22,15 @@ $shopengine_rating_plural_label = !empty($settings['shopengine_rating_plural_lab
 $rating_count = $product->get_rating_count();
 $review_count = $product->get_review_count();
 $average      = $product->get_average_rating();
+
+/*
+ * The labels are widget settings (user input), so they are escaped on output and never
+ * used as a printf format. A count of 1 picks the singular label, any other count the
+ * plural one - the same choice _n() made when the labels were joined into its format.
+ */
+$shopengine_rating_label = function($count) use ($shopengine_rating_singular_label, $shopengine_rating_plural_label) {
+	return 1 === (int) $count ? $shopengine_rating_singular_label : $shopengine_rating_plural_label;
+};
 ?>
 
 <div class="shopengine-product-rating">
@@ -31,7 +40,7 @@ $average      = $product->get_average_rating();
 		<div class="woocommerce-product-rating">
 			<?php shopengine_content_render( wc_get_rating_html( $average, $rating_count ) ); ?>
 			<a title="<?php esc_html_e('Product Reviews','shopengine')?>" href="#reviews" class="woocommerce-review-link" rel="nofollow">
-				(<?php shopengine_content_render(sprintf( _n( '%s '. $shopengine_rating_singular_label, '%s ' . $shopengine_rating_plural_label, $rating_count, 'shopengine' ), '<span class="count">' . esc_html( $review_count ) . '</span>' )); ?>)
+				(<span class="count"><?php echo esc_html( $review_count ); ?></span> <?php echo esc_html( $shopengine_rating_label( $rating_count ) ); ?>)
 			</a>
 		</div>
 
@@ -47,9 +56,7 @@ $average      = $product->get_average_rating();
 			<div class="woocommerce-product-rating">
 				<?php shopengine_content_render( wc_get_rating_html( $average, $rating_count ) ); ?>
 				<?php if ( comments_open() ) : ?>
-					<?php //phpcs:disable ?>
-					<a title="<?php esc_html_e('Product Reviews','shopengine')?>" href="#reviews" class="woocommerce-review-link" rel="nofollow">(<?php printf( _n( '%s ' . $shopengine_rating_singular_label, '%s ' . $shopengine_rating_plural_label, $review_count, 'shopengine' ), '<span class="count">' . esc_html( $review_count ) . '</span>' ); ?>)</a>
-					<?php // phpcs:enable ?>
+					<a title="<?php esc_html_e('Product Reviews','shopengine')?>" href="#reviews" class="woocommerce-review-link" rel="nofollow">(<span class="count"><?php echo esc_html( $review_count ); ?></span> <?php echo esc_html( $shopengine_rating_label( $review_count ) ); ?>)</a>
 				<?php endif ?>
 			</div>
 		<?php

@@ -3,7 +3,7 @@ Contributors: Roxnor, Ataurr, aion11
 Tags: WooCommerce Builder, WooCommerce addons, Elementor WooCommerce, Cross-sell, Variation Swatches, WooCommerce Checkout, WooCommerce Product
 Requires at least: 6.0
 Tested up to: 7.1
-Stable tag: 4.9.8
+Stable tag: 4.9.9
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -369,6 +369,9 @@ Tutorial videos on the ShopEngine admin pages are embedded from YouTube. They lo
 The ShopEngine admin pages load the Roboto font from Google Fonts. [Terms of Service](https://policies.google.com/terms), [Privacy Policy](https://policies.google.com/privacy).
 
 == Changelog ==
+v4.9.9// 05-11-2026
+Fixed: Stored Cross-Site Scripting (XSS) vulnerability in the Product Rating widget.
+
 v4.9.8// 02-11-2026
 Added: Remote template library for ready-made designs.
 Improved: User consent for data sharing and remote notices.
